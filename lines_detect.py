@@ -20,7 +20,6 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
     """
     try:
         # Make a copy for drawing
-        output_image = frame.copy()
         
         # 2. Convert to HSV color space
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -46,11 +45,21 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         # Check the generated mask_f1.jpg and mask_f2.jpg. If the lines aren't white, 
         # you MUST adjust the HSV ranges above.
 
-        # Optional: Clean up the mask using morphological operations
-        kernel = np.ones((1, 1), np.uint8) # Slightly larger kernel for better closing
-        red_mask = cv2.erode(red_mask, kernel, iterations=1)
-        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel) 
-        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, kernel)
+        kernel_height = 20
+        horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, kernel_height))
+
+        # 2. Apply the Erosion operation (Recommended for filtering thin lines)
+        filtered_mask_erosion = cv2.erode(red_mask, horizontal_kernel, iterations=1)
+
+        # OR
+
+        # 2. Apply the Opening operation
+        filtered_mask_opening = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)
+        red_mask = cv2.erode(red_mask, horizontal_kernel, iterations=2)  # More iterations
+        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
+        red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
+        cv2.imshow("red_mask",red_mask)
+
         
         # 4. Find contours
         contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -58,7 +67,7 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         # 5. Filter and calculate average X location
         image_height, image_width, _ = frame.shape
         # Estimate a minimum area based on the image size
-        min_line_area = image_height * 30    # A simple heuristic (e.g., must be 30px wide * full height)
+        min_line_area = image_height * 15    # A simple heuristic (e.g., must be 30px wide * full height)
         print("min_line_area",min_line_area)
         x_locations = []
         
@@ -72,10 +81,10 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
             print("area=",area)
             if area > min_line_area:
                 x, y, w, h = cv2.boundingRect(contour)
-                cv2.rectangle(output_image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 print(x, y, w, h)
                 # Further ensure it is a tall object, filtering out small red labels
-                if h > image_height * 0.5: 
+                if h > image_height * 0.3: 
                     
                     x_locations.append(x)
                     # Draw visualization
@@ -83,28 +92,27 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
                     random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
 
 
-                    cv2.rectangle(output_image, (x, y), (x + w, y + h), random_color_tuple, 2)
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), random_color_tuple, 2)
 
         if len(x_locations)<2:
             print(f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}")
-            cv2.resize(output_image,(800,600))
-            cv2.putText(output_image, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
+            cv2.resize(frame,(800,600))
+            cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-            cv2.imshow("output_image", output_image)
+            #cv2.imshow("frame", frame)
             return TargetPosition.NOT_DETECTED
         # 6. Save the result image
-        else:
-            cv2.resize(output_image,(800,600))
-            cv2.imshow("output_image", output_image)
-
         right_w = image_width-max(x_locations)
         left_w = min(x_locations)
         print(x_locations, left_w, right_w)
         if abs(left_w-right_w)<10:
+            print("center")
             return TargetPosition.CENTER
         elif left_w>right_w:
+            print("left")
             return TargetPosition.LEFT
         else:
+            print("right")
             return TargetPosition.RIGHT  
 
     except Exception as e:
@@ -113,7 +121,7 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
 
 # --- Main Execution ---
 # Path to your video file
-video_path = "red_target_vid.mp4"
+video_path = "photos/red_target_vid.mp4"
 
 cap = cv2.VideoCapture(video_path)
 
@@ -139,8 +147,23 @@ while True:
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-    detect_lines_and_get_x_locations(frame)
-
+    match detect_lines_and_get_x_locations(frame):
+        case TargetPosition.LEFT:
+            cv2.putText(frame, f"go left", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        case TargetPosition.RIGHT:
+            cv2.putText(frame, f"go right", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        case TargetPosition.CENTER:
+            cv2.putText(frame, f"in the center", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        case TargetPosition.NOT_DETECTED:
+            cv2.putText(frame, f"not detected", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        case _:
+            print("error")
+    cv2.resize(frame,(800,600))
+    cv2.imshow("final",frame)
     # Wait for ANY key to go to next frame
     key = cv2.waitKey(0)  # 0 = wait forever
     if cv2.waitKey(1) & 0xFF == ord('q'):
