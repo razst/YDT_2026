@@ -3,7 +3,8 @@ import numpy as np
 from enum import Enum
 import time
 import random
-
+FRAME_WIDTH = 800
+FRAME_HEIGHT = 600
 DEBUG = True
 
 
@@ -12,6 +13,7 @@ class TargetPosition(Enum):
     CENTER = 0
     RIGHT = 1
     NOT_DETECTED = 2
+    NOT_IN_SQUARE = 3
 
 def detect_lines_and_get_x_locations(frame) ->TargetPosition:
     """
@@ -23,6 +25,9 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         
         # 2. Convert to HSV color space
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        center_frame = (width//2,height//2)
 
         # 3. Define a WIDER red color range in HSV
         # This accounts for lighting variations and different shades of red tape.
@@ -87,6 +92,7 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
                 if h > image_height * 0.3: 
                     
                     x_locations.append(x)
+                    x_locations.append(x+w)
                     # Draw visualization
                     print(f"Detected line {i+1}: Area={area}, X={x}, Y={y}, W={w}, H={h}")
                     random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
@@ -94,26 +100,32 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
 
                     cv2.rectangle(frame, (x, y), (x + w, y + h), random_color_tuple, 2)
 
-        if len(x_locations)<2:
+        if len(x_locations)<4:
             print(f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}")
-            cv2.resize(frame,(800,600))
             cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #cv2.imshow("frame", frame)
             return TargetPosition.NOT_DETECTED
         # 6. Save the result image
-        right_w = image_width-max(x_locations)
-        left_w = min(x_locations)
-        print(x_locations, left_w, right_w)
+        x_locations.sort()
+        print(len(x_locations))
+        print(x_locations)
+        print(center_frame[0])
+        right_w = abs(image_width-x_locations[3]-center_frame[0])
+        left_w = abs(center_frame[0] - x_locations[1]) 
+        print(f"right_w: {right_w}")
+        print(f"left_w: {left_w}")
         if abs(left_w-right_w)<10:
             print("center")
             return TargetPosition.CENTER
         elif left_w>right_w:
             print("left")
             return TargetPosition.LEFT
-        else:
+        elif right_w > left_w:
             print("right")
             return TargetPosition.RIGHT  
+        else:
+            return TargetPosition.NOT_DETECTED
 
     except Exception as e:
         print(f"An error occurred while processing frame: {e}")
@@ -160,9 +172,22 @@ while True:
         case TargetPosition.NOT_DETECTED:
             cv2.putText(frame, f"not detected", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        case TargetPosition.NOT_IN_SQUARE:
+            cv2.putText(frame, f"not in square", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        
         case _:
             print("error")
-    cv2.resize(frame,(800,600))
+    center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
+    radius_circle=20
+    thickness_circle=2
+    frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
+    color_circle=(0, 0, 255)
+    circle_x = center_frame[0]#image.shape[1]//2
+    circle_y = center_frame[1]#image.shape[0]//2
+    center_circle=(circle_x,circle_y)
+    cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
+    cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
     cv2.imshow("final",frame)
     # Wait for ANY key to go to next frame
     key = cv2.waitKey(0)  # 0 = wait forever
