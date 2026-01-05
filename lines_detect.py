@@ -54,16 +54,16 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, kernel_height))
 
         # 2. Apply the Erosion operation (Recommended for filtering thin lines)
-        filtered_mask_erosion = cv2.erode(red_mask, horizontal_kernel, iterations=1)
+        #filtered_mask_erosion = cv2.erode(red_mask, horizontal_kernel, iterations=1)
 
         # OR
 
         # 2. Apply the Opening operation
-        filtered_mask_opening = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)
+        #filtered_mask_opening = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)
         red_mask = cv2.erode(red_mask, horizontal_kernel, iterations=2)  # More iterations
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
-        cv2.imshow("red_mask",red_mask)
+        #cv2.imshow("red_mask",red_mask)
 
         
         # 4. Find contours
@@ -72,50 +72,50 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         # 5. Filter and calculate average X location
         image_height, image_width, _ = frame.shape
         # Estimate a minimum area based on the image size
-        min_line_area = image_height * 15    # A simple heuristic (e.g., must be 30px wide * full height)
-        print("min_line_area",min_line_area)
+        min_line_area = image_height * 1    # A simple heuristic (e.g., must be 30px wide * full height)
+        #print("min_line_area",min_line_area)
         x_locations = []
         
         # Sort contours by area in descending order
         # We only care about the largest objects, which should be the two lines
         contours = sorted(contours, key=cv2.contourArea, reverse=True)
-        print(len(contours))
+        #print(len(contours))
         # Process the two largest contours, if they meet the area threshold
         for i, contour in enumerate(contours): # Look at most 2 largest
             area = cv2.contourArea(contour)
-            print("area=",area)
+            #print("area=",area)
             if area > min_line_area:
                 x, y, w, h = cv2.boundingRect(contour)
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                print(x, y, w, h)
+                #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                #print(x, y, w, h)
                 # Further ensure it is a tall object, filtering out small red labels
                 if h > image_height * 0.3: 
                     
                     x_locations.append(x)
                     x_locations.append(x+w)
                     # Draw visualization
-                    print(f"Detected line {i+1}: Area={area}, X={x}, Y={y}, W={w}, H={h}")
-                    random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
+                    #print(f"Detected line {i+1}: Area={area}, X={x}, Y={y}, W={w}, H={h}")
+                    #random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
 
 
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), random_color_tuple, 2)
+                    #cv2.rectangle(frame, (x, y), (x + w, y + h), random_color_tuple, 2)
 
         if len(x_locations)<4:
-            print(f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}")
-            cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            # print(f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}")
+            # cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
+            #     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #cv2.imshow("frame", frame)
             return TargetPosition.NOT_DETECTED
         # 6. Save the result image
         x_locations.sort()
-        print(len(x_locations))
-        print(x_locations)
-        print(center_frame[0])
+        # print(len(x_locations))
+        # print(x_locations)
+        # print(center_frame[0])
         right_w = abs(image_width-x_locations[3]-center_frame[0])
         left_w = abs(center_frame[0] - x_locations[1]) 
-        print(f"right_w: {right_w}")
-        print(f"left_w: {left_w}")
-        if abs(left_w-right_w)<10:
+        # print(f"right_w: {right_w}")
+        # print(f"left_w: {left_w}")
+        if abs(left_w-right_w)<100:
             print("center")
             return TargetPosition.CENTER
         elif left_w>right_w:
@@ -144,17 +144,21 @@ if not cap.isOpened():
 # For FPS calculation
 prev_time = 0
 target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
+
+fps_count=0
+fps_sum=0
 while True:
     ret, frame = cap.read()
     if not ret:
         break
-    # frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)    # Time now
+    frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)    # Time now
     current_time = time.time()
 
     # FPS = 1 / time between frames
     fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
     prev_time = current_time
-
+    fps_count +=1
+    fps_sum+=fps
     # Put FPS text on frame
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -178,21 +182,22 @@ while True:
         
         case _:
             print("error")
-    center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
-    radius_circle=20
-    thickness_circle=2
-    frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
-    color_circle=(0, 0, 255)
-    circle_x = center_frame[0]#image.shape[1]//2
-    circle_y = center_frame[1]#image.shape[0]//2
-    center_circle=(circle_x,circle_y)
-    cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
-    cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
-    cv2.imshow("final",frame)
+    # center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
+    # radius_circle=20
+    # thickness_circle=2
+    # frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
+    # color_circle=(0, 0, 255)
+    # circle_x = center_frame[0]#image.shape[1]//2
+    # circle_y = center_frame[1]#image.shape[0]//2
+    # center_circle=(circle_x,circle_y)
+    # cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
+    # cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
+    #cv2.imshow("final",frame)
     # Wait for ANY key to go to next frame
-    key = cv2.waitKey(0)  # 0 = wait forever
+    # key = cv2.waitKey(0)  # 0 = wait forever
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+print(F"avg fps: {fps_sum/fps_count}")
 cap.release()
 cv2.destroyAllWindows()
