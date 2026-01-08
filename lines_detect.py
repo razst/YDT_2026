@@ -2,10 +2,21 @@ import cv2
 import numpy as np
 from enum import Enum
 import time
-import random
+class Prevpos:#TODO change this to prev rectangle pos
+    def __init__(self,x_pos,y_pos,vertical_lines):
+        self.vertical_lines = vertical_lines
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+    
+        
+
 FRAME_WIDTH = 800
 FRAME_HEIGHT = 600
 DEBUG = True
+lower_red_1 = np.array([0, 80, 50])    # Lowered Saturation and Value minimums
+upper_red_1 = np.array([20, 255, 255])
+lower_red_2 = np.array([160, 80, 50])
+upper_red_2 = np.array([180, 255, 255])
 
 
 class TargetPosition(Enum):
@@ -15,7 +26,63 @@ class TargetPosition(Enum):
     NOT_DETECTED = 2
     NOT_IN_SQUARE = 3
 
-def detect_lines_and_get_x_locations(frame) ->TargetPosition:
+def detect_y_lines(frame):
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    center_frame = (height//2,width//2)
+    print(f"height: {height} , width: {width}")
+
+        # 3. Define a WIDER red color range in HSV
+        # This accounts for lighting variations and different shades of red tape.
+        
+        # Lower red range (H: 0-20) - Increased from 10
+    mask1 = cv2.inRange(hsv, lower_red_1, upper_red_1)
+
+        # Upper red range (H: 160-180) - Increased lower boundary
+    mask2 = cv2.inRange(hsv, lower_red_2, upper_red_2)
+
+    red_mask = mask1 + mask2
+    _, red_mask = cv2.threshold(red_mask, 150, 255, cv2.THRESH_BINARY)
+
+
+    kernel_height = 20
+    horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_height, 1))
+
+
+    red_mask = cv2.erode(red_mask, horizontal_kernel, iterations=2)  # More iterations
+    red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
+    red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
+    cv2.imshow("red_horizontal",red_mask)
+    min_line_area = FRAME_HEIGHT * 1
+        
+    # 4. Find contours
+    contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    x_locations = []
+
+    for i, contour in enumerate(contours): # Look at most 2 largest
+        area = cv2.contourArea(contour)
+        if area > min_line_area:
+            x, y, w, h = cv2.boundingRect(contour)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            if h > FRAME_HEIGHT * 0.01 : 
+                
+                x_locations.append(x)
+                x_locations.append(x+w)
+
+
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
+                print(f"y:{y}")
+                print(f"center_frame: {center_frame[1]},malben_height{height-y-h}")
+                print(f"prevPos: {prevPos.x_pos,prevPos.y_pos}")
+                if center_frame[1] > height-y-h and prevPos.y_pos < height-y-h:
+                    prevPos.vertical_lines+=1
+        prevPos.x_pos = center_frame[0]
+        prevPos.y_pos = center_frame[1]
+    return None
+
+
+def detect_x_lines(frame) ->TargetPosition:
     """
     Detects red lines in an image using a wider HSV range and robust filtering.
     Saves the processed mask and the final detected image.
@@ -33,13 +100,9 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         # This accounts for lighting variations and different shades of red tape.
         
         # Lower red range (H: 0-20) - Increased from 10
-        lower_red_1 = np.array([0, 80, 50])    # Lowered Saturation and Value minimums
-        upper_red_1 = np.array([20, 255, 255])
         mask1 = cv2.inRange(hsv, lower_red_1, upper_red_1)
 
         # Upper red range (H: 160-180) - Increased lower boundary
-        lower_red_2 = np.array([160, 80, 50])
-        upper_red_2 = np.array([180, 255, 255])
         mask2 = cv2.inRange(hsv, lower_red_2, upper_red_2)
 
         # Combine the masks
@@ -63,7 +126,7 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
         red_mask = cv2.erode(red_mask, horizontal_kernel, iterations=2)  # More iterations
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
-        #cv2.imshow("red_mask",red_mask)
+        cv2.imshow("red_vertical",red_mask)
 
         
         # 4. Find contours
@@ -86,7 +149,7 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
             #print("area=",area)
             if area > min_line_area:
                 x, y, w, h = cv2.boundingRect(contour)
-                #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 #print(x, y, w, h)
                 # Further ensure it is a tall object, filtering out small red labels
                 if h > image_height * 0.3: 
@@ -98,12 +161,12 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
                     #random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
 
 
-                    #cv2.rectangle(frame, (x, y), (x + w, y + h), random_color_tuple, 2)
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
 
         if len(x_locations)<4:
             # print(f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}")
-            # cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
-            #     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (20, 40),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #cv2.imshow("frame", frame)
             return TargetPosition.NOT_DETECTED
         # 6. Save the result image
@@ -134,7 +197,6 @@ def detect_lines_and_get_x_locations(frame) ->TargetPosition:
 # --- Main Execution ---
 # Path to your video file
 video_path = "photos/red_target_vid.mp4"
-
 cap = cv2.VideoCapture(video_path)
 
 if not cap.isOpened():
@@ -147,11 +209,12 @@ target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
 
 fps_count=0
 fps_sum=0
+prevPos = Prevpos(0,0,0)
 while True:
     ret, frame = cap.read()
     if not ret:
         break
-    frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)    # Time now
+    frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
     current_time = time.time()
 
     # FPS = 1 / time between frames
@@ -162,39 +225,42 @@ while True:
     # Put FPS text on frame
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
-    match detect_lines_and_get_x_locations(frame):
-        case TargetPosition.LEFT:
-            cv2.putText(frame, f"go left", (20, 120),
+    location = detect_x_lines(frame)
+    detect_y_lines(frame)
+    cv2.putText(frame, f"lines amount:{prevPos.vertical_lines}", (20, 200),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        case TargetPosition.RIGHT:
-            cv2.putText(frame, f"go right", (20, 120),
+    if location == TargetPosition.LEFT:
+        cv2.putText(frame, f"go left", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        case TargetPosition.CENTER:
-            cv2.putText(frame, f"in the center", (20, 120),
+    if location == TargetPosition.CENTER:
+        if prevPos.vertical_lines == 1:
+            cv2.putText(frame, f"fire", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        case TargetPosition.NOT_DETECTED:
+        else:
+            cv2.putText(frame, f"in center", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    if location == TargetPosition.RIGHT:
+        cv2.putText(frame, f"go right", (20, 120),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    if location == TargetPosition.NOT_DETECTED:
             cv2.putText(frame, f"not detected", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        case TargetPosition.NOT_IN_SQUARE:
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)    
+    if location ==  TargetPosition.NOT_IN_SQUARE:
             cv2.putText(frame, f"not in square", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        
-        case _:
-            print("error")
-    # center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
-    # radius_circle=20
-    # thickness_circle=2
-    # frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
-    # color_circle=(0, 0, 255)
-    # circle_x = center_frame[0]#image.shape[1]//2
-    # circle_y = center_frame[1]#image.shape[0]//2
-    # center_circle=(circle_x,circle_y)
-    # cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
-    # cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
-    #cv2.imshow("final",frame)
+    center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
+    radius_circle=20
+    thickness_circle=2
+    frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
+    color_circle=(0, 0, 255)
+    circle_x = center_frame[0]#image.shape[1]//2
+    circle_y = center_frame[1]#image.shape[0]//2
+    center_circle=(circle_x,circle_y)
+    cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
+    cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
+    cv2.imshow("final",frame)
     # Wait for ANY key to go to next frame
-    # key = cv2.waitKey(0)  # 0 = wait forever
+    key = cv2.waitKey(0)  # 0 = wait forever
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
