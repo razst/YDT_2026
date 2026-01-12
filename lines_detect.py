@@ -2,6 +2,10 @@ import cv2
 import numpy as np
 from enum import Enum
 import time
+
+#BUG vertical -> horizontal
+#BUG what happens if we see two H lines?
+
 class Prevpos:#TODO change this to prev rectangle pos
     def __init__(self,x_pos,y_pos,vertical_lines):
         self.vertical_lines = vertical_lines
@@ -10,9 +14,13 @@ class Prevpos:#TODO change this to prev rectangle pos
     
         
 
-FRAME_WIDTH = 800
+FRAME_WIDTH = 800 #BUG remove, use image_height, image_width
 FRAME_HEIGHT = 600
-DEBUG = True
+DEBUG = True #BUG remove of not used or use
+
+# RED color mask
+# Define a WIDER red color range in HSV
+# This accounts for lighting variations and different shades of red tape.
 lower_red_1 = np.array([0, 80, 50])    # Lowered Saturation and Value minimums
 upper_red_1 = np.array([20, 255, 255])
 lower_red_2 = np.array([160, 80, 50])
@@ -24,17 +32,11 @@ class TargetPosition(Enum):
     CENTER = 0
     RIGHT = 1
     NOT_DETECTED = 2
-    NOT_IN_SQUARE = 3
 
+#BUG test in case of 2 V lines
 def detect_y_lines(frame):
+    global center_frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    center_frame = (height//2,width//2)
-    print(f"height: {height} , width: {width}")
-
-        # 3. Define a WIDER red color range in HSV
-        # This accounts for lighting variations and different shades of red tape.
         
         # Lower red range (H: 0-20) - Increased from 10
     mask1 = cv2.inRange(hsv, lower_red_1, upper_red_1)
@@ -54,48 +56,47 @@ def detect_y_lines(frame):
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
     cv2.imshow("red_horizontal",red_mask)
-    min_line_area = FRAME_HEIGHT * 1
+    min_line_area = FRAME_HEIGHT * 1 #BUG get more realiable number, set FRAME_W / H after rezise
         
     # 4. Find contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     x_locations = []
 
-    for i, contour in enumerate(contours): # Look at most 2 largest
+    for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if area > min_line_area:
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             if h > FRAME_HEIGHT * 0.01 : 
                 
-                x_locations.append(x)
-                x_locations.append(x+w)
-
 
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
-                print(f"y:{y}")
-                print(f"center_frame: {center_frame[1]},malben_height{height-y-h}")
-                print(f"prevPos: {prevPos.x_pos,prevPos.y_pos}")
-                if center_frame[1] > height-y-h and prevPos.y_pos < height-y-h:
-                    prevPos.vertical_lines+=1
-        prevPos.x_pos = center_frame[0]
-        prevPos.y_pos = center_frame[1]
+                cv2.putText(frame,f"first conditional: {prevPos.y_pos > center_frame[1]}", (200, 100),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                cv2.putText(frame,f"second conditional: {center_frame[1] < y}", (200, 120),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                cv2.putText(frame,f"prevPos: {prevPos.y_pos}", (300, 200),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                cv2.putText(frame,f"curr Pos: {y}", (300, 220),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                if prevPos.y_pos < center_frame[0] and center_frame[0] < y:
+                    prevPos.vertical_lines +=1
+                prevPos.y_pos = y
+            
     return None
 
 
-def detect_x_lines(frame) ->TargetPosition:
+def detect_x_lines(frame) ->TargetPosition:                
     """
     Detects red lines in an image using a wider HSV range and robust filtering.
     Saves the processed mask and the final detected image.
     """
+    global center_frame
     try:
         # Make a copy for drawing
         
         # 2. Convert to HSV color space
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        center_frame = (width//2,height//2)
-
         # 3. Define a WIDER red color range in HSV
         # This accounts for lighting variations and different shades of red tape.
         
@@ -174,11 +175,11 @@ def detect_x_lines(frame) ->TargetPosition:
         # print(len(x_locations))
         # print(x_locations)
         # print(center_frame[0])
-        right_w = abs(image_width-x_locations[3]-center_frame[0])
-        left_w = abs(center_frame[0] - x_locations[1]) 
+        right_w = abs(image_width-x_locations[3]-center_frame[1])
+        left_w = abs(center_frame[1] - x_locations[1]) 
         # print(f"right_w: {right_w}")
         # print(f"left_w: {left_w}")
-        if abs(left_w-right_w)<100:
+        if abs(left_w-right_w)<100: #BUG - make this 100 a CONST param
             print("center")
             return TargetPosition.CENTER
         elif left_w>right_w:
@@ -215,6 +216,9 @@ while True:
     if not ret:
         break
     frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
+    height,width = frame.shape[:2]
+    global center_frame
+    center_frame = (height//2,width//2)
     current_time = time.time()
 
     # FPS = 1 / time between frames
@@ -225,6 +229,7 @@ while True:
     # Put FPS text on frame
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    #BUG put these lines of code in thier own function
     location = detect_x_lines(frame)
     detect_y_lines(frame)
     cv2.putText(frame, f"lines amount:{prevPos.vertical_lines}", (20, 200),
@@ -233,6 +238,7 @@ while True:
         cv2.putText(frame, f"go left", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if location == TargetPosition.CENTER:
+        print("in center")
         if prevPos.vertical_lines == 1:
             cv2.putText(frame, f"fire", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -248,6 +254,7 @@ while True:
     if location ==  TargetPosition.NOT_IN_SQUARE:
             cv2.putText(frame, f"not in square", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    # BUG use pre rezise img. don't use 800*600
     center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
     radius_circle=20
     thickness_circle=2
