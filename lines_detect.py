@@ -3,21 +3,13 @@ import numpy as np
 from enum import Enum
 import time
 
-#BUG vertical -> horizontal
 #BUG what happens if we see two H lines?
 
-class Prevpos:#TODO change this to prev rectangle pos
-    def __init__(self,x_pos,y_pos,vertical_lines):
-        self.vertical_lines = vertical_lines
+class Prevrect:
+    def __init__(self,x_pos,y_pos,horizontal_lines):
+        self.horizontal_lines = horizontal_lines
         self.x_pos = x_pos
         self.y_pos = y_pos
-    
-        
-
-FRAME_WIDTH = 800 #BUG remove, use image_height, image_width
-FRAME_HEIGHT = 600
-DEBUG = True #BUG remove of not used or use
-
 # RED color mask
 # Define a WIDER red color range in HSV
 # This accounts for lighting variations and different shades of red tape.
@@ -25,7 +17,9 @@ lower_red_1 = np.array([0, 80, 50])    # Lowered Saturation and Value minimums
 upper_red_1 = np.array([20, 255, 255])
 lower_red_2 = np.array([160, 80, 50])
 upper_red_2 = np.array([180, 255, 255])
-
+global areaY_sum ,areaX_sum
+areaY_sum = 0
+areaX_sum = 0
 
 class TargetPosition(Enum):
     LEFT = -1
@@ -35,6 +29,7 @@ class TargetPosition(Enum):
 
 #BUG test in case of 2 V lines
 def detect_y_lines(frame):
+    global areaY_sum ,areaX_sum
     global center_frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         
@@ -56,7 +51,7 @@ def detect_y_lines(frame):
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
     cv2.imshow("red_horizontal",red_mask)
-    min_line_area = FRAME_HEIGHT * 1 #BUG get more realiable number, set FRAME_W / H after rezise
+    min_line_area = center_frame[0] * 1 #BUG get more realiable number, set FRAME_W / H after rezise
         
     # 4. Find contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -64,24 +59,26 @@ def detect_y_lines(frame):
 
     for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
+        areaY_sum += area
         if area > min_line_area:
+
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            if h > FRAME_HEIGHT * 0.01 : 
+            if h > center_frame[0] * 0.01 : 
                 
 
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
-                cv2.putText(frame,f"first conditional: {prevPos.y_pos > center_frame[1]}", (200, 100),
+                cv2.putText(frame,f"first conditional: {Prevrect.y_pos > center_frame[1]}", (200, 100),
                  cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.putText(frame,f"second conditional: {center_frame[1] < y}", (200, 120),
                  cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                cv2.putText(frame,f"prevPos: {prevPos.y_pos}", (300, 200),
+                cv2.putText(frame,f"Prevrect: {Prevrect.y_pos}", (300, 200),
                  cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.putText(frame,f"curr Pos: {y}", (300, 220),
                  cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                if prevPos.y_pos < center_frame[0] and center_frame[0] < y:
-                    prevPos.vertical_lines +=1
-                prevPos.y_pos = y
+                if Prevrect.y_pos < center_frame[0] and center_frame[0] < y:
+                    Prevrect.horizontal_lines +=1
+                Prevrect.y_pos = y
             
     return None
 
@@ -92,6 +89,7 @@ def detect_x_lines(frame) ->TargetPosition:
     Saves the processed mask and the final detected image.
     """
     global center_frame
+    global areaY_sum ,areaX_sum
     try:
         # Make a copy for drawing
         
@@ -147,6 +145,7 @@ def detect_x_lines(frame) ->TargetPosition:
         # Process the two largest contours, if they meet the area threshold
         for i, contour in enumerate(contours): # Look at most 2 largest
             area = cv2.contourArea(contour)
+            areaX_sum += area
             #print("area=",area)
             if area > min_line_area:
                 x, y, w, h = cv2.boundingRect(contour)
@@ -210,7 +209,7 @@ target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
 
 fps_count=0
 fps_sum=0
-prevPos = Prevpos(0,0,0)
+Prevrect = Prevrect(0,0,0)
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -225,6 +224,7 @@ while True:
     fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
     prev_time = current_time
     fps_count +=1
+
     fps_sum+=fps
     # Put FPS text on frame
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
@@ -232,14 +232,14 @@ while True:
     #BUG put these lines of code in thier own function
     location = detect_x_lines(frame)
     detect_y_lines(frame)
-    cv2.putText(frame, f"lines amount:{prevPos.vertical_lines}", (20, 200),
+    cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (20, 200),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if location == TargetPosition.LEFT:
         cv2.putText(frame, f"go left", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if location == TargetPosition.CENTER:
         print("in center")
-        if prevPos.vertical_lines == 1:
+        if Prevrect.horizontal_lines == 1:
             cv2.putText(frame, f"fire", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         else:
@@ -250,20 +250,14 @@ while True:
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if location == TargetPosition.NOT_DETECTED:
             cv2.putText(frame, f"not detected", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)    
-    if location ==  TargetPosition.NOT_IN_SQUARE:
-            cv2.putText(frame, f"not in square", (20, 120),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    # BUG use pre rezise img. don't use 800*600
-    center_frame = ((FRAME_WIDTH//2),(FRAME_HEIGHT//2))
     radius_circle=20
     thickness_circle=2
-    frame = cv2.resize(frame,(FRAME_WIDTH,FRAME_HEIGHT))
     color_circle=(0, 0, 255)
-    circle_x = center_frame[0]#image.shape[1]//2
-    circle_y = center_frame[1]#image.shape[0]//2
+    circle_x = center_frame[1]
+    circle_y = center_frame[0]
     center_circle=(circle_x,circle_y)
-    cv2.line(frame, (center_frame[0]-radius_circle, center_frame[1]), (circle_x+radius_circle, circle_y), color_circle, 2)
+    cv2.line(frame, (center_frame[1]-radius_circle, center_frame[0]), (circle_x+radius_circle, circle_y), color_circle, 2)
     cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
     cv2.imshow("final",frame)
     # Wait for ANY key to go to next frame
@@ -272,5 +266,7 @@ while True:
         break
 
 print(F"avg fps: {fps_sum/fps_count}")
+print(F"horizontal avarage: {areaY_sum/fps_count}")
+print(F"vertical average: {areaX_sum /fps_count}")
 cap.release()
 cv2.destroyAllWindows()
