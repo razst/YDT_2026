@@ -21,7 +21,6 @@ def center_detect(frame):
     H, W, _ = frame.shape
     X_mid_frame = W // 2 
     Y_mid_frame = H // 2 
-
     x_tol, y_tol = int(W * 0.05), int(H * 0.05)
     
     # HSV Processing for Red
@@ -33,16 +32,15 @@ def center_detect(frame):
     # Cleaning up the noise
     kernel = np.ones((5, 5), np.uint8) 
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel)
-
     # Finding Contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
     display_text = "No target detected"
     target_color = (0, 0, 255) # Red (BGR)
 
     # Logic to find the largest rectangle
     best_cnt = None
     max_area = 0
+    print(len(contours))
     for cnt in contours:
         area = cv2.contourArea(cnt)
         if area > 500:
@@ -123,9 +121,10 @@ def main(path):
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
         cv2.imshow('Drone Alignment Check', frame) 
-        
+
         # key = cv2.waitKey(0) 
         # Press 'q' to quit early.
+        key = cv2.waitKey(0)  # 0 = wait forever
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -135,4 +134,8 @@ def main(path):
 
 # CORRECT CALL: Pass the path variable, not 'frame'
 if __name__ == "__main__":
-    main(video_path)
+    # main(video_path)
+    f = cv2.imread("photos/test2.jpg")
+    f = cv2.resize(f, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    center_detect(f)
+    cv2.waitKey(0)
