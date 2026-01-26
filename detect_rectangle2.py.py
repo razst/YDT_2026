@@ -1,12 +1,20 @@
 import cv2
 import numpy as np
 import time
-
+from enum import Enum
 video_path = r"photos\red_target_vid.mp4"
 
+
+class TargetPosition(Enum):
+    LEFT = -1
+    CENTER = 0
+    RIGHT = 1
+    NOT_DETECTED = 2
+    DOWN=-1
+    UP=1
 # gets a frame and instrcut how to get to its center
 # input: cv2 frame
-# output: frame, horz (-1:right,0:center,1:right), vart (-1:down,0:center,1:up) 
+# output: frame, horz (-1:left,0:center,1:right), vart (-1:down,0:center,1:up) 
 def center_detect(frame):
 
     horz,vert = 0,0
@@ -48,17 +56,29 @@ def center_detect(frame):
         x, y, w, h = cv2.boundingRect(best_cnt)
         cx, cy = x + w//2, y + h//2
         
+
         # Check if centered
-        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol) and \
-            (Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):
-            display_text = "Target Centered"
-            target_color = (0, 255, 0) # Green
+        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol):
+             horz=TargetPosition.CENTER
+             dir_x = "CENTER in X"
+        if(Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):   
+            vert=TargetPosition.CENTER
+            dir_x = "CENTER in Y"
+        if(cx < X_mid_frame - x_tol):
+            dir_x = "Left"
+            horz=TargetPosition.LEFT
         else:
-            # Direction Logic
-            dir_x = "Left" if cx < X_mid_frame - x_tol else ("Right" if cx > X_mid_frame + x_tol else "")
-            dir_y = "Up" if cy < Y_mid_frame - y_tol else ("Down" if cy > Y_mid_frame + y_tol else "")
-            display_text = f"{dir_x} {dir_y}".strip()
-            target_color = (255, 0, 0) # Blue
+             horz=TargetPosition.RIGHT
+             dir_x= "Right"
+        if(cy > Y_mid_frame + y_tol):
+             vert=TargetPosition.DOWN
+             dir_y="Down"
+        else:
+             vert=TargetPosition.UP
+             dir_y="up"
+
+        display_text = f"{dir_x} {dir_y}".strip()
+        target_color = (255, 0, 0) # Blue
 
         cv2.putText(frame, display_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
         cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
