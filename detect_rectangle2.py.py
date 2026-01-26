@@ -13,7 +13,6 @@ def center_detect(frame):
     H, W, _ = frame.shape
     X_mid_frame = W // 2 
     Y_mid_frame = H // 2 
-
     x_tol, y_tol = int(W * 0.05), int(H * 0.05)
     
     # HSV Processing for Red
@@ -25,48 +24,61 @@ def center_detect(frame):
     # Cleaning up the noise
     kernel = np.ones((5, 5), np.uint8) 
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel)
-
     # Finding Contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
     display_text = "No target detected"
     target_color = (0, 0, 255) # Red (BGR)
 
     # Logic to find the largest rectangle
     best_cnt = None
     max_area = 0
+    print(len(contours))
     for cnt in contours:
-        area = cv2.contourArea(cnt)
-        if area > 500:
-            x, y, w, h = cv2.boundingRect(cnt)
-            aspect_ratio = float(w) / h
-            if 0.2 < aspect_ratio < 5.0 and area > max_area:
-                best_cnt = cnt
-                max_area = area
-
-    if best_cnt is not None:
-        x, y, w, h = cv2.boundingRect(best_cnt)
-        cx, cy = x + w//2, y + h//2
         
-        # Check if centered
-        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol) and \
-            (Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):
-            display_text = "Target Centered"
-            target_color = (0, 255, 0) # Green
-        else:
-            # Direction Logic
-            dir_x = "Left" if cx < X_mid_frame - x_tol else ("Right" if cx > X_mid_frame + x_tol else "")
-            dir_y = "Up" if cy < Y_mid_frame - y_tol else ("Down" if cy > Y_mid_frame + y_tol else "")
-            display_text = f"{dir_x} {dir_y}".strip()
-            target_color = (255, 0, 0) # Blue
 
-        cv2.putText(frame, display_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
-        cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
-
-    # Draw Crosshair
-    cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
-    cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+            # aspect_ratio = float(w) / h
+            # if 0.2 < aspect_ratio < 5.0 and area > max_area:
+            #     best_cnt = cnt
+            #     max_area = area
+            
+        # Calculate the perimeter to determine epsilon
+            # 1. Calculate the perimeter to determine epsilon
+        perimeter = cv2.arcLength(cnt, True)
+        # 2. Approximate the shape (low epsilon = more detail, high = simpler shape)
+        # Usually 2% to 5% of the perimeter is a good threshold
+        approx = cv2.approxPolyDP(cnt, 0.04 * perimeter, True)
+        # 3. Check if the approximated shape has 4 vertices
+        print(approx)
+        if len(approx) == 4:
+            area = cv2.contourArea(cnt)
+            if area > 500:  # Ignore small noise
+                x, y, w, h = cv2.boundingRect(cnt)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
+                print("x,y,w,h:",x,y,w,h)
+                cx, cy = x + w//2, y + h//2
+                print("cx, cy",cx, cy)
+                # Check if centered
+                
+                if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol) and \
+                    (Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):
+    
+                    display_text = "Target Centered"
+                    target_color = (0, 255, 0) 
+                else:
+                    # Direction Logic
+                    dir_x = "Left" if cx < X_mid_frame - x_tol else ("Right" if cx > X_mid_frame + x_tol else "")
+                    dir_y = "Up" if cy < Y_mid_frame - y_tol else ("Down" if cy > Y_mid_frame + y_tol else "")
+                    display_text = f"{dir_x} {dir_y}".strip()
+                    target_color = (255, 0, 0)
+             
+                cv2.putText(frame, display_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+                cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
+            # if(X_mid_frame - x_tol < cx < X_mid_frame + x_tol):
+        # Draw Crosshair
+        cv2.imshow('red_mask ',red_mask)
+        cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
+        cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+        cv2.imshow('Drone Alignment Check', frame) 
     return frame,horz,vert
 
 def main(path):
@@ -103,9 +115,10 @@ def main(path):
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
         cv2.imshow('Drone Alignment Check', frame) 
-        
+
         # key = cv2.waitKey(0) 
         # Press 'q' to quit early.
+        key = cv2.waitKey(0)  # 0 = wait forever
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -115,4 +128,8 @@ def main(path):
 
 # CORRECT CALL: Pass the path variable, not 'frame'
 if __name__ == "__main__":
-    main(video_path)
+    # main(video_path)
+    f = cv2.imread("photos/test2.jpg")
+    f = cv2.resize(f, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    center_detect(f)
+    cv2.waitKey(0)
