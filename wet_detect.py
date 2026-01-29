@@ -1,4 +1,7 @@
 import cv2
+
+#DEVIDE INTO 3 PARTS
+
 import numpy as np
 # from matplotlib import pyplot as plt
 
@@ -55,6 +58,38 @@ def is_tile_wet(tile, percent_threshold):
     print(actual_percent)
     return actual_percent >= percent_threshold
 
-grid = divide_image("photos\WIN_20251127_19_27_09_Pro.jpg", 30, 30)
+def divide_into_three_rows(image_path):
+    img = cv2.imread(image_path)
+    hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-print(is_tile_wet(grid[0][2], 60))
+    h, w = img.shape[:2]
+    
+    row_h = h // 3
+    
+    top_row = hsv_img[0 : row_h, 0 : w]
+    mid_row = hsv_img[row_h : row_h*2, 0 : w]
+    bottom_row = hsv_img[row_h*2 : h, 0 : w]
+    
+    rows = [top_row, mid_row, bottom_row]
+    return rows
+
+rows = divide_into_three_rows("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
+
+
+
+
+
+# print(is_tile_wet(rows[0], 60))
+
+
+# img = cv2.imread("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
+# hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+# lower_bound = np.array([0, 0, 0]),
+# upper_bound = np.array([180, 255, 150])
+# mask = cv2.inRange(hsv_img, lower_bound, upper_bound)
+# resized_img = cv2.resize(mask, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+
+# cv2.imshow('wet mask', resized_img)
+
+
+# cv2.waitKey(0)
