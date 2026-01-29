@@ -1,8 +1,17 @@
 import cv2
 import numpy as np
 import time
-
+from enum import Enum
 video_path = r"photos\red_target_vid.mp4"
+
+
+class TargetPosition(Enum):
+    LEFT = -1
+    CENTER = 0
+    RIGHT = 1
+    NOT_DETECTED = 2
+    DOWN=-1
+    UP=1
 
 # gets a frame and instrcut how to get to its center
 # input: cv2 frame
@@ -13,7 +22,6 @@ def center_detect(frame):
     H, W, _ = frame.shape
     X_mid_frame = W // 2 
     Y_mid_frame = H // 2 
-
     x_tol, y_tol = int(W * 0.05), int(H * 0.05)
     
     # HSV Processing for Red
@@ -25,16 +33,15 @@ def center_detect(frame):
     # Cleaning up the noise
     kernel = np.ones((5, 5), np.uint8) 
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel)
-
     # Finding Contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
     display_text = "No target detected"
     target_color = (0, 0, 255) # Red (BGR)
 
     # Logic to find the largest rectangle
     best_cnt = None
     max_area = 0
+    print(len(contours))
     for cnt in contours:
         area = cv2.contourArea(cnt)
         if area > 500:
@@ -48,25 +55,33 @@ def center_detect(frame):
         x, y, w, h = cv2.boundingRect(best_cnt)
         cx, cy = x + w//2, y + h//2
         
+
         # Check if centered
-        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol) and \
-            (Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):
-            display_text = "Target Centered"
-            target_color = (0, 255, 0) # Green
+        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol):
+             horz=TargetPosition.CENTER
+             dir_x = "CENTER in X"
+        if(Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):   
+            vert=TargetPosition.CENTER
+            dir_x = "CENTER in Y"
+        if(cx < X_mid_frame - x_tol):
+            dir_x = "Left"
+            horz=TargetPosition.LEFT
         else:
-            # Direction Logic
-            dir_x = "Left" if cx < X_mid_frame - x_tol else ("Right" if cx > X_mid_frame + x_tol else "")
-            dir_y = "Up" if cy < Y_mid_frame - y_tol else ("Down" if cy > Y_mid_frame + y_tol else "")
-            display_text = f"{dir_x} {dir_y}".strip()
-            target_color = (255, 0, 0) # Blue
+             horz=TargetPosition.RIGHT
+             dir_x= "Right"
+        if(cy > Y_mid_frame + y_tol):
+             vert=TargetPosition.DOWN
+             dir_y="Down"
+        else:
+             vert=TargetPosition.UP
+             dir_y="up"
 
-        cv2.putText(frame, display_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
-        cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
+        display_text = f"{dir_x} {dir_y}".strip()
+        target_color = (255, 0, 0) # Blue
 
-    # Draw Crosshair
-    cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
-    cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+        cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
+        cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+        cv2.imshow('Drone Alignment Check', frame) 
     return frame,horz,vert
 
 def main(path):
@@ -103,9 +118,10 @@ def main(path):
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
         cv2.imshow('Drone Alignment Check', frame) 
-        
+
         # key = cv2.waitKey(0) 
         # Press 'q' to quit early.
+        key = cv2.waitKey(0)  # 0 = wait forever
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -115,4 +131,8 @@ def main(path):
 
 # CORRECT CALL: Pass the path variable, not 'frame'
 if __name__ == "__main__":
-    main(video_path)
+    # main(video_path)
+    f = cv2.imread("photos/test2.jpg")
+    f = cv2.resize(f, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    center_detect(f)
+    cv2.waitKey(0)

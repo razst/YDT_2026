@@ -20,6 +20,8 @@ upper_red_2 = np.array([180, 255, 255])
 global areaY_sum ,areaX_sum
 areaY_sum = 0
 areaX_sum = 0
+CENTER_THRESHOLD = 100
+Prevrect = Prevrect(0,0,0)
 
 class TargetPosition(Enum):
     LEFT = -1
@@ -51,7 +53,7 @@ def detect_y_lines(frame):
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
     cv2.imshow("red_horizontal",red_mask)
-    min_line_area = center_frame[0] * 1 #BUG get more realiable number, set FRAME_W / H after rezise
+    min_line_area = center_frame[0]*2  * center_frame[0]* 2 * 0.005 # bigger then half a % 
         
     # 4. Find contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -64,7 +66,7 @@ def detect_y_lines(frame):
 
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            if h > center_frame[0] * 0.01 : 
+            if h > 10 :
                 
 
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
@@ -133,8 +135,8 @@ def detect_x_lines(frame) ->TargetPosition:
 
         # 5. Filter and calculate average X location
         image_height, image_width, _ = frame.shape
-        # Estimate a minimum area based on the image size
-        min_line_area = image_height * 1    # A simple heuristic (e.g., must be 30px wide * full height)
+        # Estimate a minimum area based on the image size           
+        min_line_area = image_height * image_width * 0.005 #bigger then half a % of the screen 
         #print("min_line_area",min_line_area)
         x_locations = []
         
@@ -152,7 +154,7 @@ def detect_x_lines(frame) ->TargetPosition:
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 #print(x, y, w, h)
                 # Further ensure it is a tall object, filtering out small red labels
-                if h > image_height * 0.3: 
+                if h > 30: #bigger then 1% of the screen 
                     
                     x_locations.append(x)
                     x_locations.append(x+w)
@@ -178,7 +180,7 @@ def detect_x_lines(frame) ->TargetPosition:
         left_w = abs(center_frame[1] - x_locations[1]) 
         # print(f"right_w: {right_w}")
         # print(f"left_w: {left_w}")
-        if abs(left_w-right_w)<100: #BUG - make this 100 a CONST param
+        if abs(left_w-right_w)<CENTER_THRESHOLD: 
             print("center")
             return TargetPosition.CENTER
         elif left_w>right_w:
@@ -193,43 +195,12 @@ def detect_x_lines(frame) ->TargetPosition:
     except Exception as e:
         print(f"An error occurred while processing frame: {e}")
         return []
+    
+def show_image(frame,fps):
 
-# --- Main Execution ---
-# Path to your video file
-video_path = "photos/red_target_vid.mp4"
-cap = cv2.VideoCapture(video_path)
-
-if not cap.isOpened():
-    print("Error: Could not open video.")
-    exit()
-
-# For FPS calculation
-prev_time = 0
-target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
-
-fps_count=0
-fps_sum=0
-Prevrect = Prevrect(0,0,0)
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-    frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
-    height,width = frame.shape[:2]
-    global center_frame
-    center_frame = (height//2,width//2)
-    current_time = time.time()
-
-    # FPS = 1 / time between frames
-    fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
-    prev_time = current_time
-    fps_count +=1
-
-    fps_sum+=fps
     # Put FPS text on frame
     cv2.putText(frame, f"FPS: {fps:.2f}", (20, 40),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    #BUG put these lines of code in thier own function
     location = detect_x_lines(frame)
     detect_y_lines(frame)
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (20, 200),
@@ -260,13 +231,44 @@ while True:
     cv2.line(frame, (center_frame[1]-radius_circle, center_frame[0]), (circle_x+radius_circle, circle_y), color_circle, 2)
     cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
     cv2.imshow("final",frame)
-    # Wait for ANY key to go to next frame
-    key = cv2.waitKey(0)  # 0 = wait forever
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+def main():
+    # --- Main Execution ---
+    # Path to your video file
+    video_path = "photos/red_target_vid.mp4"
+    cap = cv2.VideoCapture(video_path)
+    prev_time = 0
+    target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
 
-print(F"avg fps: {fps_sum/fps_count}")
-print(F"horizontal avarage: {areaY_sum/fps_count}")
-print(F"vertical average: {areaX_sum /fps_count}")
-cap.release()
-cv2.destroyAllWindows()
+    fps_count=0
+    fps_sum=0
+
+    if not cap.isOpened():
+        print("Error: Could not open video.")
+        exit()
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        current_time = time.time()
+
+    # FPS = 1 / time between frames
+        fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
+        prev_time = current_time
+        fps_count +=1
+        frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
+        height,width = frame.shape[:2]
+        global center_frame
+        center_frame = (height//2,width//2)
+        show_image(frame,fps)
+
+        # Wait for ANY key to go to next frame
+        key = cv2.waitKey(0)  # 0 = wait forever
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    print(F"avg fps: {fps_sum/fps_count}")
+    print(F"horizontal avarage: {(areaY_sum/fps_count) / (height * width) * 100}, percent"              )
+    print(F"vertical average is : {(areaX_sum /fps_count) /(height * width) * 100            }, percent")
+    print(f"{(height * width)}")
+    cap.release()
+    cv2.destroyAllWindows()
+main()
