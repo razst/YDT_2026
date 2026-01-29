@@ -12,9 +12,10 @@ class TargetPosition(Enum):
     NOT_DETECTED = 2
     DOWN=-1
     UP=1
+
 # gets a frame and instrcut how to get to its center
 # input: cv2 frame
-# output: frame, horz (-1:left,0:center,1:right), vart (-1:down,0:center,1:up) 
+# output: frame, horz (-1:right,0:center,1:right), vart (-1:down,0:center,1:up) 
 def center_detect(frame):
 
     horz,vert = 0,0
@@ -78,13 +79,9 @@ def center_detect(frame):
         display_text = f"{dir_x} {dir_y}".strip()
         target_color = (255, 0, 0) # Blue
 
-        cv2.putText(frame, display_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
-        cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
-
-    # Draw Crosshair
-    cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
-    cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+        cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
+        cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
+        cv2.imshow('Drone Alignment Check', frame) 
     return frame,horz,vert
 
 def main(path):
