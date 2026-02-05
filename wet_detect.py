@@ -74,13 +74,29 @@ def divide_into_three_rows(image_path):
     return rows
 
 rows = divide_into_three_rows("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
+img = cv2.imread("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
+
+
+print(is_tile_wet(rows[1], 30))
 
 
 
 
+lower_bound = np.array([0, 0, 0])
+upper_bound = np.array([180, 255, 152])
+
+mask1 = cv2.inRange(rows[0], lower_bound, upper_bound)
+mask2 = cv2.inRange(rows[1], lower_bound, upper_bound)
+mask3 = cv2.inRange(rows[2], lower_bound, upper_bound)
+
+combined = np.vstack((mask1, mask2, mask3))
+
+resized_comb = cv2.resize(combined, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+resized_img = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+cv2.imshow('comb', resized_comb)
+cv2.imshow('original', resized_img)
 
 # print(is_tile_wet(rows[0], 60))
-
 
 # img = cv2.imread("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
 # hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -92,4 +108,4 @@ rows = divide_into_three_rows("photos\WIN_20251127_19_27_09_Pro_EDIT.jpg")
 # cv2.imshow('wet mask', resized_img)
 
 
-# cv2.waitKey(0)
+cv2.waitKey(0)
