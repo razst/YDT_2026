@@ -12,6 +12,7 @@ class TargetPosition(Enum):
     DOWN=-1
     UP=1
 
+
 # gets a frame and instrcut how to get to its center
 # input: cv2 frame
 # output: frame, horz (-1:left,0:center,1:right), vart (-1:down,0:center,1:up)
