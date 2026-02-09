@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 from enum import Enum
-video_path = "C:/Users/user/Downloads/dji_recording.mp4"
+video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
 
 class TargetPosition(Enum):
     LEFT = -1
@@ -36,30 +36,31 @@ def center_detect(frame):
     # Finding Contours TODO find only Contours that are "closed"
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     display_text = "No target detected"
-
+    cv2.imshow("red_horizontal",red_mask)
     # TODO wh ywhen these are moved inside the loop, we don't recognise all frames ???
-    best_cnt = None # TODO change name to last_cnt
+    last_cnt = None 
     max_area = 0
 
     # Logic to find the largest rectangle
     print("count of contoutrs",len(contours))
     for cnt in contours:
         area = cv2.contourArea(cnt)
-
+        print("area:",area)
         if area > 500:
             x, y, w, h = cv2.boundingRect(cnt)
             aspect_ratio = float(w) / h
-            if 0.45 < aspect_ratio < 0.55 and area > max_area: #TODO make the numbers CONSTS
-                best_cnt = cnt
+            print(f"aspect ratio: {aspect_ratio}")
+            if 0.45 < aspect_ratio < 0.57 and area > max_area: #TODO make the numbers CONSTS
+                last_cnt = cnt
                 max_area = area
 
-    if best_cnt is not None:
-        x, y, w, h = cv2.boundingRect(best_cnt)
+    if last_cnt is not None:
+        x, y, w, h = cv2.boundingRect(last_cnt)
         cx, cy = x + w//2, y + h//2
         # Check if centered
         if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol):
-             horz=TargetPosition.CENTER
-             dir_x = "CENTER in X"
+            horz=TargetPosition.CENTER
+            dir_x = "CENTER in X"
         if(Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):  
             vert=TargetPosition.CENTER
             dir_x = "CENTER in Y"
@@ -67,14 +68,14 @@ def center_detect(frame):
             dir_x = "Left"
             horz=TargetPosition.LEFT
         else:
-             horz=TargetPosition.RIGHT
-             dir_x= "Right"
+            horz=TargetPosition.RIGHT
+            dir_x= "Right"
         if(cy > Y_mid_frame + y_tol):
-             vert=TargetPosition.DOWN
-             dir_y="Down"
+            vert=TargetPosition.DOWN
+            dir_y="Down"
         else:
-             vert=TargetPosition.UP
-             dir_y="up"
+            vert=TargetPosition.UP
+            dir_y="up"
 
         display_text = f"{dir_x} {dir_y}".strip()
         target_color = (255, 0, 0) # Blue

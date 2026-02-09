@@ -53,34 +53,32 @@ def detect_y_lines(frame):
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, horizontal_kernel)  # Morphological closing
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_OPEN, horizontal_kernel)  # Morphological opening
     cv2.imshow("red_horizontal",red_mask)
-    min_line_area = center_frame[0]*2  * center_frame[0]* 2 * 0.005 # bigger then half a % 
+    min_line_area = center_frame[0]*2  * center_frame[0]* 2 * 0.003 # bigger then half a % 
         
     # 4. Find contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    x_locations = []
+    cnt_locations = []
 
     for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
+        print(f"y area  {area}")
         areaY_sum += area
         if area > min_line_area:
-
+            
             x, y, w, h = cv2.boundingRect(contour)
+            cnt_locations.append([x,y,w,h])
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            if h > 10 :
-                
+    if len(cnt_locations) == 1:
+        if center_frame[0] > cnt_locations[0][1]:
+            cv2.putText(frame,f"go up", (300, 220),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        else:
+            cv2.putText(frame,f"go down", (300, 220),
+                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
-                cv2.putText(frame,f"first conditional: {Prevrect.y_pos > center_frame[1]}", (200, 100),
+    elif len(cnt_locations) == 2:
+        cv2.putText(frame,f"go up", (300, 220),
                  cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                cv2.putText(frame,f"second conditional: {center_frame[1] < y}", (200, 120),
-                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                cv2.putText(frame,f"Prevrect: {Prevrect.y_pos}", (300, 200),
-                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                cv2.putText(frame,f"curr Pos: {y}", (300, 220),
-                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-                if Prevrect.y_pos < center_frame[0] and center_frame[0] < y:
-                    Prevrect.horizontal_lines +=1
-                Prevrect.y_pos = y
             
     return None
 
@@ -136,7 +134,7 @@ def detect_x_lines(frame) ->TargetPosition:
         # 5. Filter and calculate average X location
         image_height, image_width, _ = frame.shape
         # Estimate a minimum area based on the image size           
-        min_line_area = image_height * image_width * 0.005 #bigger then half a % of the screen 
+        min_line_area = image_height * image_width * 0.004 #bigger then half a % of the screen 
         #print("min_line_area",min_line_area)
         x_locations = []
         
@@ -148,21 +146,18 @@ def detect_x_lines(frame) ->TargetPosition:
         for i, contour in enumerate(contours): # Look at most 2 largest
             area = cv2.contourArea(contour)
             areaX_sum += area
-            #print("area=",area)
+            print(f"x area  {area}")
             if area > min_line_area:
                 x, y, w, h = cv2.boundingRect(contour)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 #print(x, y, w, h)
                 # Further ensure it is a tall object, filtering out small red labels
                 if h > 30: #bigger then 1% of the screen 
-                    
                     x_locations.append(x)
                     x_locations.append(x+w)
                     # Draw visualization
                     #print(f"Detected line {i+1}: Area={area}, X={x}, Y={y}, W={w}, H={h}")
                     #random_color_tuple = tuple(random.randint(0, 255) for _ in range(3))
-
-
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
 
         if len(x_locations)<4:
@@ -206,22 +201,18 @@ def show_image(frame,fps):
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (20, 200),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if location == TargetPosition.LEFT:
-        cv2.putText(frame, f"go left", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        put_text = f"go left"
     if location == TargetPosition.CENTER:
         print("in center")
         if Prevrect.horizontal_lines == 1:
-            cv2.putText(frame, f"fire", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            put_text = f"fire"
         else:
-            cv2.putText(frame, f"in center", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            put_text = f"in center"
     if location == TargetPosition.RIGHT:
-        cv2.putText(frame, f"go right", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        put_text =  f"go right"
     if location == TargetPosition.NOT_DETECTED:
-            cv2.putText(frame, f"not detected", (20, 120),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            put_text = f"not detected"
+    cv2.putText(frame, put_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
     radius_circle=20
     thickness_circle=2
     color_circle=(0, 0, 255)
@@ -234,7 +225,7 @@ def show_image(frame,fps):
 def main():
     # --- Main Execution ---
     # Path to your video file
-    video_path = "photos/red_target_vid.mp4"
+    video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
     cap = cv2.VideoCapture(video_path)
     prev_time = 0
     target_delay = 1.0 / 25  # 25 FPS → 0.04 seconds per frame
