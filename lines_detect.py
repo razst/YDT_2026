@@ -28,9 +28,8 @@ class TargetPosition(Enum):
     CENTER = 0
     RIGHT = 1
     NOT_DETECTED = 2
-
-#BUG test in case of 2 V lines
-def detect_y_lines(frame):
+#TODO when no line detected go up
+def detect_y_lines(frame,position):
     global areaY_sum ,areaX_sum
     global center_frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -61,7 +60,7 @@ def detect_y_lines(frame):
 
     for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
-        print(f"y area  {area}")
+        print(f"y area {area}")
         areaY_sum += area
         if area > min_line_area:
             
@@ -71,6 +70,8 @@ def detect_y_lines(frame):
     if len(cnt_locations) == 1:
         if center_frame[0] > cnt_locations[0][1]:
             cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1,(150, 200, 210), 2)
+        elif center_frame[0] < cnt_locations[0][1] and position == TargetPosition.NOT_DETECTED:
+            cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
         else:
             cv2.putText(frame,f"go down", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
 
@@ -131,7 +132,7 @@ def detect_x_lines(frame) ->TargetPosition:
         if abs(left_w-right_w)<CENTER_THRESHOLD: 
             print("center")
             return TargetPosition.CENTER
-        elif left_w>right_w:
+        elif left_w>right_w:                
             print("left")
             return TargetPosition.LEFT
         elif right_w > left_w:
@@ -143,26 +144,40 @@ def detect_x_lines(frame) ->TargetPosition:
     except Exception as e:
         print(f"An error occurred while processing frame: {e}")
         return []
-    
+def detect_white_lines(frame):
+    # 2. Convert to HSV for better color segmentation
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # 3. Define the range for 'White'
+    # White has low saturation (0-50) and high value (200-255)
+    lower_white = np.array([0, 0, 200])
+    upper_white = np.array([180, 50, 255])
+
+    # 4. Create a mask and find contours
+    mask = cv2.inRange(hsv, lower_white, upper_white)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.imshow("white_mask",mask) 
 def show_image(frame,fps):
 
     cv2.putText(frame, f"FPS: {fps:.2f}", (10,150),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    location = detect_x_lines(frame)
-    detect_y_lines(frame)
+    #TODO make this the only detect that is needed
+    detect_white_lines(frame)
+    position = detect_x_lines(frame)
+    detect_y_lines(frame,position)
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (10,170),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    if location == TargetPosition.LEFT:
+    if position == TargetPosition.LEFT:
         put_text = f"go left"
-    if location == TargetPosition.CENTER:
+    if position == TargetPosition.CENTER:
         print("in center")
         if Prevrect.horizontal_lines == 1:
             put_text = f"fire"
         else:
             put_text = f"in center"
-    if location == TargetPosition.RIGHT:
+    if position == TargetPosition.RIGHT:
         put_text =  f"go right"
-    if location == TargetPosition.NOT_DETECTED:
+    if position == TargetPosition.NOT_DETECTED:
             put_text = f"not detected"
     cv2.putText(frame, put_text, (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
     radius_circle=20
@@ -177,11 +192,9 @@ def show_image(frame,fps):
 def main():
     # --- Main Execution ---
     # Path to your video file
-    video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
+    video_path = "C:/Users/pc/Downloads/drive-download-20260216T160310Z-3-001/epstein4.mp4"
     cap = cv2.VideoCapture(video_path)
     prev_time = 0
-    target_delay = 1.0 / 25
-
     fps_count=0
     fps_sum=0
 
