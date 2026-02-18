@@ -61,7 +61,6 @@ def detect_y_lines(frame,position):
     for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         print(f"y area {area}")
-        areaY_sum += area
         if area > min_line_area:
             
             x, y, w, h = cv2.boundingRect(contour)
@@ -121,9 +120,9 @@ def detect_x_lines(frame) ->TargetPosition:
                     x_locations.append(x+w)
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
 
-        if len(x_locations)<4:
-            cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (10, 110),
-                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+        #if len(x_locations)<4:
+        #    cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (10, 110),
+        #         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #cv2.imshow("frame", frame)
             return TargetPosition.NOT_DETECTED
         x_locations.sort()
@@ -144,7 +143,7 @@ def detect_x_lines(frame) ->TargetPosition:
     except Exception as e:
         print(f"An error occurred while processing frame: {e}")
         return []
-def detect_white_lines(frame):
+def detect_white(frame):
     # 2. Convert to HSV for better color segmentation
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -156,15 +155,23 @@ def detect_white_lines(frame):
     # 4. Create a mask and find contours
     mask = cv2.inRange(hsv, lower_white, upper_white)
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.imshow("white_mask",mask) 
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
+        # Process the two largest contours, if they meet the area threshold
+    for i, contour in enumerate(contours): # Look at most 2 largest
+        area = cv2.contourArea(contour)
+        if area > 0.1:
+            x, y, w, h = cv2.boundingRect(contour)
+            #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            if h > 50: #bigger then 1% of the screen                       
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (128, 0, 0), 2)
 def show_image(frame,fps):
 
     cv2.putText(frame, f"FPS: {fps:.2f}", (10,150),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     #TODO make this the only detect that is needed
-    detect_white_lines(frame)
     position = detect_x_lines(frame)
     detect_y_lines(frame,position)
+    detect_white(frame)
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (10,170),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if position == TargetPosition.LEFT:
@@ -192,7 +199,7 @@ def show_image(frame,fps):
 def main():
     # --- Main Execution ---
     # Path to your video file
-    video_path = "C:/Users/pc/Downloads/drive-download-20260216T160310Z-3-001/epstein4.mp4"
+    video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
     cap = cv2.VideoCapture(video_path)
     prev_time = 0
     fps_count=0
