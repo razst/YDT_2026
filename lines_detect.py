@@ -29,7 +29,7 @@ class TargetPosition(Enum):
     RIGHT = 1
     NOT_DETECTED = 2
 #TODO when no line detected go up
-def detect_y_lines(frame,position):
+def detect_y_lines(frame,rx,ry,rw,rh):
     global areaY_sum ,areaX_sum
     global center_frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -57,26 +57,28 @@ def detect_y_lines(frame,position):
     # 4. Find contours
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnt_locations = []
-
     for i, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         print(f"y area {area}")
-        if area > min_line_area:
-            
+        if area > min_line_area:    
             x, y, w, h = cv2.boundingRect(contour)
             cnt_locations.append([x,y,w,h])
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    in_rect =  (rx <= center_frame[1] <= (rx + rw)) and (ry <= center_frame[0] <= (ry + rh))
+    print(in_rect)
+
     if len(cnt_locations) == 1:
-        if center_frame[0] > cnt_locations[0][1]:
-            cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1,(150, 200, 210), 2)
-        elif center_frame[0] < cnt_locations[0][1] and position == TargetPosition.NOT_DETECTED:
+        if center_frame > cnt_locations[0][1]:
+            cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
+        elif center_frame < cnt_locations[0][1] and in_rect:
             cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
         else:
             cv2.putText(frame,f"go down", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
-
+    
     elif len(cnt_locations) == 2:
         cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
-            
+    else:
+        cv2.putText(frame,f"go down", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)       
     return None
 
 
@@ -124,7 +126,6 @@ def detect_x_lines(frame) ->TargetPosition:
         #    cv2.putText(frame, f"ERROR: Less than two lines detected in frame. Detected X locations: {x_locations}", (10, 110),
         #         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             #cv2.imshow("frame", frame)
-            return TargetPosition.NOT_DETECTED
         x_locations.sort()
         right_w = abs(image_width-x_locations[3]-center_frame[1])
         left_w = abs(center_frame[1] - x_locations[1]) 
@@ -159,19 +160,19 @@ def detect_white(frame):
         # Process the two largest contours, if they meet the area threshold
     for i, contour in enumerate(contours): # Look at most 2 largest
         area = cv2.contourArea(contour)
-        if area > 0.1:
+        if area > 5000:
             x, y, w, h = cv2.boundingRect(contour)
-            #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            if h > 50: #bigger then 1% of the screen                       
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (128, 0, 0), 2)
+            #cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 255, 0), 2)
+    return x, y, w, h
 def show_image(frame,fps):
 
     cv2.putText(frame, f"FPS: {fps:.2f}", (10,150),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     #TODO make this the only detect that is needed
+    x, y, w, h = detect_white(frame)
     position = detect_x_lines(frame)
-    detect_y_lines(frame,position)
-    detect_white(frame)
+    detect_y_lines(frame,x,y,h,w)
+    put_text = ''
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (10,170),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     if position == TargetPosition.LEFT:
@@ -199,7 +200,7 @@ def show_image(frame,fps):
 def main():
     # --- Main Execution ---
     # Path to your video file
-    video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
+    video_path = "C:/Users/pc/Downloads/videos/4.mp4"
     cap = cv2.VideoCapture(video_path)
     prev_time = 0
     fps_count=0
