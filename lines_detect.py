@@ -64,21 +64,35 @@ def detect_y_lines(frame,rx,ry,rw,rh):
             x, y, w, h = cv2.boundingRect(contour)
             cnt_locations.append([x,y,w,h])
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    print(center_frame[1],center_frame[0])
+    print(rx,ry,rw,rh)
     in_rect =  (rx <= center_frame[1] <= (rx + rw)) and (ry <= center_frame[0] <= (ry + rh))
-    print(in_rect)
-
+    if in_rect:
+        cv2.putText(frame,f"in rect", (10, 80),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+    else:
+        cv2.putText(frame,f"not in  rect", (10, 80),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+        
     if len(cnt_locations) == 1:
-        if center_frame > cnt_locations[0][1]:
+        if center_frame[0] > cnt_locations[0][1]:
+            cv2.putText(frame,f"conditional 1", (10, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
             cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
-        elif center_frame < cnt_locations[0][1] and in_rect:
+        elif center_frame[0] < cnt_locations[0][1] and in_rect:
             cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
+            cv2.putText(frame,f"conditional 2", (10, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
         else:
             cv2.putText(frame,f"go down", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
+            cv2.putText(frame,f"conditional 3", (10, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
     
     elif len(cnt_locations) == 2:
         cv2.putText(frame,f"go up", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)
+        cv2.putText(frame,f"conditional 4", (10, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
     else:
         cv2.putText(frame,f"go down", (10, 60),cv2.FONT_HERSHEY_SIMPLEX, 1, (150, 200, 210), 2)       
+        cv2.putText(frame,f"conditional 5", (10, 200),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
     return None
 
 
@@ -145,6 +159,7 @@ def detect_x_lines(frame) ->TargetPosition:
         print(f"An error occurred while processing frame: {e}")
         return []
 def detect_white(frame):
+    x = y = w = h = 0
     # 2. Convert to HSV for better color segmentation
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -162,7 +177,7 @@ def detect_white(frame):
         area = cv2.contourArea(contour)
         if area > 5000:
             x, y, w, h = cv2.boundingRect(contour)
-            #cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 255, 0), 2)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0,0,255 ), 2)
     return x, y, w, h
 def show_image(frame,fps):
 
@@ -171,7 +186,7 @@ def show_image(frame,fps):
     #TODO make this the only detect that is needed
     x, y, w, h = detect_white(frame)
     position = detect_x_lines(frame)
-    detect_y_lines(frame,x,y,h,w)
+    detect_y_lines(frame,x,y,w,h)
     put_text = ''
     cv2.putText(frame, f"lines amount:{Prevrect.horizontal_lines}", (10,170),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
@@ -200,7 +215,7 @@ def show_image(frame,fps):
 def main():
     # --- Main Execution ---
     # Path to your video file
-    video_path = "C:/Users/pc/Downloads/videos/4.mp4"
+    video_path = "C:/Users/janjo/Desktop/ctfs/ydtvids/1.mp4"
     cap = cv2.VideoCapture(video_path)
     prev_time = 0
     fps_count=0
@@ -230,7 +245,7 @@ def main():
             break
     print(F"avg fps: {fps_sum/fps_count}")
     print(F"horizontal avarage: {(areaY_sum/fps_count) / (height * width) * 100}, percent"              )
-    print(F"vertical average is : {(areaX_sum /fps_count) /(height * width) * 100            }, percent")
+    print(F"vertical average is : {(areaX_sum /fps_count) /(height * width) * 100}, percent")
     print(f"{(height * width)}")
     cap.release()
     cv2.destroyAllWindows()
