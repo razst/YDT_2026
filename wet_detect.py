@@ -166,3 +166,6 @@ print(list)
 # resized_img = cv2.resize(mask, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
 
 # cv2.imshow('wet mask', resized_img)
+
+
+cv2.waitKey(0)

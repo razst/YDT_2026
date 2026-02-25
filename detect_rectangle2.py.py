@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 import time
 from enum import Enum
-video_path = r"photos\red_target_vid.mp4"
-
+video_path ="C:/Users/user/Downloads/epsteinFiles.mp4"
 
 class TargetPosition(Enum):
     LEFT = -1
@@ -13,116 +12,137 @@ class TargetPosition(Enum):
     DOWN=-1
     UP=1
 
+global x, y, w, h
 # gets a frame and instrcut how to get to its center
 # input: cv2 frame
-# output: frame, horz (-1:right,0:center,1:right), vart (-1:down,0:center,1:up) 
-def center_detect(frame):
+# output: frame, horz (-1:left,0:center,1:right), vart (-1:down,0:center,1:up)
 
+def center_detect(frame):
+    global x, y, w, h
+    adited_frame=frame
+    original_frame=frame.copy()
     horz,vert = 0,0
-    H, W, _ = frame.shape
-    X_mid_frame = W // 2 
-    Y_mid_frame = H // 2 
-    x_tol, y_tol = int(W * 0.05), int(H * 0.05)
-    
+    H, W, _ = adited_frame.shape
+    X_mid_adited_frame = W // 2
+    Y_mid_adited_frame = H // 2
+    x_tol, y_tol = int(W * 0.03), int(H * 0.03)
+
     # HSV Processing for Red
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(adited_frame, cv2.COLOR_BGR2HSV)
     mask1 = cv2.inRange(hsv, np.array([0, 100, 100]), np.array([10, 255, 255]))
     mask2 = cv2.inRange(hsv, np.array([170, 100, 100]), np.array([180, 255, 255]))
     red_mask = mask1 + mask2
 
     # Cleaning up the noise
-    kernel = np.ones((5, 5), np.uint8) 
+    kernel = np.ones((5, 5), np.uint8)
     red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel)
-    # Finding Contours
+    # Finding Contours TODO find only Contours that are "closed"
     contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    display_text = "No target detected"
-    target_color = (0, 0, 255) # Red (BGR)
+    cv2.imshow("red_horizontal",red_mask)
+    max_area = 0
+    last_cnt = None
 
     # Logic to find the largest rectangle
-    best_cnt = None
-    max_area = 0
-    print(len(contours))
+    print("count of contoutrs",len(contours))
     for cnt in contours:
         area = cv2.contourArea(cnt)
+        print("area:",area)
         if area > 500:
             x, y, w, h = cv2.boundingRect(cnt)
             aspect_ratio = float(w) / h
-            if 0.2 < aspect_ratio < 5.0 and area > max_area:
-                best_cnt = cnt
+            print(f"aspect ratio: {aspect_ratio}")
+            if 0.45 < aspect_ratio < 0.57 and area > max_area: #TODO make the numbers CONSTS
+                last_cnt = cnt
                 max_area = area
 
-    if best_cnt is not None:
-        x, y, w, h = cv2.boundingRect(best_cnt)
+    if last_cnt is not None:
+        x, y, w, h = cv2.boundingRect(last_cnt)
         cx, cy = x + w//2, y + h//2
-        
-
         # Check if centered
-        if (X_mid_frame - x_tol < cx < X_mid_frame + x_tol):
-             horz=TargetPosition.CENTER
-             dir_x = "CENTER in X"
-        if(Y_mid_frame - y_tol < cy < Y_mid_frame + y_tol):   
-            vert=TargetPosition.CENTER
-            dir_x = "CENTER in Y"
-        if(cx < X_mid_frame - x_tol):
+        if (X_mid_adited_frame - x_tol < cx < X_mid_adited_frame + x_tol):
+            print("in center")
+            horz=TargetPosition.CENTER
+            dir_x = "CENTER in X"
+        elif(cx < X_mid_adited_frame - x_tol):
             dir_x = "Left"
             horz=TargetPosition.LEFT
         else:
-             horz=TargetPosition.RIGHT
-             dir_x= "Right"
-        if(cy > Y_mid_frame + y_tol):
-             vert=TargetPosition.DOWN
-             dir_y="Down"
+            horz=TargetPosition.RIGHT
+            dir_x= "Right"
+
+        if(Y_mid_adited_frame - y_tol < cy < Y_mid_adited_frame + y_tol):
+            print("in center y")  
+            vert=TargetPosition.CENTER
+            dir_y = "CENTER in Y"
+        elif(cy > Y_mid_adited_frame + y_tol):
+            vert=TargetPosition.DOWN
+            dir_y="Down"
         else:
-             vert=TargetPosition.UP
-             dir_y="up"
-
-        display_text = f"{dir_x} {dir_y}".strip()
+            vert=TargetPosition.UP
+            dir_y="up"
+        display_x = f"{dir_x}".strip()
+        display_y = f"{dir_y}".strip()
         target_color = (255, 0, 0) # Blue
+        cv2.putText(frame, display_y, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+        cv2.putText(frame, display_x, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
+        cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
+    else:
+        dir_y = "No target detected"
+        dir_x = ""
 
-        cv2.line(frame, (X_mid_frame-20, Y_mid_frame), (X_mid_frame+20, Y_mid_frame), (0,0,0), 2)
-        cv2.line(frame, (X_mid_frame, Y_mid_frame-20), (X_mid_frame, Y_mid_frame+20), (0,0,0), 2)
-        cv2.imshow('Drone Alignment Check', frame) 
-    return frame,horz,vert
+    display_x = f"{dir_x}".strip()
+    display_y = f"{dir_y}".strip()
+    # target_color = (255, 0, 0) # Blue
+    cv2.putText(adited_frame, display_y, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (180, 105, 255), 2)
+    cv2.putText(adited_frame, display_x, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (180, 105, 255), 2)
+    # cv2.rectangle(frame, (x, y), (x + w, y + h), target_color, 3)
+    # cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
+    # Draw Crosshair
+    cv2.line(adited_frame, (X_mid_adited_frame-20, Y_mid_adited_frame), (X_mid_adited_frame+20, Y_mid_adited_frame), (0,0,0), 2)
+    cv2.line(adited_frame, (X_mid_adited_frame, Y_mid_adited_frame-20), (X_mid_adited_frame, Y_mid_adited_frame+20), (0,0,0), 2)
 
-def main(path):
-    cap = cv2.VideoCapture(path)
+    return original_frame,adited_frame,horz,vert
 
+def get_cropped_rectangle(original_frame):
+    global x, y, w, h
+    cropped_frame = original_frame[y:y+h, x:x+w]
+    return cropped_frame
+
+
+def main(video_path):
+    # cap = cv2.VideoCapture(path)
+    cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         print("Error: Could not open video.")
-        return 
+        return
 
     prev_time = 0
     fps_count=0
     fps_sum=0
-
     while True:
         ret, frame = cap.read()
         if not ret:
             print("End of video or cannot read frame.")
             break
-        
-        current_time = time.time()
 
+        current_time = time.time()
         # FPS = 1 / time between frames
         fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
         prev_time = current_time
         fps_count +=1
         fps_sum+=fps
 
-        # Resize once (0.5 is usually enough)
-        frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-        f,h,v = center_detect(frame)
-
+        #Resize once (0.5 is usually enough)
+        frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
+        original_frame,f,h,v = center_detect(frame)# o_or=original_frame Doesn't matter here
+        cropped_frame= get_cropped_rectangle(original_frame)
                 # Put FPS text on frame
-        cv2.putText(frame, f"FPS: {fps:.2f}", (30, 100),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
-        cv2.imshow('Drone Alignment Check', frame) 
-
-        # key = cv2.waitKey(0) 
+        cv2.putText(frame, f"FPS: {fps:.2f}", (10, 100),cv2.FONT_HERSHEY_SIMPLEX, 1,(0, 255, 255), 2)
+        cv2.imshow('Drone Alignment Check', frame)
+        cv2.imshow('get_cropped_rectangle', cropped_frame)
         # Press 'q' to quit early.
-        key = cv2.waitKey(0)  # 0 = wait forever
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(0) & 0xFF == ord('q'):
             break
 
     print("Avg FPS:",fps_sum/fps_count)
@@ -130,9 +150,9 @@ def main(path):
     cv2.destroyAllWindows()
 
 # CORRECT CALL: Pass the path variable, not 'frame'
+
 if __name__ == "__main__":
-    # main(video_path)
-    f = cv2.imread("photos/test2.jpg")
-    f = cv2.resize(f, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-    center_detect(f)
+
+    main(video_path)
+
     cv2.waitKey(0)
