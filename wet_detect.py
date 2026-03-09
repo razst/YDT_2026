@@ -55,7 +55,6 @@ def divide_into_three_rows(img):
 
 
 
-
 def main_image(path):
     frame = cv2.imread(path)
     rows = divide_into_three_rows(frame)
