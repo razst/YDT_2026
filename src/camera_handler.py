@@ -35,13 +35,11 @@ class Camera:
             self.q.put(frame)
 
     def start(self):
-        """Run the update method in a background thread."""
         thread = threading.Thread(target=self.update, daemon=True) 
         thread.start()
         return self
 
     def stop(self):
-        """Stop the loop and release resources."""
         self.stopped = True
         if self.cap.isOpened():
             self.cap.release()
