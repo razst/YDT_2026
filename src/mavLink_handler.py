@@ -10,7 +10,7 @@ class NotGuidedException(Exception):
         super().__init__(self.message)
 
 
-class PixHandler:
+class mavLink_handler:
     def __init__(self, connection_string,msg_frq=1): # msg freq in Hz
         self._last_pos = 0
         self._connection = self._connect(connection_string,msg_frq)
