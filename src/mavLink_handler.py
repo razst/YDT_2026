@@ -10,7 +10,7 @@ class NotGuidedException(Exception):
         super().__init__(self.message)
 
 
-class mavLink_handler:
+class MavLinkHandler:
     def __init__(self, connection_string,msg_frq=1): # msg freq in Hz
         self._last_pos = 0
         self._connection = self._connect(connection_string,msg_frq)
@@ -54,9 +54,9 @@ class mavLink_handler:
             # Moves a servo connected to the ardupilot
             # aux_ch - use 7 for main_out 7, 8 for main_out 8
             # pwm - 900 = 0 degree, 2000 = 90 degree  
-            logger.debug("requsting to move servo in pix")
+            logger.debug("requsting to move servo in FC")
             pwm_angle = int((2000 - 900) * (servo_angle / 90) + 900) 
-            logger.debug(f"sending command move servo to pix with value: {pwm_angle}")
+            logger.debug(f"sending command move servo to FC with value: {pwm_angle}")
             self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component
             ,mavutil.mavlink.MAV_CMD_DO_SET_SERVO,0,servo_channel, pwm_angle, 0,0,0,0,0)
             # self.logger.debug("waiting to recev command ack from pix")
@@ -66,7 +66,7 @@ class mavLink_handler:
             # else:
             #     self.logger.info("servo moved")
         except Exception as error:
-            self.logger.exception("Failed to send move servo to pix")
+            self.logger.exception("Failed to send move servo to FC")
 
     def send_text(self,msg):
         # ******* Send TEXT messages ********

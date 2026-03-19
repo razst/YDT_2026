@@ -4,12 +4,12 @@ import queue
 from logger_handler import logger
 
 class Camera:
-    def __init__(self, source, frame_queue, autp_start = False):
+    def __init__(self, source, frame_queue, auto_start = False):
         self.cap = cv2.VideoCapture(source)
         self.q = frame_queue
         self.stopped = False
 
-        if autp_start:
+        if auto_start:
             self.start()
 
     def update(self):
