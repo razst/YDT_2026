@@ -3,6 +3,7 @@ from mavLink_handler import *
 from constants import *
 from camera_handler import *
 import queue
+from lines_detect import *
 
 if __name__ == "__main__":
    
@@ -20,9 +21,12 @@ if __name__ == "__main__":
       camera = Camera(CAMERA_IDX, frame_queue,True) 
    except Exception:
       logger.error("Unable to connect to FC")
-
    # wait 4 GUIDED mode
+   mode = False
+   while mode != True:
+      mode = mavLink._check_guided_mode()
    # start the mission
+   
    # Start movie recording to file
    # wait for mission to end
    
