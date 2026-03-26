@@ -1,14 +1,30 @@
 from logger_handler import logger
 from mavLink_handler import *
 from constants import *
-
+from camera_handler import *
+import queue
 
 if __name__ == "__main__":
-    global mavLink
-    logger.info("Starting autonumi script 2026")
-    # get a connection to the FC
-    try:
-       mavLink = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
-    except Exception:
-       logger.error("Unable to connect to FC")
-       quit()
+   
+   logger.info("Starting autonumi script 2026")
+   # Connect the FC
+   global mavLink
+   try:
+      mavLink = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
+   except Exception:
+      logger.error("Unable to connect to FC")
+
+   # Connect the Camera
+   try:
+      frame_queue = queue.Queue(maxsize=10)  # Buffer up to 10 frames
+      camera = Camera(CAMERA_IDX, frame_queue,True) 
+   except Exception:
+      logger.error("Unable to connect to FC")
+
+   # wait 4 GUIDED mode
+   # start the mission
+   # Start movie recording to file
+   # wait for mission to end
+   
+
+   quit()

@@ -8,3 +8,6 @@ MAV_MSG_FREQ = 1 # how ofthen do we want to get messages from mavlink (in Hz)
 
 # General params
 LOGGING_LEVEL = logging.DEBUG  # You can set to INFO, WARNING, ERROR etc.
+
+# Camera params
+CAMERA_IDX=0
