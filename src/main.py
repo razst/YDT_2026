@@ -3,7 +3,7 @@ from mavLink_handler import *
 from constants import *
 from camera_handler import *
 import queue
-#from lines_detect import *
+#from target_detect import *
 from record_video import *
 
 if __name__ == "__main__":
@@ -18,10 +18,10 @@ if __name__ == "__main__":
 
    # Connect the Camera
    try:
-      frame_queue = queue.Queue(maxsize=10)  # Buffer up to 10 frames
+      frame_queue = queue.Queue(maxsize=10)  # Buffer up to 10 frames TBD MAXSIZE in constants.py
       camera = Camera(CAMERA_IDX, frame_queue,True) 
    except Exception:
-      logger.error("Unable to connect to FC")
+      logger.error("Unable to connect to Camera")
    # wait 4 GUIDED mode
    mavLink.check_until_guided()
    # start the mission
