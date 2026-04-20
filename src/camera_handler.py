@@ -27,7 +27,7 @@ class Camera:
             # Logic to prevent the queue from bloating if processing is slow
             if self.q.full(): 
                 try:
-                    logger.info("Frame queue is full")
+                    # logger.info("Frame queue is full")
                     self.q.get_nowait() # Drop oldest frame
                 except queue.Empty:
                     pass

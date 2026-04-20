@@ -24,8 +24,10 @@ class MavLinkHandler:
             return True 
     def check_until_guided(self):
         mode = self.get_curr_mode()
+        print(mode)
         while mode != 4:
             mode = self.get_curr_mode()
+            print(mode)
     def _connect(self,connection_string,msg_frq):
 
         the_connection = mavutil.mavlink_connection(connection_string,source_system=1) 

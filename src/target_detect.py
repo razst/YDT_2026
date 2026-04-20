@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 from enum import Enum
 import time
+import threading
+import queue
+import traceback
 class Detect:
     def __init__(self,frame_queue,auto_start = False):
         self.lower_red_1 = np.array([0, 80, 50])    # Lowered Saturation and Value minimums
@@ -10,6 +13,8 @@ class Detect:
         self.upper_red_2 = np.array([180, 255, 255])
         self.CENTER_THRESHOLD = 0.25
         self.frame_queue = frame_queue
+        if auto_start:
+            self.start()
     #BUG what happens if we see two H lines?
 
     # RED color mask
@@ -27,7 +32,7 @@ class Detect:
         NOT_DETECTED = 4 # we didn't detect two H lines ! (need to go up)
 
     
-    def detect_x_lines(self) ->TargetPosition:                
+    def detect_x_lines(self,frame) ->TargetPosition:                
         """
         Detects red lines in an image using a wider HSV range and robust filtering.
         Saves the processed mask and the final detected image.
@@ -64,50 +69,54 @@ class Detect:
                         cv2.rectangle(frame, (x, y), (x + w, y + h), (255,0,255), 2)
             # TODO return NOT DETECTED if num of lines < 2
             if len(rect_locations) < 2:
-                return TargetPosition.NOT_DETECTED 
-            rect_locations.sort(key=sort_rect)
+                return self.TargetPosition.NOT_DETECTED 
+            rect_locations.sort(key=self.sort_rect)
             #rect_locatins((x1,y1,xw1,yh1),(x2,y2,xw2,yh2))
             print(rect_locations) 
             right_w = abs(image_width-rect_locations[1][0]-center_frame[1])
             left_w = abs(center_frame[1] - rect_locations[0][2]) 
             w = rect_locations[1][0]-rect_locations[0][2] 
-            print(w,CENTER_THRESHOLD * w)
+            print(w,self.CENTER_THRESHOLD * w)
 
-            if abs(left_w-right_w)<CENTER_THRESHOLD * w:
+            if abs(left_w-right_w)<self.CENTER_THRESHOLD * w:
                 if (center_frame[0] <= rect_locations[0][3]) and (rect_locations[0][1] <= center_frame[0]):
                     print("center_fire")
-                    return TargetPosition.CENTER_FIRE
+                    return self.TargetPosition.CENTER_FIRE
                 print("center")
-                return TargetPosition.CENTER
+                return self.TargetPosition.CENTER
             elif left_w>=right_w:                
                 print("left")
-                return TargetPosition.LEFT
+                return self.TargetPosition.LEFT
             elif right_w > left_w:
                 print("right")
-                return TargetPosition.RIGHT  
+                return self.TargetPosition.RIGHT  
 
 
         except Exception as e:
             print(f"An error occurred while processing frame: {e}")
+            print("--- FULL STACK TRACE ---")
+            traceback.print_exc()
+            print("------------------------")            
             return []
 
-    def show_image(frame,fps):
+    def show_image(self,frame,fps):
 
         cv2.putText(frame, f"FPS: {fps:.2f}", (10,150),
         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
         #TODO make this the only detect that is needed
 
-        position = detect_x_lines(frame)
+        position = self.detect_x_lines(frame)
+        
         put_text = ''
-        if position == TargetPosition.CENTER_FIRE:
+        if position == self.TargetPosition.CENTER_FIRE:
             put_text = f"center fire"
-        if position == TargetPosition.LEFT:
+        if position == self.TargetPosition.LEFT:
             put_text = f"go left"
-        if position == TargetPosition.CENTER:
+        if position == self.TargetPosition.CENTER:
             put_text="center"
-        if position == TargetPosition.RIGHT:
+        if position == self.TargetPosition.RIGHT:
             put_text =  f"go right"
-        if position == TargetPosition.NOT_DETECTED:
+        if position == self.TargetPosition.NOT_DETECTED:
                 put_text = f"not detected"
         cv2.putText(frame, put_text, (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
         radius_circle=20
@@ -119,24 +128,22 @@ class Detect:
         cv2.line(frame, (center_frame[1]-radius_circle, center_frame[0]), (circle_x+radius_circle, circle_y), color_circle, 2)
         cv2.line(frame, (circle_x, circle_y-radius_circle), (circle_x, circle_y+radius_circle), color_circle, 2)
         cv2.imshow("final",frame)
+
     def start(self):
-        thread = threading.Thread(target=self.update, daemon=True) 
+        thread = threading.Thread(target=self.update, daemon=True)
+        print("started detect frame")
         thread.start()
         return self
-    def main():
-        # --- Main Execution ---
-        # Path to your video file
-        video_path = "C:/Users/user/Downloads/field_test2.mp4" # test diffremt highths 
-        # video_path = "C:/Users/user/Downloads/field_test1.mp4" # test all positions
-        cap = cv2.VideoCapture(video_path)
+    def update(self):
+        print("in update")
         prev_time = 0
         fps_count=0
         fps_sum=0
-
-        if not cap.isOpened():
-            print("Error: Could not open video.")
-            exit()
+        video_path = "C:/Users/user/Downloads/field_test2.mp4" # test diffremt highths 
+        # video_path = "C:/Users/user/Downloads/field_test1.mp4" # test all positions
+        cap = cv2.VideoCapture(video_path)        
         while True:
+            # frame = self.frame_queue.get()
             ret, frame = cap.read()
             if not ret:
                 break
@@ -149,12 +156,10 @@ class Detect:
             height,width = frame.shape[:2]
             global center_frame
             center_frame = (height//2,width//2)
-            show_image(frame,fps)
+            
+            self.show_image(frame,fps)
+            
 
             # Wait for ANY key to go to next frame
-            key = cv2.waitKey(0)  # 0 = wait forever
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-        cap.release()
+            cv2.waitKey(1)
         cv2.destroyAllWindows()
-    main()
