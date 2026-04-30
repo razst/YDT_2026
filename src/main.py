@@ -2,7 +2,8 @@ from logger_handler import logger
 from mavLink_handler import *
 from constants import *
 from camera_handler import *
-import queue
+from collections import deque # FIX 1: Import deque instead of queue
+import time
 from target_detect import *
 from record_video import *
 
@@ -15,25 +16,29 @@ if __name__ == "__main__":
       mavLink = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
    except Exception:
       logger.error("Unable to connect to FC")
-
-   # Connect the Camera
+      
+   # wait 4 GUIDED mode
    mavLink.check_until_guided()
    try:
-      frame_queue = queue.Queue(maxsize=5)  # Buffer up to 10 frames TBD MAXSIZE in constants.py
-      camera = Camera(CAMERA_IDX, frame_queue,True) 
+      # FIX 2: Create the deque with maxlen=1. 
+      frame_buffer = deque(maxlen=1)
+      video_buffer = deque(maxlen=1)
+      # Connect the Camera
+      # Pass the new buffer to the Camera
+      camera = Camera(CAMERA_IDX, frame_buffer, True) 
    except Exception:
       logger.error("Unable to connect to Camera")
-   # wait 4 GUIDED mode
+
    # start the mission
-   target_detect = Detect(frame_queue,True) 
-   # Start movie recording to file
-   #recorder = RecordVideo(frame_queue)
-   #thread_target = threading.Thread(target=recorder.record_main)
-   #thread_target.start()
-   while True:
-      pass
+   target_detect = Detect(frame_buffer,video_buffer, True) 
    
+   #Start movie recording to file
+   recorder = RecordVideo(video_buffer)
+   thread_target = threading.Thread(target=recorder.record_main)
+   thread_target.start()
+   
+   while True:
+      time.sleep(1)
    # wait for mission to end
    
-
    quit()
