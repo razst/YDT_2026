@@ -4,6 +4,7 @@ from enum import Enum
 import time
 import threading
 from collections import deque
+from constants import *
 
 class TargetPosition(Enum):
     LEFT = 0
@@ -100,8 +101,8 @@ class Detect:
         
         cv2.line(frame, (circle_x - radius_circle, circle_y), (circle_x + radius_circle, circle_y), color_circle, 2)
         cv2.line(frame, (circle_x, circle_y - radius_circle), (circle_x, circle_y + radius_circle), color_circle, 2)
-        
-        cv2.imshow("final", frame)
+        if not  IS_HEADLESS:
+            cv2.imshow("final", frame)
 
     def start(self):
         thread = threading.Thread(target=self.update, daemon=True)
@@ -139,5 +140,5 @@ class Detect:
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-                
-        cv2.destroyAllWindows()
+        if not IS_HEADLESS:      
+            cv2.destroyAllWindows()
