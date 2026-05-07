@@ -9,7 +9,7 @@ from record_video import *
 
 if __name__ == "__main__":
    
-   logger.info("Starting autonumi script 2026")
+   logger.info("Starting autonumi script 2026...")
    # Connect the FC
    global mavLink
    if not IS_HEADLESS:
