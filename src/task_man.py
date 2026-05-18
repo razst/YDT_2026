@@ -18,6 +18,7 @@ class TaskManager:
         for color in self.tasks:
             logger.info(f"Running task for target color: {color}")
             detect = Detect(self.cam_buffer, self.target_buffer, True, color)
+           
             # wait for the task to complete
         # RTL ??
         # Land ??
