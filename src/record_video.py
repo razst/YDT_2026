@@ -1,18 +1,25 @@
+import threading
+
 import cv2
 import time
 from datetime import datetime
 from collections import deque 
+import constants
 
 class RecordVideo: 
-    def __init__(self, frame_queue): 
+    def __init__(self, frame_queue, auto_start=False): 
         self.frame_queue = frame_queue
         # Removed hardcoded width and height!
         self.fps = 30 
-        self.segment_duration = 15
+        self.segment_duration = constants.SEGMENT_DURATION
         self.recording = True
 
+        if constants.SEGMENT_DURATION != -1 and auto_start:
+            thread_target = threading.Thread(target=self.record_main)
+            thread_target.start()            
+
     # Pass the actual frame into this function
-    def create_new_writer(self, frame, filename="segment_"):
+    def create_new_writer(self, frame, filename="v_out_"):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = f"{filename}{timestamp}.avi"
         fourcc = cv2.VideoWriter_fourcc(*'XVID')

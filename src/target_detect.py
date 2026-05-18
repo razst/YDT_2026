@@ -13,13 +13,31 @@ class TargetPosition(Enum):
     CENTER_FIRE = 3
     NOT_DETECTED = 4
 
+class TargetColor(Enum):
+    RED = 0
+    GREEN = 1
+    BLUE = 2
+
 class Detect:
     # ADDED: record_buffer parameter
-    def __init__(self, frame_buffer, record_buffer=None, auto_start=False):
-        self.lower_red_1 = np.array([0, 80, 50])
-        self.upper_red_1 = np.array([20, 255, 255])
-        self.lower_red_2 = np.array([160, 80, 50])
-        self.upper_red_2 = np.array([180, 255, 255])
+    def __init__(self, frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
+        
+        
+        if target_color == TargetColor.RED:
+            self.lower_1 = np.array([0, 80, 50])
+            self.upper_1 = np.array([20, 255, 255])
+            self.lower_2 = np.array([160, 80, 50])
+            self.upper_2 = np.array([180, 255, 255])
+        elif target_color == TargetColor.GREEN:
+            self.lower_1 = np.array([40, 80, 50])
+            self.upper_1 = np.array([80, 255, 255])
+            self.lower_2 = np.array([40, 80, 50])
+            self.upper_2 = np.array([80, 255, 255])
+        elif target_color == TargetColor.BLUE:
+            self.lower_1 = np.array([100, 80, 50])
+            self.upper_1 = np.array([140, 255, 255])
+            self.lower_2 = np.array([100, 80, 50])
+            self.upper_2 = np.array([140, 255, 255])
         self.CENTER_THRESHOLD = 0.25
         self.frame_buffer = frame_buffer
         self.record_buffer = record_buffer # Save the outgoing buffer
@@ -30,12 +48,15 @@ class Detect:
     def detect_x_lines(self, frame, center_frame) -> TargetPosition:                
         try:
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            mask1 = cv2.inRange(hsv, self.lower_red_1, self.upper_red_1)
-            mask2 = cv2.inRange(hsv, self.lower_red_2, self.upper_red_2)
+            mask1 = cv2.inRange(hsv, self.lower_1, self.upper_1)
+            mask2 = cv2.inRange(hsv, self.lower_2, self.upper_2)
             red_mask = cv2.bitwise_or(mask1, mask2)
 
             red_mask = cv2.erode(red_mask, None, iterations=1)
 
+            if not IS_HEADLESS:
+                cv2.imshow("mask", red_mask)
+                cv2.waitKey(1)
             contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             
             image_height, image_width = frame.shape[:2]
@@ -78,6 +99,7 @@ class Detect:
                 return TargetPosition.RIGHT  
 
         except Exception as e:
+            print(f"Error in detect_x_lines: {e}")
             return TargetPosition.NOT_DETECTED
 
     def show_image(self, frame, fps, center_frame):
