@@ -19,12 +19,17 @@ class TargetColor(Enum):
     GREEN = 1
     BLUE = 2
 
-
 class Detect:
     def __init__(self, frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
         self.frame_queue = frame_buffer
         self.target_bbox = None 
         self.record_buffer = record_buffer
+        
+        # ADDED: Synchronization event to let TaskManager know we are done
+        self.is_finished = threading.Event()
+        # ADDED: Flag to safely shut down the processing loop
+        self.running = True
+
         if target_color == TargetColor.RED:
             self.lower_1 = np.array([0, 80, 50])
             self.upper_1 = np.array([20, 255, 255])
@@ -46,14 +51,14 @@ class Detect:
 
     def center_detect(self, frame):
         adited_frame = frame
-        original_frame = frame.copy() # TODO can we remove this ???
+        original_frame = frame.copy() 
         horz, vert = TargetPosition.NOT_DETECTED, TargetPosition.NOT_DETECTED
         H, W, _ = adited_frame.shape
         X_mid_adited_frame = W // 2
         Y_mid_adited_frame = H // 2
-        x_tol, y_tol = int(W * 0.03), int(H * 0.03) # TODO: Consts ???
+        x_tol, y_tol = int(W * 0.03), int(H * 0.03)
 
-        # HSV Processing for Red 
+        # HSV Processing
         hsv = cv2.cvtColor(adited_frame, cv2.COLOR_BGR2HSV)
         mask1 = cv2.inRange(hsv, self.lower_1, self.upper_1)
         mask2 = cv2.inRange(hsv, self.lower_2, self.upper_2)
@@ -77,7 +82,7 @@ class Detect:
             if area > 500:
                 x, y, w, h = cv2.boundingRect(cnt)
                 aspect_ratio = float(w) / h
-                if 0.45 < aspect_ratio < 0.57 and area > max_area:
+                if 0 < aspect_ratio < 1 and area > max_area: #the values are not to br changed!!!0.45 0.57
                     max_cnt = cnt
                     max_area = area
 
@@ -132,7 +137,6 @@ class Detect:
 
         return original_frame, adited_frame, horz, vert
 
-    # imshow the detected object
     def get_cropped_rectangle(self, original_frame):
         if self.target_bbox is None:
             return None
@@ -143,18 +147,17 @@ class Detect:
             cv2.imshow('get_cropped_rectangle', cropped_frame)
         return cropped_frame
     
-
     def start(self):
         thread = threading.Thread(target=self.process_frames, daemon=True)
         thread.start()
         
-
     def process_frames(self):
         prev_time = time.time()
         fps_count = 0
         fps_sum = 0
+        centered_frames_count = 0 # ADDED: Counter to ensure stable lock
 
-        while True:
+        while self.running: # CHANGED: Uses the flag instead of True
             if len(self.frame_queue) > 0:
                 frame = self.frame_queue.popleft() 
 
@@ -166,8 +169,7 @@ class Detect:
 
                 frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
                 
-                original_frame, edited_frame, h, v = self.center_detect(frame)
-                # cropped_frame = self.get_cropped_rectangle(original_frame)
+                original_frame, edited_frame, horz, vert = self.center_detect(frame)
                 
                 if not IS_HEADLESS:
                     cv2.putText(edited_frame, f"FPS: {fps:.2f}", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
@@ -176,7 +178,22 @@ class Detect:
                 if self.record_buffer is not None:
                     self.record_buffer.append(edited_frame)
 
+                # ADDED: Task Completion Logic
+                if horz == TargetPosition.CENTER and vert == TargetPosition.CENTER:
+                    centered_frames_count += 1
+                    # Require being centered for 10 consecutive frames to prevent false positives
+                    if centered_frames_count > 10:
+                        print("Target properly aligned and locked! Finishing task.")
+                        self.running = False
+                        self.is_finished.set() # Unblocks the TaskManager!
+                        break
+                else:
+                    centered_frames_count = 0 # Reset counter if target moves out of center
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
+                self.running = False
+                self.is_finished.set() # Make sure TaskManager gets unblocked if user quits early
                 break
+                
         if not IS_HEADLESS:                
             cv2.destroyAllWindows()
