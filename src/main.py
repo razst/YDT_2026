@@ -29,8 +29,7 @@ if __name__ == "__main__":
       camera = Camera(CAMERA_IDX, cam_buffer, True) 
    except Exception:
       logger.error("Unable to connect to Camera")
-   #center_detect = Detect(cam_buffer,target_buffer,True,TargetColor.BLUE)
-
+   
    #Start movie recording to file
    recorder = RecordVideo(target_buffer,True)
 
