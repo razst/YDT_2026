@@ -4,6 +4,7 @@ import time
 from enum import Enum
 from collections import deque
 import threading
+from constants import *
 
 class TargetPosition(Enum):
     LEFT = -1
@@ -45,18 +46,18 @@ class Detect:
 
     def center_detect(self, frame):
         adited_frame = frame
-        original_frame = frame.copy()
+        original_frame = frame.copy() # TODO can we remove this ???
         horz, vert = TargetPosition.NOT_DETECTED, TargetPosition.NOT_DETECTED
         H, W, _ = adited_frame.shape
         X_mid_adited_frame = W // 2
         Y_mid_adited_frame = H // 2
-        x_tol, y_tol = int(W * 0.03), int(H * 0.03)
+        x_tol, y_tol = int(W * 0.03), int(H * 0.03) # TODO: Consts ???
 
-        # HSV Processing for Red
+        # HSV Processing for Red 
         hsv = cv2.cvtColor(adited_frame, cv2.COLOR_BGR2HSV)
         mask1 = cv2.inRange(hsv, self.lower_1, self.upper_1)
         mask2 = cv2.inRange(hsv, self.lower_2, self.upper_2)
-        red_mask = mask1 + mask2
+        red_mask = cv2.bitwise_or(mask1, mask2)
 
         # Cleaning up the noise
         kernel = np.ones((5, 5), np.uint8)
@@ -64,10 +65,11 @@ class Detect:
         
         # Finding Contours
         contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        cv2.imshow("red_horizontal", red_mask)
+        if not IS_HEADLESS:
+            cv2.imshow("red_horizontal", red_mask)
         
         max_area = 0
-        last_cnt = None
+        max_cnt = None
 
         # Logic to find the largest rectangle
         for cnt in contours:
@@ -76,13 +78,13 @@ class Detect:
                 x, y, w, h = cv2.boundingRect(cnt)
                 aspect_ratio = float(w) / h
                 if 0.45 < aspect_ratio < 0.57 and area > max_area:
-                    last_cnt = cnt
+                    max_cnt = cnt
                     max_area = area
 
         dir_x, dir_y = "", "No target detected"
 
-        if last_cnt is not None:
-            x, y, w, h = cv2.boundingRect(last_cnt)
+        if max_cnt is not None:
+            x, y, w, h = cv2.boundingRect(max_cnt)
             self.target_bbox = (x, y, w, h)
             
             cx, cy = x + w // 2, y + h // 2
@@ -130,12 +132,15 @@ class Detect:
 
         return original_frame, adited_frame, horz, vert
 
+    # imshow the detected object
     def get_cropped_rectangle(self, original_frame):
         if self.target_bbox is None:
             return None
         
         x, y, w, h = self.target_bbox
         cropped_frame = original_frame[y:y+h, x:x+w]
+        if not IS_HEADLESS and cropped_frame is not None and cropped_frame.size > 0:
+            cv2.imshow('get_cropped_rectangle', cropped_frame)
         return cropped_frame
     
 
@@ -162,17 +167,16 @@ class Detect:
                 frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
                 
                 original_frame, edited_frame, h, v = self.center_detect(frame)
-                cropped_frame = self.get_cropped_rectangle(original_frame)
+                # cropped_frame = self.get_cropped_rectangle(original_frame)
                 
-                cv2.putText(edited_frame, f"FPS: {fps:.2f}", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
-                cv2.imshow('Drone Alignment Check', edited_frame)
+                if not IS_HEADLESS:
+                    cv2.putText(edited_frame, f"FPS: {fps:.2f}", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
+                    cv2.imshow('Drone Alignment Check', edited_frame)
                 
-                if cropped_frame is not None and cropped_frame.size > 0:
-                    cv2.imshow('get_cropped_rectangle', cropped_frame)
                 if self.record_buffer is not None:
-                    self.record_buffer.append(cropped_frame)
+                    self.record_buffer.append(edited_frame)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-                
-        cv2.destroyAllWindows()
+        if not IS_HEADLESS:                
+            cv2.destroyAllWindows()
