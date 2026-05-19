@@ -1,206 +1,178 @@
 import cv2
 import numpy as np
 import time
-import threading
-from collections import deque
 from enum import Enum
+from collections import deque
+import threading
 
-class TargetPositionX(Enum):
+class TargetPosition(Enum):
     LEFT = -1
     CENTER = 0
     RIGHT = 1
     NOT_DETECTED = 2
-
-class TargetPositionY(Enum):
     DOWN = -1
-    CENTER = 0
     UP = 1
-    NOT_DETECTED = 2
 
-class TargetDetector:
-    def __init__(self, frame_buffer, record_buffer=None, auto_start=False):
-        self.frame_buffer = frame_buffer
+class TargetColor(Enum):
+    RED = 0
+    GREEN = 1
+    BLUE = 2
+
+
+class Detect:
+    def __init__(self, frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
+        self.frame_queue = frame_buffer
+        self.target_bbox = None 
         self.record_buffer = record_buffer
-        self.running = True
-        
-        # HSV Processing ranges for Red
-        self.lower_1 = np.array([0, 100, 100])
-        self.upper_1 = np.array([10, 255, 255])
-        self.lower_2 = np.array([170, 100, 100])
-        self.upper_2 = np.array([180, 255, 255])
-        
-        # Detection Constants
-        self.MIN_AREA = 500
-        self.MIN_ASPECT_RATIO = 0.45
-        self.MAX_ASPECT_RATIO = 0.57
-        self.TOLERANCE_PCT = 0.03
-        
-        # Target state
-        self.last_bbox = None
-        
+        if target_color == TargetColor.RED:
+            self.lower_1 = np.array([0, 80, 50])
+            self.upper_1 = np.array([20, 255, 255])
+            self.lower_2 = np.array([160, 80, 50])
+            self.upper_2 = np.array([180, 255, 255])
+        elif target_color == TargetColor.GREEN:
+            self.lower_1 = np.array([40, 80, 50])
+            self.upper_1 = np.array([80, 255, 255])
+            self.lower_2 = np.array([40, 80, 50])
+            self.upper_2 = np.array([80, 255, 255])
+        elif target_color == TargetColor.BLUE:
+            self.lower_1 = np.array([100, 80, 50])
+            self.upper_1 = np.array([140, 255, 255])
+            self.lower_2 = np.array([100, 80, 50])
+            self.upper_2 = np.array([140, 255, 255])
+            
         if auto_start:
             self.start()
 
-    def process_target(self, frame):
-        """
-        Detects the red target, calculates aspect ratios, and determines alignment.
-        Returns the annotated frame, cropped frame, and X/Y positions.
-        """
-        h, w, _ = frame.shape
-        x_mid, y_mid = w // 2, h // 2
-        x_tol, y_tol = int(w * self.TOLERANCE_PCT), int(h * self.TOLERANCE_PCT)
+    def center_detect(self, frame):
+        adited_frame = frame
+        original_frame = frame.copy()
+        horz, vert = TargetPosition.NOT_DETECTED, TargetPosition.NOT_DETECTED
+        H, W, _ = adited_frame.shape
+        X_mid_adited_frame = W // 2
+        Y_mid_adited_frame = H // 2
+        x_tol, y_tol = int(W * 0.03), int(H * 0.03)
 
-        # HSV Processing
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        # HSV Processing for Red
+        hsv = cv2.cvtColor(adited_frame, cv2.COLOR_BGR2HSV)
         mask1 = cv2.inRange(hsv, self.lower_1, self.upper_1)
         mask2 = cv2.inRange(hsv, self.lower_2, self.upper_2)
-        red_mask = cv2.bitwise_or(mask1, mask2)
+        red_mask = mask1 + mask2
 
-        # Morphological operations to remove noise
+        # Cleaning up the noise
         kernel = np.ones((5, 5), np.uint8)
         red_mask = cv2.morphologyEx(red_mask, cv2.MORPH_CLOSE, kernel)
         
-        # Find contours
+        # Finding Contours
         contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.imshow("red_horizontal", red_mask)
         
         max_area = 0
-        best_cnt = None
+        last_cnt = None
 
-        # Filter contours by area and aspect ratio
+        # Logic to find the largest rectangle
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            if area > self.MIN_AREA:
-                bx, by, bw, bh = cv2.boundingRect(cnt)
-                aspect_ratio = float(bw) / bh
-                if self.MIN_ASPECT_RATIO < aspect_ratio < self.MAX_ASPECT_RATIO and area > max_area:
-                    best_cnt = cnt
+            if area > 500:
+                x, y, w, h = cv2.boundingRect(cnt)
+                aspect_ratio = float(w) / h
+                if 0.45 < aspect_ratio < 0.57 and area > max_area:
+                    last_cnt = cnt
                     max_area = area
 
-        pos_x = TargetPositionX.NOT_DETECTED
-        pos_y = TargetPositionY.NOT_DETECTED
         dir_x, dir_y = "", "No target detected"
-        cropped_frame = np.zeros((100, 100, 3), dtype=np.uint8) # Default empty crop
 
-        if best_cnt is not None:
-            bx, by, bw, bh = cv2.boundingRect(best_cnt)
-            self.last_bbox = (bx, by, bw, bh)
-            cx, cy = bx + bw // 2, by + bh // 2
+        if last_cnt is not None:
+            x, y, w, h = cv2.boundingRect(last_cnt)
+            self.target_bbox = (x, y, w, h)
             
-            # Extract Cropped Frame
-            cropped_frame = frame[by:by+bh, bx:bx+bw].copy()
-
-            # X-Axis Alignment
-            if (x_mid - x_tol < cx < x_mid + x_tol):
-                pos_x = TargetPositionX.CENTER
+            cx, cy = x + w // 2, y + h // 2
+            
+            # Check if centered horizontally
+            if (X_mid_adited_frame - x_tol < cx < X_mid_adited_frame + x_tol):
+                horz = TargetPosition.CENTER
                 dir_x = "CENTER in X"
-            elif cx < x_mid - x_tol:
-                pos_x = TargetPositionX.LEFT
+            elif (cx < X_mid_adited_frame - x_tol):
                 dir_x = "Left"
+                horz = TargetPosition.LEFT
             else:
-                pos_x = TargetPositionX.RIGHT
+                horz = TargetPosition.RIGHT
                 dir_x = "Right"
 
-            # Y-Axis Alignment
-            if (y_mid - y_tol < cy < y_mid + y_tol):
-                pos_y = TargetPositionY.CENTER
+            # Check if centered vertically
+            if (Y_mid_adited_frame - y_tol < cy < Y_mid_adited_frame + y_tol):
+                vert = TargetPosition.CENTER
                 dir_y = "CENTER in Y"
-            elif cy > y_mid + y_tol:
-                pos_y = TargetPositionY.DOWN
+            elif (cy > Y_mid_adited_frame + y_tol):
+                vert = TargetPosition.DOWN
                 dir_y = "Down"
             else:
-                pos_y = TargetPositionY.UP
+                vert = TargetPosition.UP
                 dir_y = "Up"
 
-            # Draw Bounding Box and Center Point
-            cv2.rectangle(frame, (bx, by), (bx + bw, by + bh), (255, 0, 0), 3)
-            cv2.circle(frame, (cx, cy), 5, (255, 255, 255), -1)
+            display_x = dir_x.strip()
+            display_y = dir_y.strip()
+            target_color = (255, 0, 0)
+            
+            cv2.rectangle(adited_frame, (x, y), (x + w, y + h), target_color, 3)
+            cv2.circle(adited_frame, (cx, cy), 5, (255, 255, 255), -1)
+        else:
+            self.target_bbox = None 
 
-        # Draw Crosshairs
-        cv2.line(frame, (x_mid - 20, y_mid), (x_mid + 20, y_mid), (0, 0, 0), 2)
-        cv2.line(frame, (x_mid, y_mid - 20), (x_mid, y_mid + 20), (0, 0, 0), 2)
+        display_x = dir_x.strip()
+        display_y = dir_y.strip()
 
-        # Overlay Text
-        cv2.putText(frame, dir_y, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
-        cv2.putText(frame, dir_x, (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+        cv2.putText(adited_frame, display_y, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (180, 105, 255), 2)
+        cv2.putText(adited_frame, display_x, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (180, 105, 255), 2)
+        
+        # Draw Crosshair
+        cv2.line(adited_frame, (X_mid_adited_frame - 20, Y_mid_adited_frame), (X_mid_adited_frame + 20, Y_mid_adited_frame), (0, 0, 0), 2)
+        cv2.line(adited_frame, (X_mid_adited_frame, Y_mid_adited_frame - 20), (X_mid_adited_frame, Y_mid_adited_frame + 20), (0, 0, 0), 2)
 
-        return frame, cropped_frame, pos_x, pos_y
+        return original_frame, adited_frame, horz, vert
+
+    def get_cropped_rectangle(self, original_frame):
+        if self.target_bbox is None:
+            return None
+        
+        x, y, w, h = self.target_bbox
+        cropped_frame = original_frame[y:y+h, x:x+w]
+        return cropped_frame
+    
 
     def start(self):
-        thread = threading.Thread(target=self.update, daemon=True)
+        thread = threading.Thread(target=self.process_frames, daemon=True)
         thread.start()
-
-    def update(self):
-        prev_time = time.time()
         
-        while self.running:
-            try:
-                # Pop the latest frame from the right side of the deque
-                frame = self.frame_buffer.pop()
-                # Clear out older frames so we don't build up latency
-                self.frame_buffer.clear() 
-            except IndexError:
-                time.sleep(0.001)
-                continue 
 
-            current_time = time.time()
-            elapsed = current_time - prev_time
-            fps = 1 / elapsed if elapsed > 0.001 else 0
-            prev_time = current_time
+    def process_frames(self):
+        prev_time = time.time()
+        fps_count = 0
+        fps_sum = 0
 
-            # Process the frame
-            annotated_frame, cropped_frame, pos_x, pos_y = self.process_target(frame)
+        while True:
+            if len(self.frame_queue) > 0:
+                frame = self.frame_queue.popleft() 
 
-            # Draw FPS
-            cv2.putText(annotated_frame, f"FPS: {fps:.2f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                current_time = time.time()
+                fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
+                prev_time = current_time
+                fps_count += 1
+                fps_sum += fps
 
-            # Route to outgoing buffer if provided
-            if self.record_buffer is not None:
-                self.record_buffer.append(annotated_frame)
-
-            # Display Output
-            cv2.imshow('Drone Alignment Check', annotated_frame)
-            if cropped_frame.shape[0] > 0 and cropped_frame.shape[1] > 0:
-                cv2.imshow('get_cropped_rectangle', cropped_frame)
+                frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
+                
+                original_frame, edited_frame, h, v = self.center_detect(frame)
+                cropped_frame = self.get_cropped_rectangle(original_frame)
+                
+                cv2.putText(edited_frame, f"FPS: {fps:.2f}", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
+                cv2.imshow('Drone Alignment Check', edited_frame)
+                
+                if cropped_frame is not None and cropped_frame.size > 0:
+                    cv2.imshow('get_cropped_rectangle', cropped_frame)
+                if self.record_buffer is not None:
+                    self.record_buffer.append(cropped_frame)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
-                self.running = False
                 break
                 
         cv2.destroyAllWindows()
-
-
-def main(video_path):
-    cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened():
-        print("Error: Could not open video.")
-        return
-
-    # Thread-safe buffer for frames
-    frame_buffer = deque(maxlen=5) 
-    
-    # Initialize the detector class and auto-start the background thread
-    detector = TargetDetector(frame_buffer=frame_buffer, auto_start=True)
-
-    print("Starting video feed... Press 'q' in the video window to quit.")
-    
-    while detector.running:
-        ret, frame = cap.read()
-        if not ret:
-            print("End of video or cannot read frame.")
-            detector.running = False
-            break
-
-        # Resize for performance (matches your fx=0.5, fy=0.5 requirement)
-        frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-        
-        # Append to the deque. The background thread will pop and process it.
-        frame_buffer.append(frame)
-        
-        # Small sleep to yield to background thread
-        time.sleep(0.01)
-
-    cap.release()
-
-if __name__ == "__main__":
-    video_path = "C:/Users/user/Downloads/epsteinFiles.mp4"
-    main(video_path)
