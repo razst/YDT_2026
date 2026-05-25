@@ -15,3 +15,6 @@ CAMERA_IDX=0
 #video out params
 OUTPUT_DIR = "recordings"
 SEGMENT_DURATION = -1  # Duration of each video segment in seconds. set -1 to disable video output
+
+# Detect params
+FRAMES_CENTERED = 10 # Number of consecutive frames the target must be centered to consider the task complete
