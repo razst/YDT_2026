@@ -146,16 +146,6 @@ class Detect:
         if not IS_HEADLESS and cropped_frame is not None and cropped_frame.size > 0:
             cv2.imshow('get_cropped_rectangle', cropped_frame)
         return cropped_frame
-    
-    def hold_altitude(self, mav):
-        current_alt = mav.get_curr_height()
-        if current_alt is None:
-            return
-        while abs(HOLD_ALTITUDE - current_alt) > 0.3:
-            # NED frame: negative z = up, positive z = down
-            z_velocity = -0.5 if HOLD_ALTITUDE > current_alt else 0.5
-            mav.send_ned_velocity(0, 0, z_velocity, 1)
-            current_alt = mav.get_curr_height()
 
     def start(self):
         thread = threading.Thread(target=self.process_frames, daemon=True)
