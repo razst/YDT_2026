@@ -124,6 +124,36 @@ class MavLinkHandler:
             else:
                 self.send_text(f'didnt get the right message type')
 
+
+    def ensure_height(self, target_height, tolerance=0.5, timeout=30):
+        """
+        Moves the drone up or down until it reaches the target height within tolerance.
+        Returns True if target reached, False if timeout occurs.
+        """
+        start_time = time.time()
+        logger.info(f"Ensuring height {target_height}m (tol: {tolerance}m)...")
+
+        while time.time() - start_time < timeout:
+            curr_h = self.get_curr_height()
+            if curr_h is None:
+                continue
+
+            if abs(curr_h - target_height) <= tolerance:
+                self.send_text(f"Height target reached: {curr_h:.2f}m")
+                # Stop vertical movement
+                self.send_ned_velocity(0, 0, 0, 1)
+                return True
+
+            # Determine velocity: -0.5 m/s (up) if too low, 0.5 m/s (down) if too high
+            vel_z = -0.5 if curr_h < target_height else 0.5
+
+            # Send velocity command
+            self.send_ned_velocity(0, 0, vel_z, 1)
+            time.sleep(0.5)
+
+        self.send_text(f"Timed out reaching height {target_height}m")
+        return False
+
     def takeoff(self,takeoff_alt_meters): 
         # ******* TAKEOFF ******** 
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
@@ -207,20 +237,6 @@ class MavLinkHandler:
         else:
             self.send_text("Landing...")
     
-    def fly_to_height(self,height_meters):
-        self._check_guided_mode()
-        # ******* Fly to height ********
-        # in mission planner in full prarameter list, update WPNAV_SPEED_UP & WPNAV_SPEED_DN !! to make sure we don't fly too fast
-        # see https://www.youtube.com/watch?v=yyt4VjBRG_Y
-        # https://ardupilot.org/dev/docs/copter-commands-in-guided-mode.html
-        # https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED
-        self.send_text("Changing height...")
-        self._connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_global_int_message(10, self._connection.target_system,
-                                self._connection.target_component, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, int(0b0000111111000111), 0,0, 0, 0, 0, -0.5, 0, 0, 0, 0, 0))
-        while self.get_curr_height() <= height_meters:
-            self._connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_global_int_message(10, self._connection.target_system,
-                                self._connection.target_component, mavutil.mavlink.MAV_FRAME_GLOBAL_RELATIVE_ALT, int(0b0000111111000111 ), 0,0, 0, 0, 0, -0.5, 0, 0, 0, 0, 0))
-            self.send_text(f"Current height is {self.get_curr_height()} meters")
     def send_ned_velocity(self,velocity_x, velocity_y, velocity_z, duration):
         """
         Move vehicle in direction based on specified velocity vectors.
@@ -241,16 +257,6 @@ class MavLinkHandler:
             self._connection.mav.send(msg)
             time.sleep(1)
             
-    def hold_altitude(self):
-        current_alt = self.get_curr_height()
-        if current_alt is None:
-            return
-        while abs(HOLD_ALTITUDE - current_alt) > 0.3:
-            # NED frame: negative z = up, positive z = down
-            z_velocity = -0.5 if HOLD_ALTITUDE > current_alt else 0.5
-            self.send_ned_velocity(0, 0, z_velocity, 1)
-            current_alt = self.get_curr_height()
-
 def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
     """
     Convert degrees to quaternions

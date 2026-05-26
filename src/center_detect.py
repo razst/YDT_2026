@@ -1,3 +1,5 @@
+from venv import logger
+
 import cv2
 import numpy as np
 import time
@@ -7,10 +9,10 @@ import threading
 from constants import *
 
 class TargetPosition(Enum):
-    LEFT = -1
-    CENTER = 0
-    RIGHT = 1
     NOT_DETECTED = 2
+    LEFT = -1
+    RIGHT = 1
+    CENTER = 0
     DOWN = -1
     UP = 1
 
@@ -20,7 +22,8 @@ class TargetColor(Enum):
     BLUE = 2
 
 class Detect:
-    def __init__(self, frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
+    def __init__(self, mavLink,frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
+        self.mavLink = mavLink
         self.frame_queue = frame_buffer
         self.target_bbox = None 
         self.record_buffer = record_buffer
@@ -150,7 +153,13 @@ class Detect:
     def start(self):
         thread = threading.Thread(target=self.process_frames, daemon=True)
         thread.start()
-        
+
+    def fire(self):
+        self.mavLink.ensure_height(FIRE_ALTITUDE)       
+        self.mavLink.start_pump()        
+        #TODO move servo
+
+
     def process_frames(self):
         prev_time = time.time()
         fps_count = 0
@@ -181,16 +190,23 @@ class Detect:
                 # ADDED: Task Completion Logic
                 if horz == TargetPosition.CENTER and vert == TargetPosition.CENTER:
                     #TODO add hight check??
-                    # fire()
+                    self.fire()
                     centered_frames_count += 1
                     # Require being centered for FRAMES_CENTERED consecutive frames to prevent false positives
                     if centered_frames_count > FRAMES_CENTERED:
+                        #TODO stop pump
                         print("Target properly aligned and locked! Finishing task.")
                         self.running = False
                         self.is_finished.set() # Unblocks the TaskManager!
                         break
+                
+                elif horz == TargetPosition.NOT_DETECTED or vert == TargetPosition.NOT_DETECTED:
+                    # target not found, go up to search for it
+                    self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 1)
                 else:
-                    centered_frames_count = 0 # Reset counter if target moves out of center
+                    # target not found, go up to search for it
+                    # my_pix.send_ned_velocity(last_frame.pitch * DRONE_MOVE_ANGLE, last_frame.roll * DRONE_MOVE_ANGLE, 0, DRONE_MOVE_TIME)
+                    self.mavLink.send_ned_velocity(0, 0, 0, 1)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.running = False
