@@ -240,15 +240,16 @@ class MavLinkHandler:
         for _ in range(duration):
             self._connection.mav.send(msg)
             time.sleep(1)
-    def hold_altitude(self, mav):
-        current_alt = mav.get_curr_height()
+            
+    def hold_altitude(self):
+        current_alt = self.get_curr_height()
         if current_alt is None:
             return
         while abs(HOLD_ALTITUDE - current_alt) > 0.3:
             # NED frame: negative z = up, positive z = down
             z_velocity = -0.5 if HOLD_ALTITUDE > current_alt else 0.5
-            mav.send_ned_velocity(0, 0, z_velocity, 1)
-            current_alt = mav.get_curr_height()
+            self.send_ned_velocity(0, 0, z_velocity, 1)
+            current_alt = self.get_curr_height()
 
 def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
     """
