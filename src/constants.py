@@ -12,6 +12,9 @@ LOGGING_LEVEL = logging.DEBUG  # You can set to INFO, WARNING, ERROR etc.
 # Camera params
 CAMERA_IDX=0
 
+# Flight params
+HOLD_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
+
 #video out params
 OUTPUT_DIR = "recordings"
 SEGMENT_DURATION = -1  # Duration of each video segment in seconds. set -1 to disable video output
