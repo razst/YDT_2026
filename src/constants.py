@@ -23,4 +23,4 @@ FRAMES_CENTERED = 10 # Number of consecutive frames the target must be centered 
 FIRE_DURATION = 20  # Duration of the firing mechanism activation in seconds
 FIRE_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
 VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive for down, negative for up)
-DRONE_MOVE_ANGLE = 1
+DRONE_MOVE_ANGLE = 2
