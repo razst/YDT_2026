@@ -190,9 +190,11 @@ class Detect:
 
                 # ADDED: Task Completion Logic
                 if horz == TargetPosition.CENTER and vert == TargetPosition.CENTER:
+                    #TODO add hight check??
+                    # fire()
                     centered_frames_count += 1
-                    # Require being centered for 10 consecutive frames to prevent false positives
-                    if centered_frames_count > 10:
+                    # Require being centered for FRAMES_CENTERED consecutive frames to prevent false positives
+                    if centered_frames_count > FRAMES_CENTERED:
                         print("Target properly aligned and locked! Finishing task.")
                         self.running = False
                         self.is_finished.set() # Unblocks the TaskManager!
