@@ -13,8 +13,8 @@ class TargetPosition(Enum):
     LEFT = -1
     RIGHT = 1
     CENTER = 0
-    DOWN = -1
-    UP = 1
+    DOWN = 1
+    UP = -1
 
 class TargetColor(Enum):
     RED = 0
@@ -204,9 +204,8 @@ class Detect:
                     # target not found, go up to search for it
                     self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 1)
                 else:
-                    # target not found, go up to search for it
                     # my_pix.send_ned_velocity(last_frame.pitch * DRONE_MOVE_ANGLE, last_frame.roll * DRONE_MOVE_ANGLE, 0, DRONE_MOVE_TIME)
-                    self.mavLink.send_ned_velocity(0, 0, 0, 1)
+                    self.mavLink.send_ned_velocity(horz * DRONE_MOVE_ANGLE, vert * DRONE_MOVE_ANGLE, 0, 1)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.running = False
