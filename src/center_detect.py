@@ -3,12 +3,12 @@ from venv import logger
 import cv2
 import numpy as np
 import time
-from enum import Enum
+from enum import IntEnum,Enum
 from collections import deque
 import threading
 from constants import *
 
-class TargetPosition(Enum):
+class TargetPosition(IntEnum):
     NOT_DETECTED = 2
     LEFT = -1
     RIGHT = 1
@@ -73,8 +73,8 @@ class Detect:
         
         # Finding Contours
         contours, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if not IS_HEADLESS:
-            cv2.imshow("red_horizontal", red_mask)
+        #if not IS_HEADLESS:
+            #cv2.imshow("red_horizontal", red_mask)
         
         max_area = 0
         max_cnt = None
@@ -167,6 +167,7 @@ class Detect:
         centered_frames_count = 0 # ADDED: Counter to ensure stable lock
 
         while self.running: # CHANGED: Uses the flag instead of True
+            self.mavLink._check_guided_mode() # ADDED: Ensure we are still in guided mode, otherwise we might be sending commands to a drone that is not ready to receive them, causing erratic behavior. This is especially important during the fire phase when we want to maintain control.  
             if len(self.frame_queue) > 0:
                 frame = self.frame_queue.popleft() 
 

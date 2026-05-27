@@ -10493,3 +10493,458 @@
 2026-05-19 19:39:35,208 - INFO - run_tasks - Task for TargetColor.RED completed. Moving to next phase.
 2026-05-19 19:39:35,208 - INFO - run_tasks - Running task for target color: TargetColor.GREEN
 2026-05-19 19:39:35,209 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:00:54,605 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:02:52,980 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:02:52,980 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:02:52,981 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:02:52,981 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:53,620 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:54,711 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:55,724 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:56,734 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:57,740 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:58,746 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:02:59,753 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:00,758 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:01,766 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:02,772 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:03,780 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:04,787 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:05,795 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:06,801 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:07,808 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:03:08,814 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:26:59,567 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:27:13,953 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:27:13,953 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:27:13,954 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:27:14,560 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:43,994 - INFO - _connect - Heartbeat from system (system 0 component 0)
+2026-05-27 18:43:44,254 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:43:44,254 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:43:44,255 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:43:44,255 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,259 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,267 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,271 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,286 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,292 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,299 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,308 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,315 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,321 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,328 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,335 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,342 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,354 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,361 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,369 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:43:44,381 - DEBUG - _check_guided_mode - mode=5
+2026-05-27 18:44:19,796 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:44:49,308 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:44:49,308 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:44:49,308 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:44:49,792 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:50,806 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:51,873 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:52,879 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:53,886 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:54,893 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:55,897 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:56,907 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:57,913 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:44:58,919 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:00,778 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:01,782 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:02,938 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:03,949 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:04,960 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:05,984 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:06,997 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:08,001 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:09,011 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:10,015 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:11,025 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:12,032 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:13,040 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:14,047 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:15,053 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:16,061 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:17,067 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:18,074 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:19,082 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:20,087 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:21,094 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:22,100 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:23,109 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:24,115 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:25,122 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:26,129 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:27,150 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:28,164 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:29,171 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:30,178 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:31,184 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:32,198 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:33,205 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:34,212 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:35,219 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:36,226 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:37,229 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:38,234 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:39,240 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:40,246 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:41,254 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:42,261 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:43,268 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:44,274 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:45,281 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:46,289 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:47,295 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:48,302 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:49,309 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:50,316 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:51,323 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:52,330 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:53,338 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:54,352 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:55,357 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:56,361 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:57,366 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:58,374 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:45:59,379 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:00,387 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:01,393 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:02,399 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:03,406 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:04,412 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:05,420 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:06,428 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:07,433 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:08,441 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:09,446 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:10,453 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:11,461 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:12,470 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:13,474 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:14,482 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:15,486 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:16,497 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:17,503 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:18,509 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:19,518 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:20,525 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:21,532 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:22,537 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:46:23,548 - DEBUG - _check_guided_mode - mode=5
+2026-05-27 18:49:48,590 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:50:11,316 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:50:11,316 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:50:11,316 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:53:04,413 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:53:05,636 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:53:05,636 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:53:05,636 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:53:43,616 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:53:44,833 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:53:44,834 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:53:44,834 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:54:02,875 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:54:04,052 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:54:04,052 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:54:04,053 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:54:20,346 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:54:21,565 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:54:21,565 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:54:21,565 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:55:39,836 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:55:41,063 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:55:41,064 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:55:41,064 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:55:41,816 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:55:42,810 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:55:43,816 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:55:44,817 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:55:45,816 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:09,178 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:56:10,338 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:56:10,338 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:56:10,338 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:56:11,162 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:12,151 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:13,156 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:14,150 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:15,156 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:16,167 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:17,153 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:56:18,157 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:37,620 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:57:38,833 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:57:38,833 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:57:38,833 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:57:39,592 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:40,661 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:42,022 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:43,028 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:44,052 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:45,073 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:46,100 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:47,109 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:48,119 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:49,128 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:50,140 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:51,158 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:52,164 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:53,172 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:54,188 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:55,199 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:57:55,200 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 18:57:55,200 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:57:56,702 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:57:58,204 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:57:59,706 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:58:01,208 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:58:02,710 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:58:04,213 - DEBUG - send_text - Current height is 64.192 meters
+2026-05-27 18:58:05,716 - DEBUG - send_text - Current height is 64.191 meters
+2026-05-27 18:58:07,218 - DEBUG - send_text - Current height is 64.19 meters
+2026-05-27 18:58:08,719 - DEBUG - send_text - Current height is 64.182 meters
+2026-05-27 18:58:10,224 - DEBUG - send_text - Current height is 64.166 meters
+2026-05-27 18:58:11,728 - DEBUG - send_text - Current height is 64.14 meters
+2026-05-27 18:58:13,230 - DEBUG - send_text - Current height is 64.106 meters
+2026-05-27 18:58:14,732 - DEBUG - send_text - Current height is 64.064 meters
+2026-05-27 18:58:24,557 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:58:25,726 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:58:25,727 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:58:25,727 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:58:26,547 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:27,602 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:28,618 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:29,636 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:30,649 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:31,660 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:32,669 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:33,677 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:34,689 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:35,700 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:36,709 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:37,715 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:38,728 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:39,749 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:40,756 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:41,781 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:42,799 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:43,817 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:44,844 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:45,878 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:46,887 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:47,894 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:48,911 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:49,923 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:50,937 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:51,948 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:52,960 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:53,977 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:54,990 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:55,997 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:57,004 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:58,011 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:58:59,020 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:00,032 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:01,039 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:02,047 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:03,062 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:04,077 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:05,091 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:06,108 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:07,116 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:08,129 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:09,137 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:10,150 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:11,157 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:12,166 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:13,177 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:14,186 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:15,198 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:16,209 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:17,221 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:18,231 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:19,243 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:20,262 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:21,276 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:22,290 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:23,314 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:24,330 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:25,344 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:26,351 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:27,365 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:28,381 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:28,382 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 18:59:28,382 - DEBUG - send_text - Current height is 55.963 meters
+2026-05-27 18:59:29,884 - DEBUG - send_text - Current height is 55.963 meters
+2026-05-27 18:59:31,386 - DEBUG - send_text - Current height is 55.963 meters
+2026-05-27 18:59:32,889 - DEBUG - send_text - Current height is 55.963 meters
+2026-05-27 18:59:34,393 - DEBUG - send_text - Current height is 55.963 meters
+2026-05-27 18:59:35,898 - DEBUG - send_text - Current height is 55.962 meters
+2026-05-27 18:59:37,401 - DEBUG - send_text - Current height is 55.961 meters
+2026-05-27 18:59:38,905 - DEBUG - send_text - Current height is 55.961 meters
+2026-05-27 18:59:50,571 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 18:59:51,746 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 18:59:51,747 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 18:59:51,747 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 18:59:52,553 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:53,616 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:54,624 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:55,633 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:56,647 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:57,655 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:58,666 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 18:59:59,673 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:02,756 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:03,773 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:04,781 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:05,801 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:06,810 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:07,818 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:08,827 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:09,835 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:10,852 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:11,859 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:12,875 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:13,883 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:14,891 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:15,906 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:16,913 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:17,928 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:18,942 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:19,955 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:20,973 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:21,985 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:22,996 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:24,011 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:25,023 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:00:25,024 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 19:00:25,025 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:26,526 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:28,029 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:29,531 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:31,036 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:32,539 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:34,041 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:35,543 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:37,048 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:38,550 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:40,051 - DEBUG - send_text - Current height is 49.19 meters
+2026-05-27 19:00:41,553 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:43,055 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:44,557 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:46,059 - DEBUG - send_text - Current height is 49.189 meters
+2026-05-27 19:00:47,561 - DEBUG - send_text - Current height is 49.188 meters
+2026-05-27 19:00:49,063 - DEBUG - send_text - Current height is 49.188 meters
+2026-05-27 19:00:50,565 - DEBUG - send_text - Current height is 49.188 meters
+2026-05-27 19:00:52,066 - DEBUG - send_text - Current height is 49.187 meters
+2026-05-27 19:00:53,568 - DEBUG - send_text - Current height is 49.187 meters
+2026-05-27 19:00:55,069 - DEBUG - send_text - Timed out reaching height 3.0m
+2026-05-27 19:01:06,742 - INFO - _connect - Heartbeat from system (system 0 component 0)
+2026-05-27 19:01:06,948 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 19:01:06,948 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 19:01:06,949 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 19:01:06,953 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:01:07,719 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:01:08,776 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:01:09,786 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:01:09,786 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 19:01:09,787 - DEBUG - send_text - Current height is 33.425 meters
+2026-05-27 19:01:11,288 - DEBUG - send_text - Current height is 33.424 meters
+2026-05-27 19:01:12,790 - DEBUG - send_text - Current height is 33.423 meters
+2026-05-27 19:01:14,291 - DEBUG - send_text - Current height is 33.419 meters
+2026-05-27 19:01:15,796 - DEBUG - send_text - Current height is 33.409 meters
+2026-05-27 19:01:17,299 - DEBUG - send_text - Current height is 33.389 meters
+2026-05-27 19:01:18,804 - DEBUG - send_text - Current height is 33.36 meters
+2026-05-27 19:01:20,309 - DEBUG - send_text - Current height is 33.323 meters
+2026-05-27 19:01:21,811 - DEBUG - send_text - Current height is 33.279 meters
+2026-05-27 19:01:23,313 - DEBUG - send_text - Current height is 33.231 meters
+2026-05-27 19:01:24,815 - DEBUG - send_text - Current height is 33.179 meters
+2026-05-27 19:01:26,317 - DEBUG - send_text - Current height is 33.126 meters
+2026-05-27 19:01:27,819 - DEBUG - send_text - Current height is 33.072 meters
+2026-05-27 19:01:29,321 - DEBUG - send_text - Current height is 33.018 meters
+2026-05-27 19:01:30,823 - DEBUG - send_text - Current height is 32.965 meters
+2026-05-27 19:01:32,326 - DEBUG - send_text - Current height is 32.911 meters
+2026-05-27 19:01:33,827 - DEBUG - send_text - Current height is 32.858 meters
+2026-05-27 19:01:35,329 - DEBUG - send_text - Current height is 32.805 meters
+2026-05-27 19:02:10,142 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 19:02:10,411 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 19:02:10,411 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 19:02:10,412 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 19:02:10,413 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:11,083 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:12,138 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:13,145 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:14,156 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:15,163 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:16,176 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:17,196 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:18,205 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:19,217 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:20,231 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:21,245 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:22,266 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:23,272 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:24,279 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:25,293 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:26,299 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:27,306 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:28,316 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:29,326 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:30,334 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:32,095 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:33,107 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:34,119 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:35,136 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:36,147 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:37,156 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:39,118 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:40,129 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:41,140 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:42,147 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:43,155 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:44,162 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:45,176 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:46,184 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:48,556 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:50,100 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:51,950 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:52,960 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:53,988 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:55,001 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:02:55,002 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 19:02:55,002 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:02:56,504 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:02:58,006 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:02:59,508 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:03:01,010 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:03:02,512 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:03:04,016 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:03:05,520 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:03:07,022 - DEBUG - send_text - Current height is 19.678 meters
+2026-05-27 19:04:07,381 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-05-27 19:04:08,598 - INFO - __init__ - Initializing Task Manager...
+2026-05-27 19:04:08,599 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-05-27 19:04:08,599 - INFO - run_tasks - Waiting for detection task to finish...
+2026-05-27 19:04:09,345 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:10,396 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:11,413 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:12,426 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:13,433 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:14,445 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:15,460 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:16,472 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:17,480 - DEBUG - _check_guided_mode - mode=4
+2026-05-27 19:04:17,481 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-05-27 19:04:17,481 - DEBUG - send_text - Current height is 12.176 meters
+2026-05-27 19:04:18,983 - DEBUG - send_text - Current height is 12.176 meters
+2026-05-27 19:04:20,485 - DEBUG - send_text - Current height is 12.176 meters
+2026-05-27 19:04:21,987 - DEBUG - send_text - Current height is 12.175 meters
+2026-05-27 19:04:23,490 - DEBUG - send_text - Current height is 12.168 meters
+2026-05-27 19:04:24,992 - DEBUG - send_text - Current height is 12.152 meters
+2026-05-27 19:04:26,498 - DEBUG - send_text - Current height is 12.126 meters
