@@ -237,12 +237,28 @@ class MavLinkHandler:
         else:
             self.send_text("Landing...")
     
+    def lock_heading(self, heading_degrees):
+        self._connection.mav.command_long_send(
+            self._connection.target_system,
+            self._connection.target_component,
+            mavutil.mavlink.MAV_CMD_CONDITION_YAW,
+            0,
+            heading_degrees,  # target angle (0=North, 90=East, 180=South, 270=West)
+            10,               # rotation speed deg/s
+            1,                # direction: 1=CW, -1=CCW
+            0,                # 0=absolute heading
+            0, 0, 0
+        )
+
     def send_ned_velocity(self,velocity_x, velocity_y, velocity_z, duration):
         """
         Move vehicle in direction based on specified velocity vectors.
         NED frame: +x is North, +y is East, +z is Down.
         DURATION IN 1/100 SEC, SO 100 = 1 SECOND
         """
+        att = self._connection.recv_match(type='ATTITUDE', blocking=True)
+        self.lock_heading(math.degrees(att.yaw) % 360)
+
         msg = self._connection.mav.set_position_target_local_ned_encode(
             0,  # time_boot_ms
             self._connection.target_system,
