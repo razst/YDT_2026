@@ -13,8 +13,8 @@ class TargetPosition(IntEnum):
     LEFT = -1
     RIGHT = 1
     CENTER = 0
-    DOWN = 1
-    UP = -1
+    DOWN = -1
+    UP = 1
 
 class TargetColor(Enum):
     RED = 0
@@ -155,6 +155,7 @@ class Detect:
         thread.start()
 
     def fire(self):
+        return
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
         self.mavLink.start_pump()        
         #TODO move servo
@@ -167,7 +168,7 @@ class Detect:
         centered_frames_count = 0 # ADDED: Counter to ensure stable lock
 
         while self.running: # CHANGED: Uses the flag instead of True
-            self.mavLink._check_guided_mode() # ADDED: Ensure we are still in guided mode, otherwise we might be sending commands to a drone that is not ready to receive them, causing erratic behavior. This is especially important during the fire phase when we want to maintain control.  
+            #self.mavLink._check_guided_mode() # ADDED: Ensure we are still in guided mode, otherwise we might be sending commands to a drone that is not ready to receive them, causing erratic behavior. This is especially important during the fire phase when we want to maintain control.  
             if len(self.frame_queue) > 0:
                 frame = self.frame_queue.popleft() 
 
@@ -203,10 +204,9 @@ class Detect:
                 
                 elif horz == TargetPosition.NOT_DETECTED or vert == TargetPosition.NOT_DETECTED:
                     # target not found, go up to search for it
-                    self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 1)
+                    self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 10)
                 else:
-                    # my_pix.send_ned_velocity(last_frame.pitch * DRONE_MOVE_ANGLE, last_frame.roll * DRONE_MOVE_ANGLE, 0, DRONE_MOVE_TIME)
-                    self.mavLink.send_ned_velocity(horz * DRONE_MOVE_ANGLE, vert * DRONE_MOVE_ANGLE, 0, 1)
+                    self.mavLink.send_ned_velocity(horz * DRONE_MOVE_ANGLE, vert * DRONE_MOVE_ANGLE, 0, 10)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.running = False

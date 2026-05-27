@@ -241,6 +241,7 @@ class MavLinkHandler:
         """
         Move vehicle in direction based on specified velocity vectors.
         NED frame: +x is North, +y is East, +z is Down.
+        DURATION IN 1/100 SEC, SO 100 = 1 SECOND
         """
         msg = self._connection.mav.set_position_target_local_ned_encode(
             0,  # time_boot_ms
@@ -255,7 +256,7 @@ class MavLinkHandler:
         )
         for _ in range(duration):
             self._connection.mav.send(msg)
-            time.sleep(1)
+            time.sleep(0.01)
             
 def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
     """
