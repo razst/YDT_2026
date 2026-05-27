@@ -257,18 +257,18 @@ class MavLinkHandler:
         DURATION IN 1/100 SEC, SO 100 = 1 SECOND
         """
         att = self._connection.recv_match(type='ATTITUDE', blocking=True)
-        self.lock_heading(math.degrees(att.yaw) % 360)
+        current_yaw = att.yaw  # radians, passed directly into the message
 
         msg = self._connection.mav.set_position_target_local_ned_encode(
             0,  # time_boot_ms
             self._connection.target_system,
             self._connection.target_component,
             mavutil.mavlink.MAV_FRAME_LOCAL_OFFSET_NED,
-            0b0000111111000111,  # Bitmask: only velocity components enabled
+            0b0000101111000111,  # velocity + yaw enabled; bit 10 cleared = use yaw field
             0, 0, 0,             # x, y, z positions (not used)
             velocity_x, velocity_y, velocity_z,  # velocities in m/s
             0, 0, 0,             # acceleration (not used)
-            0, 0
+            current_yaw, 0       # hold current heading, yaw_rate=0
         )
         for _ in range(duration):
             self._connection.mav.send(msg)
