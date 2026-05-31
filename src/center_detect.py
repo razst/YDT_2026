@@ -173,7 +173,7 @@ class Detect:
                 frame = self.frame_queue.popleft() 
 
                 current_time = time.time()
-                if (current_time - prev_time) > 1: #1 second has passed
+                if (current_time - prev_time) >= 1: #1 second has passed
                     fps = fps_count
                     fps_count = 0
                     prev_time = current_time
