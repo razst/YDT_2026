@@ -164,7 +164,7 @@ class Detect:
     def process_frames(self):
         prev_time = time.time()
         fps_count = 0
-        fps_sum = 0
+        fps = 0
         centered_frames_count = 0 # ADDED: Counter to ensure stable lock
 
         while self.running: # CHANGED: Uses the flag instead of True
@@ -173,10 +173,12 @@ class Detect:
                 frame = self.frame_queue.popleft() 
 
                 current_time = time.time()
-                fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
-                prev_time = current_time
-                fps_count += 1
-                fps_sum += fps
+                if (current_time - prev_time) > 1: #1 second has passed
+                    fps = fps_count
+                    fps_count = 0
+                    prev_time = current_time
+                else:
+                    fps_count += 1
 
                 frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA) 
                 
