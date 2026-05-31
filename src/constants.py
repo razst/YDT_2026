@@ -5,9 +5,11 @@ import logging
 #MAV_COM="COM5" 
 MAV_COM="tcp:localhost:5763" # SITL com
 MAV_MSG_FREQ = 10 # how ofthen do we want to get messages from mavlink (in Hz)
-IS_HEADLESS = False
+MAX_ALLOWED_ALT = 15.0  # Maximum allowed altitude in meters to prevent flyaways
+
 # General params
 LOGGING_LEVEL = logging.DEBUG  # You can set to INFO, WARNING, ERROR etc.
+IS_HEADLESS = False
 
 # Camera params
 CAMERA_IDX=0
@@ -17,7 +19,7 @@ OUTPUT_DIR = "recordings"
 SEGMENT_DURATION = -1  # Duration of each video segment in seconds. set -1 to disable video output
 
 # Detect params
-FRAMES_CENTERED = 10 # Number of consecutive frames the target must be centered to consider the task complete
+FRAMES_CENTERED = 100 # Number of consecutive frames the target must be centered to consider the task complete
 
 # fire params
 FIRE_DURATION = 20  # Duration of the firing mechanism activation in seconds

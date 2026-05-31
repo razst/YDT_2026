@@ -13,13 +13,13 @@ if __name__ == "__main__":
    logger.info("Starting autonumi script 2026...")
    # Connect the FC
    try:
-      mavLink = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
+      mavLink:MavLinkHandler = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
    except Exception:
       logger.error("Unable to connect to FC")
       
    # wait 4 GUIDED mode
    mavLink.check_until_guided()
-      
+
    try:
       # FIX 2: Create the deque with maxlen=1. 
       cam_buffer = deque(maxlen=1)

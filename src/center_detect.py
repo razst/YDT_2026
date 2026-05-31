@@ -155,8 +155,8 @@ class Detect:
         thread.start()
 
     def fire(self):
-        return
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
+        return
         self.mavLink.start_pump()        
         #TODO move servo
 
@@ -206,7 +206,7 @@ class Detect:
                     # target not found, go up to search for it
                     self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 10)
                 else:
-                    self.mavLink.send_ned_velocity(horz * DRONE_MOVE_ANGLE, vert * DRONE_MOVE_ANGLE, 0, 10)
+                    self.mavLink.send_ned_velocity(vert * DRONE_MOVE_ANGLE, horz * DRONE_MOVE_ANGLE, 0, 10)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.running = False

@@ -253,9 +253,18 @@ class MavLinkHandler:
     def send_ned_velocity(self,velocity_x, velocity_y, velocity_z, duration):
         """
         Move vehicle in direction based on specified velocity vectors.
-        NED frame: +x is North, +y is East, +z is Down.
+        NED frame: +x is North (forward), +y is East (right), +z is Down (down).
         DURATION IN 1/100 SEC, SO 100 = 1 SECOND
         """
+        
+        if velocity_z <0 and self.get_curr_height()> MAX_ALLOWED_ALT:
+            velocity_z = 0 # This is to prevent the drone from flying too high during the search phase, which can cause it
+            self.send_text(f"Moving up at {abs(velocity_z)} m/s")
+            logger.info(f"reach max altitude, stop moving up and maintain current altitude")
+
+        if (velocity_x == 0 and velocity_y ==0 and velocity_z ==0):
+            return
+
         att = self._connection.recv_match(type='ATTITUDE', blocking=True)
         current_yaw = att.yaw  # radians, passed directly into the message
 
