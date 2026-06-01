@@ -25,4 +25,5 @@ FRAMES_CENTERED = 100 # Number of consecutive frames the target must be centered
 
 # fire params
 FIRE_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
+VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive for down, negative for up)
 DRONE_MOVE_ANGLE = 2
