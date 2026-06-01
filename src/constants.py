@@ -29,3 +29,4 @@ VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive 
 DRONE_MOVE_ANGLE = 2
 SERVO_SPEED = 0.5
 SERVO_CHANNEL = 9
+PUMP_RELAY=0 #(0 for Relay1, 1 for Relay2, etc.)

@@ -61,7 +61,26 @@ class MavLinkHandler:
             msg = next_msg
 
         return msg        
-    
+
+    def set_motor_relay(self,relay,state):
+        """
+        state: 1 for ON, 0 for OFF
+        """
+        # MAV_CMD_DO_SET_RELAY (index 181)
+        # Param 1: Relay number (0 for Relay1, 1 for Relay2, etc.)
+        # Param 2: Setting (1 for ON, 0 for OFF)
+        self._connection.mav.command_long_send(
+            self._connection.target_system,
+            self._connection.target_component,
+            mavutil.mavlink.MAV_CMD_DO_SET_RELAY,
+            0,      # Confirmation
+            relay,      # Relay Instance (0 = RELAY1)
+            state,  # 1 = ON, 0 = OFF
+            0, 0, 0, 0, 0
+        )
+        status = "ON" if state == 1 else "OFF"
+        logger.info(f"Motor Relay set to {status}")
+
     def move_servo(self, servo_channel, servo_angle):
         try:
             # ******* Send TEXT messages ********

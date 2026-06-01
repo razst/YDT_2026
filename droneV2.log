@@ -1945,3 +1945,195 @@
 2026-06-01 18:23:51,168 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
 2026-06-01 18:23:51,669 - DEBUG - move_servo - requsting to move servo in FC
 2026-06-01 18:23:51,669 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50
+2026-06-01 18:38:26,807 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:38:34,979 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:38:34,979 - INFO - set_motor_relay - Motor Relay set to ON
+2026-06-01 18:38:40,199 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:38:40,199 - INFO - set_motor_relay - Motor Relay set to OFF
+2026-06-01 18:41:53,746 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:41:53,746 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:54,777 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:55,755 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:56,742 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:57,777 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:58,760 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:41:59,751 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:42:00,773 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:42:01,755 - DEBUG - check_until_guided - mode=0
+2026-06-01 18:46:19,575 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:46:20,597 - DEBUG - check_until_guided - mode=5
+2026-06-01 18:46:21,576 - DEBUG - check_until_guided - mode=5
+2026-06-01 18:46:22,558 - DEBUG - check_until_guided - mode=5
+2026-06-01 18:46:23,594 - DEBUG - check_until_guided - mode=5
+2026-06-01 18:46:24,527 - DEBUG - check_until_guided - mode=4
+2026-06-01 18:46:24,808 - INFO - start - Camera thread started
+2026-06-01 18:46:24,809 - INFO - __init__ - Initializing Task Manager...
+2026-06-01 18:46:24,809 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-06-01 18:46:24,809 - INFO - run_tasks - Waiting for detection task to finish...
+2026-06-01 18:46:29,745 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-06-01 18:46:29,760 - DEBUG - send_text - Current height is 0.2 meters
+2026-06-01 18:46:29,864 - DEBUG - send_text - Current height is 0.185 meters
+2026-06-01 18:46:31,054 - DEBUG - send_text - Current height is 0.182 meters
+2026-06-01 18:46:31,159 - DEBUG - send_text - Current height is 0.202 meters
+2026-06-01 18:46:32,340 - DEBUG - send_text - Current height is 0.194 meters
+2026-06-01 18:46:32,394 - DEBUG - send_text - Current height is 0.182 meters
+2026-06-01 18:46:33,578 - DEBUG - send_text - Current height is 0.341 meters
+2026-06-01 18:46:33,680 - DEBUG - send_text - Current height is 0.376 meters
+2026-06-01 18:46:34,863 - DEBUG - send_text - Current height is 0.397 meters
+2026-06-01 18:46:34,966 - DEBUG - send_text - Current height is 0.367 meters
+2026-06-01 18:46:36,140 - DEBUG - send_text - Current height is 0.261 meters
+2026-06-01 18:46:36,192 - DEBUG - send_text - Current height is 0.27 meters
+2026-06-01 18:46:37,373 - DEBUG - send_text - Current height is 0.267 meters
+2026-06-01 18:46:37,475 - DEBUG - send_text - Current height is 0.291 meters
+2026-06-01 18:46:38,657 - DEBUG - send_text - Current height is 0.282 meters
+2026-06-01 18:46:38,760 - DEBUG - send_text - Current height is 0.282 meters
+2026-06-01 18:46:39,938 - DEBUG - send_text - Current height is 0.279 meters
+2026-06-01 18:46:39,989 - DEBUG - send_text - Current height is 0.291 meters
+2026-06-01 18:46:41,168 - DEBUG - send_text - Current height is 0.264 meters
+2026-06-01 18:46:41,272 - DEBUG - send_text - Current height is 0.252 meters
+2026-06-01 18:46:42,452 - DEBUG - send_text - Current height is 0.17 meters
+2026-06-01 18:46:42,556 - DEBUG - send_text - Current height is 0.123 meters
+2026-06-01 18:46:43,736 - DEBUG - send_text - Current height is 0.088 meters
+2026-06-01 18:46:43,790 - DEBUG - send_text - Current height is 0.058 meters
+2026-06-01 18:46:44,966 - DEBUG - send_text - Current height is 0.032 meters
+2026-06-01 18:46:45,069 - DEBUG - send_text - Current height is 0.047 meters
+2026-06-01 18:46:46,246 - DEBUG - send_text - Current height is 0.052 meters
+2026-06-01 18:46:46,299 - DEBUG - send_text - Current height is 0.073 meters
+2026-06-01 18:46:47,421 - DEBUG - send_text - Current height is 0.079 meters
+2026-06-01 18:46:47,474 - DEBUG - send_text - Current height is 0.114 meters
+2026-06-01 18:46:48,658 - DEBUG - send_text - Current height is 0.335 meters
+2026-06-01 18:46:48,762 - DEBUG - send_text - Current height is 0.385 meters
+2026-06-01 18:46:49,941 - DEBUG - send_text - Current height is 0.588 meters
+2026-06-01 18:46:49,994 - DEBUG - send_text - Current height is 0.585 meters
+2026-06-01 18:46:51,171 - DEBUG - send_text - Current height is 0.523 meters
+2026-06-01 18:46:51,273 - DEBUG - send_text - Current height is 0.511 meters
+2026-06-01 18:46:52,451 - DEBUG - send_text - Current height is 0.241 meters
+2026-06-01 18:46:52,554 - DEBUG - send_text - Current height is 0.241 meters
+2026-06-01 18:46:53,739 - DEBUG - send_text - Current height is 0.105 meters
+2026-06-01 18:46:53,792 - DEBUG - send_text - Current height is 0.073 meters
+2026-06-01 18:46:54,968 - DEBUG - send_text - Current height is 0.132 meters
+2026-06-01 18:46:55,072 - DEBUG - send_text - Current height is 0.15 meters
+2026-06-01 18:46:56,260 - DEBUG - send_text - Current height is 0.158 meters
+2026-06-01 18:46:56,362 - DEBUG - send_text - Current height is 0.155 meters
+2026-06-01 18:46:57,538 - DEBUG - send_text - Current height is 0.097 meters
+2026-06-01 18:46:57,591 - DEBUG - send_text - Current height is 0.111 meters
+2026-06-01 18:46:58,765 - DEBUG - send_text - Current height is 0.17 meters
+2026-06-01 18:46:58,867 - DEBUG - send_text - Current height is 0.141 meters
+2026-06-01 18:47:00,036 - DEBUG - send_text - Timed out reaching height 3.0m
+2026-06-01 18:47:00,036 - INFO - set_motor_relay - Motor Relay set to ON
+2026-06-01 18:47:01,037 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:01,037 - DEBUG - move_servo - sending command move servo to FC with value: 1022, channel: 9, angle: 10
+2026-06-01 18:47:01,538 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:01,539 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:47:02,041 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:02,041 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:47:02,543 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:02,543 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:47:03,045 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:03,046 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:47:03,548 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:03,548 - DEBUG - move_servo - sending command move servo to FC with value: 1144, channel: 9, angle: 20
+2026-06-01 18:47:04,049 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:04,049 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:47:04,551 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:04,552 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:47:05,053 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:05,054 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:47:05,555 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:05,555 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:47:06,056 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:47:06,057 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50
+2026-06-01 18:47:06,058 - INFO - set_motor_relay - Motor Relay set to OFF
+2026-06-01 18:47:06,089 - DEBUG - send_text - Current height is 0.382 meters
+2026-06-01 18:47:06,318 - DEBUG - send_text - Current height is 0.388 meters
+2026-06-01 18:47:06,542 - DEBUG - send_text - Current height is 0.364 meters
+2026-06-01 18:47:06,717 - DEBUG - send_text - Current height is 0.373 meters
+2026-06-01 18:47:06,944 - DEBUG - send_text - Current height is 0.379 meters
+2026-06-01 18:47:07,119 - DEBUG - send_text - Current height is 0.358 meters
+2026-06-01 18:47:07,342 - DEBUG - send_text - Current height is 0.329 meters
+2026-06-01 18:47:07,516 - DEBUG - send_text - Current height is 0.279 meters
+2026-06-01 18:47:07,745 - DEBUG - send_text - Current height is 0.261 meters
+2026-06-01 18:47:07,922 - DEBUG - send_text - Current height is 0.185 meters
+2026-06-01 18:47:08,140 - DEBUG - send_text - Current height is 0.167 meters
+2026-06-01 18:47:11,062 - DEBUG - send_text - Current height is -0.044 meters
+2026-06-01 18:47:11,358 - DEBUG - send_text - Current height is 0.041 meters
+2026-06-01 18:47:11,531 - DEBUG - send_text - Current height is 0.035 meters
+2026-06-01 18:47:39,112 - DEBUG - send_text - Current height is 0.27 meters
+2026-06-01 18:47:39,419 - DEBUG - send_text - Current height is 0.258 meters
+2026-06-01 18:47:43,561 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-06-01 18:47:43,570 - DEBUG - send_text - Current height is 0.238 meters
+2026-06-01 18:47:43,673 - DEBUG - send_text - Current height is 0.217 meters
+2026-06-01 18:47:44,847 - DEBUG - send_text - Current height is 0.226 meters
+2026-06-01 18:47:44,848 - DEBUG - send_text - Current height is 0.208 meters
+2026-06-01 18:47:46,025 - DEBUG - send_text - Current height is 0.2 meters
+2026-06-01 18:47:46,076 - DEBUG - send_text - Current height is 0.223 meters
+2026-06-01 18:47:47,251 - DEBUG - send_text - Current height is 0.214 meters
+2026-06-01 18:47:47,353 - DEBUG - send_text - Current height is 0.205 meters
+2026-06-01 18:47:48,528 - DEBUG - send_text - Current height is 0.297 meters
+2026-06-01 18:47:48,580 - DEBUG - send_text - Current height is 0.32 meters
+2026-06-01 18:47:49,760 - DEBUG - send_text - Current height is 0.308 meters
+2026-06-01 18:47:49,862 - DEBUG - send_text - Current height is 0.279 meters
+2026-06-01 18:47:51,037 - DEBUG - send_text - Current height is 0.323 meters
+2026-06-01 18:47:51,089 - DEBUG - send_text - Current height is 0.341 meters
+2026-06-01 18:47:52,275 - DEBUG - send_text - Current height is 0.423 meters
+2026-06-01 18:47:52,376 - DEBUG - send_text - Current height is 0.397 meters
+2026-06-01 18:47:53,559 - DEBUG - send_text - Current height is 0.458 meters
+2026-06-01 18:47:53,661 - DEBUG - send_text - Current height is 0.441 meters
+2026-06-01 18:47:54,843 - DEBUG - send_text - Current height is 0.411 meters
+2026-06-01 18:47:54,895 - DEBUG - send_text - Current height is 0.405 meters
+2026-06-01 18:47:56,073 - DEBUG - send_text - Current height is 0.397 meters
+2026-06-01 18:47:56,175 - DEBUG - send_text - Current height is 0.397 meters
+2026-06-01 18:47:57,358 - DEBUG - send_text - Current height is 0.329 meters
+2026-06-01 18:47:57,461 - DEBUG - send_text - Current height is 0.323 meters
+2026-06-01 18:47:58,639 - DEBUG - send_text - Current height is 0.305 meters
+2026-06-01 18:47:58,691 - DEBUG - send_text - Current height is 0.335 meters
+2026-06-01 18:47:59,866 - DEBUG - send_text - Current height is 0.294 meters
+2026-06-01 18:47:59,968 - DEBUG - send_text - Current height is 0.305 meters
+2026-06-01 18:48:01,145 - DEBUG - send_text - Current height is 0.238 meters
+2026-06-01 18:48:01,198 - DEBUG - send_text - Current height is 0.22 meters
+2026-06-01 18:48:02,323 - DEBUG - send_text - Current height is 0.229 meters
+2026-06-01 18:48:02,375 - DEBUG - send_text - Current height is 0.211 meters
+2026-06-01 18:48:03,554 - DEBUG - send_text - Current height is 0.176 meters
+2026-06-01 18:48:03,658 - DEBUG - send_text - Current height is 0.173 meters
+2026-06-01 18:48:04,836 - DEBUG - send_text - Current height is 0.094 meters
+2026-06-01 18:48:04,889 - DEBUG - send_text - Current height is 0.041 meters
+2026-06-01 18:48:06,064 - DEBUG - send_text - Current height is 0.135 meters
+2026-06-01 18:48:06,167 - DEBUG - send_text - Current height is 0.144 meters
+2026-06-01 18:48:07,342 - DEBUG - send_text - Current height is 0.308 meters
+2026-06-01 18:48:07,395 - DEBUG - send_text - Current height is 0.32 meters
+2026-06-01 18:48:08,569 - DEBUG - send_text - Current height is 0.323 meters
+2026-06-01 18:48:08,672 - DEBUG - send_text - Current height is 0.335 meters
+2026-06-01 18:48:09,852 - DEBUG - send_text - Current height is 0.188 meters
+2026-06-01 18:48:09,954 - DEBUG - send_text - Current height is 0.176 meters
+2026-06-01 18:48:11,132 - DEBUG - send_text - Current height is 0.076 meters
+2026-06-01 18:48:11,184 - DEBUG - send_text - Current height is 0.126 meters
+2026-06-01 18:48:12,363 - DEBUG - send_text - Current height is 0.117 meters
+2026-06-01 18:48:12,465 - DEBUG - send_text - Current height is 0.158 meters
+2026-06-01 18:48:13,631 - DEBUG - send_text - Timed out reaching height 3.0m
+2026-06-01 18:48:13,631 - INFO - set_motor_relay - Motor Relay set to ON
+2026-06-01 18:48:14,632 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:14,632 - DEBUG - move_servo - sending command move servo to FC with value: 1022, channel: 9, angle: 10
+2026-06-01 18:48:15,133 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:15,134 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:48:15,636 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:15,636 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:48:16,138 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:16,139 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:48:16,641 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:16,642 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:48:17,144 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:17,145 - DEBUG - move_servo - sending command move servo to FC with value: 1144, channel: 9, angle: 20
+2026-06-01 18:48:17,646 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:17,647 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:48:18,148 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:18,149 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:48:18,651 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:18,652 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:48:19,153 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:19,154 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:48:19,656 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:48:19,656 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50
+2026-06-01 18:48:19,657 - INFO - set_motor_relay - Motor Relay set to OFF
+2026-06-01 18:48:19,794 - DEBUG - send_text - Current height is 0.241 meters
+2026-06-01 18:48:20,129 - DEBUG - send_text - Current height is 0.188 meters
+2026-06-01 18:48:20,355 - DEBUG - send_text - Current height is 0.211 meters

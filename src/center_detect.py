@@ -162,7 +162,8 @@ class Detect:
     def fire(self):
         logger.info("Target locked! Initiating firing sequence...")
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
-        # self.mavLink.start_pump()        
+        self.mavLink.set_motor_relay(PUMP_RELAY, 1) # turn on pump
+        time.sleep(1) # wait for pump to spin up, adjust as necessary     
         # move servo back and forth for FIRE_DURATION seconds
        # servo 20sec each side
         for i in range(10,90,2):
@@ -172,6 +173,7 @@ class Detect:
             self.mavLink.move_servo(SERVO_CHANNEL, i)
             time.sleep(SERVO_SPEED)
         self.mavLink.move_servo(SERVO_CHANNEL, 50) # move back to center
+        self.mavLink.set_motor_relay(PUMP_RELAY, 0) # turn off pump
         return
 
 

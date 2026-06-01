@@ -21,7 +21,6 @@ if __name__ == "__main__":
       logger.error(f"Error: {e}")
       quit()
       
-
    # wait 4 GUIDED mode
    mavLink.check_until_guided()
 
