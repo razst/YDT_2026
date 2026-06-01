@@ -160,10 +160,11 @@ class Detect:
         thread.start()
 
     def fire(self):
+        logger.info("Target locked! Initiating firing sequence...")
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
+        # self.mavLink.start_pump()        
+        # move servo back and forth for FIRE_DURATION seconds
         return
-        self.mavLink.start_pump()        
-        #TODO move servo
 
 
     def process_frames(self):
