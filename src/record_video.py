@@ -1,4 +1,5 @@
 import threading
+import os
 
 import cv2
 import time
@@ -21,13 +22,22 @@ class RecordVideo:
     # Pass the actual frame into this function
     def create_new_writer(self, frame, filename="v_out_"):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_file = f"{filename}{timestamp}.avi"
+        # Ensure output directory exists
+        output_dir = constants.OUTPUT_DIR if hasattr(constants, "OUTPUT_DIR") else '.'
+        os.makedirs(output_dir, exist_ok=True)
+        output_file_name = f"{filename}{timestamp}.avi"
+        output_file = os.path.join(output_dir, output_file_name)
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         
         # FIX: Extract the EXACT height and width from the live frame
         height, width = frame.shape[:2]
         
+        cwd = os.getcwd()
+        print(f"Video writer cwd={cwd}")
+        print("output_file:", output_file)
         writer = cv2.VideoWriter(output_file, fourcc, self.fps, (width, height))
+        if not writer.isOpened():
+            raise RuntimeError(f"Unable to open VideoWriter for {output_file}")
         return writer, output_file
 
     def record_main(self):

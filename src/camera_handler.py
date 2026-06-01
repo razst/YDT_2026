@@ -24,10 +24,9 @@ class Camera:
             current_time = time.time()
             fps = 1 / (current_time - prev_time) if prev_time != 0 else 0
             prev_time = current_time
-            #print(f"fps{fps}")
                 
             if not ret:
-                print("Stream ended or failed.")
+                logger.error("Stream ended or failed.")
                 self.stop()
                 break
 
@@ -40,7 +39,7 @@ class Camera:
     def start(self):
         thread = threading.Thread(target=self.update, daemon=True) 
         thread.start()
-        print("Camera thread started") # Fixed a small typo here (it previously said print("stop"))
+        logger.info("Camera thread started") # Fixed a small typo here (it previously said logger.info("stop"))
         return self
 
     def stop(self):

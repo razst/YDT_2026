@@ -34,10 +34,15 @@ class Detect:
         self.running = True
 
         if target_color == TargetColor.RED:
-            self.lower_1 = np.array([0, 80, 50])
-            self.upper_1 = np.array([20, 255, 255])
+            self.lower_1 = np.array([4, 28, 82])
+            self.upper_1 = np.array([9, 114, 255])
             self.lower_2 = np.array([160, 80, 50])
             self.upper_2 = np.array([180, 255, 255])
+
+            # self.lower_1 = np.array([0, 80, 50])
+            # self.upper_1 = np.array([20, 255, 255])
+            # self.lower_2 = np.array([160, 80, 50])
+            # self.upper_2 = np.array([180, 255, 255])
         elif target_color == TargetColor.GREEN:
             self.lower_1 = np.array([40, 80, 50])
             self.upper_1 = np.array([80, 255, 255])
@@ -199,7 +204,7 @@ class Detect:
                     # Require being centered for FRAMES_CENTERED consecutive frames to prevent false positives
                     if centered_frames_count > FRAMES_CENTERED:
                         #TODO stop pump
-                        print("Target properly aligned and locked! Finishing task.")
+                        logger.info("Target properly aligned and locked! Finishing task.")
                         self.running = False
                         self.is_finished.set() # Unblocks the TaskManager!
                         break

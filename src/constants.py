@@ -1,4 +1,5 @@
 import logging
+import os
 
 # MAVLINK params
 #MAV_COM="/dev/ttyACM0" 
@@ -15,7 +16,8 @@ IS_HEADLESS = False
 CAMERA_IDX=0
 
 #video out params
-OUTPUT_DIR = "recordings"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE_DIR, "recordings")
 SEGMENT_DURATION = -1  # Duration of each video segment in seconds. set -1 to disable video output
 
 # Detect params

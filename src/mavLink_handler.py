@@ -24,10 +24,10 @@ class MavLinkHandler:
             return True 
     def check_until_guided(self):
         mode = self.get_curr_mode()
-        print(f"mode={mode}")
+        logger.debug(f"mode={mode}")
         while mode != 4:
             mode = self.get_curr_mode()
-            print(f"mode={mode}")
+            logger.debug(f"mode={mode}")
     def _connect(self,connection_string,msg_frq):
 
         the_connection = mavutil.mavlink_connection(connection_string,source_system=1) 
@@ -45,12 +45,21 @@ class MavLinkHandler:
     # for list of message type in ardupilot: https://ardupilot.org/copter/docs/ArduCopter_MAVLink_Messages.html#requestable-messages
     # some common ones: ATTITUDE, RAW_IMU, HEARTBEAT, WIND, RC_CHANNELS
     def _get_message(self, msg_type:str):
-        # msg = the_connection.recv_match(type='SYS_STATUS',blocking=True)
-        if msg_type != "" and msg_type is not None:
-            msg = self._connection.recv_match(type=msg_type,blocking=True)
-        else:
+        if msg_type == "" or msg_type is None:
             msg = self._connection.recv_match(blocking=True)
             logger.debug(msg.get_type())
+            return msg
+
+        # Get the first message of the type (blocking)
+        msg = self._connection.recv_match(type=msg_type, blocking=True)
+
+        # Drain the buffer for the same type to get the most recent one
+        while True:
+            next_msg = self._connection.recv_match(type=msg_type, blocking=False)
+            if next_msg is None:
+                break
+            msg = next_msg
+
         return msg        
     
     def move_servo(self, servo_channel, servo_angle):
@@ -89,7 +98,6 @@ class MavLinkHandler:
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0, 1, mode, 0, 0, 0, 0, 0)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        # print(msg)# Once connected, use 'the_connection' to get and send messages
         if msg.result != 0:
             self.send_text(f"Unable to change to mode {mode}")
             quit()
@@ -101,7 +109,6 @@ class MavLinkHandler:
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 0, 0, 0, 0, 0, 0)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        # print(msg)# Once connected, use 'the_connection' to get and send messages
         if msg.result != 0:
             self.send_text("Unable to ARM. Exiting !!!")
             quit()
@@ -115,7 +122,8 @@ class MavLinkHandler:
         return msg.custom_mode
         
     def get_curr_height(self):
-        msg = self._connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
+        # msg = self._connection.recv_match(type='GLOBAL_POSITION_INT', blocking=True)
+        msg = self._get_message('GLOBAL_POSITION_INT')
         if msg:
             if msg.get_type() == 'GLOBAL_POSITION_INT':
                 alt_meter = msg.relative_alt / 1000
@@ -141,15 +149,15 @@ class MavLinkHandler:
             if abs(curr_h - target_height) <= tolerance:
                 self.send_text(f"Height target reached: {curr_h:.2f}m")
                 # Stop vertical movement
-                self.send_ned_velocity(0, 0, 0, 1)
+                self.send_ned_velocity(0, 0, 0, 100)
                 return True
 
             # Determine velocity: -0.5 m/s (up) if too low, 0.5 m/s (down) if too high
             vel_z = -0.5 if curr_h < target_height else 0.5
 
             # Send velocity command
-            self.send_ned_velocity(0, 0, vel_z, 1)
-            time.sleep(0.5)
+            self.send_ned_velocity(0, 0, vel_z, 100)  # Move vertically for 1 second
+
 
         self.send_text(f"Timed out reaching height {target_height}m")
         return False
@@ -159,7 +167,6 @@ class MavLinkHandler:
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_NAV_TAKEOFF, 0, 0, 0, 0, 0, 0, 0, takeoff_alt_meters)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        # print(msg)# Once connected, use 'the_connection' to get and send messages
         if msg.result != 0:
             self.send_text("Unable to Take off")
         else:
@@ -209,7 +216,6 @@ class MavLinkHandler:
         # see https://ardupilot.org/dev/docs/copter-commands-in-guided-mode.html#set-attitude-target
         # see https://github.com/dronekit/dronekit-python/blob/master/examples/set_attitude_target/set_attitude_target.py
         q = to_quaternion(roll_angle, pitch_angle, yaw_angle) # Quaternion
-        # print(q)
         self._connection.mav.send(mavutil.mavlink.MAVLink_set_attitude_target_message(10, self._connection.target_system,
                                 self._connection.target_component, int(0b00000111), q, 0,0,0,0.5))
 
@@ -231,7 +237,6 @@ class MavLinkHandler:
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_NAV_LAND , 0, 0, 0, 0, 0, 0, 0, 0)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        # print(msg)# Once connected, use 'the_connection' to get and send messages
         if msg.result != 0:
             self.send_text("Unable to land")
         else:
@@ -262,8 +267,8 @@ class MavLinkHandler:
             self.send_text(f"Moving up at {abs(velocity_z)} m/s")
             logger.info(f"reach max altitude, stop moving up and maintain current altitude")
 
-        if (velocity_x == 0 and velocity_y ==0 and velocity_z ==0):
-            return
+            if (velocity_x == 0 and velocity_y ==0 and velocity_z ==0):
+                return
 
         att = self._connection.recv_match(type='ATTITUDE', blocking=True)
         current_yaw = att.yaw  # radians, passed directly into the message
