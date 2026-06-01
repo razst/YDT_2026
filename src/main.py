@@ -1,3 +1,5 @@
+from turtle import speed
+
 from logger_handler import logger
 from mavLink_handler import *
 from constants import *
@@ -14,9 +16,12 @@ if __name__ == "__main__":
    # Connect the FC
    try:
       mavLink:MavLinkHandler = MavLinkHandler(MAV_COM,MAV_MSG_FREQ) 
-   except Exception:
+   except Exception as e:
       logger.error("Unable to connect to FC")
+      logger.error(f"Error: {e}")
+      quit()
       
+
    # wait 4 GUIDED mode
    mavLink.check_until_guided()
 
@@ -27,8 +32,9 @@ if __name__ == "__main__":
       # Connect the Camera
       # Pass the new buffer to the Camera
       camera = Camera(CAMERA_IDX, cam_buffer, True) 
-   except Exception:
-      logger.error("Unable to connect to Camera")
+   except Exception as e:
+      logger.error(f"Unable to connect to Camera: {e}")
+      quit()
    
    #Start movie recording to file
    recorder = RecordVideo(target_buffer,True)

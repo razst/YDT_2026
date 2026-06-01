@@ -882,3 +882,1066 @@
 2026-06-01 12:29:20,821 - DEBUG - send_text - Height target reached: 2.98m
 2026-06-01 12:29:34,642 - DEBUG - send_text - Current height is 2.977 meters
 2026-06-01 12:29:35,065 - DEBUG - send_text - Current height is 2.986 meters
+2026-06-01 17:48:22,780 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 17:48:22,781 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:23,190 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:24,182 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:25,180 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:26,187 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:27,176 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:28,171 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:29,189 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:30,173 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:31,186 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:32,167 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:33,188 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:34,170 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:35,183 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:36,175 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:37,190 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:38,182 - DEBUG - check_until_guided - mode=5
+2026-06-01 17:48:39,070 - DEBUG - check_until_guided - mode=4
+2026-06-01 17:48:39,360 - INFO - start - Camera thread started
+2026-06-01 17:48:39,360 - INFO - __init__ - Initializing Task Manager...
+2026-06-01 17:48:39,360 - INFO - run_tasks - Running task for target color: TargetColor.RED
+2026-06-01 17:48:39,360 - INFO - run_tasks - Waiting for detection task to finish...
+2026-06-01 17:48:59,281 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-06-01 17:48:59,294 - DEBUG - send_text - Current height is 13.527 meters
+2026-06-01 17:49:00,364 - DEBUG - send_text - Current height is 13.255 meters
+2026-06-01 17:49:01,441 - DEBUG - send_text - Current height is 12.668 meters
+2026-06-01 17:49:02,568 - DEBUG - send_text - Current height is 12.123 meters
+2026-06-01 17:49:03,672 - DEBUG - send_text - Current height is 11.576 meters
+2026-06-01 17:49:04,776 - DEBUG - send_text - Current height is 11.027 meters
+2026-06-01 17:49:05,882 - DEBUG - send_text - Current height is 10.48 meters
+2026-06-01 17:49:06,980 - DEBUG - send_text - Current height is 9.93 meters
+2026-06-01 17:49:08,066 - DEBUG - send_text - Current height is 9.38 meters
+2026-06-01 17:49:09,174 - DEBUG - send_text - Current height is 8.829 meters
+2026-06-01 17:49:10,278 - DEBUG - send_text - Current height is 8.281 meters
+2026-06-01 17:49:11,369 - DEBUG - send_text - Current height is 7.731 meters
+2026-06-01 17:49:12,470 - DEBUG - send_text - Current height is 7.181 meters
+2026-06-01 17:49:13,572 - DEBUG - send_text - Current height is 6.63 meters
+2026-06-01 17:49:14,667 - DEBUG - send_text - Current height is 6.08 meters
+2026-06-01 17:49:15,774 - DEBUG - send_text - Current height is 5.531 meters
+2026-06-01 17:49:16,869 - DEBUG - send_text - Current height is 4.982 meters
+2026-06-01 17:49:17,969 - DEBUG - send_text - Current height is 4.431 meters
+2026-06-01 17:49:19,093 - DEBUG - send_text - Current height is 3.88 meters
+2026-06-01 17:49:20,174 - DEBUG - send_text - Current height is 3.33 meters
+2026-06-01 17:49:20,174 - DEBUG - send_text - Height target reached: 3.33m
+2026-06-01 17:49:49,956 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-06-01 17:49:49,974 - DEBUG - send_text - Current height is 3.083 meters
+2026-06-01 17:49:49,975 - DEBUG - send_text - Height target reached: 3.08m
+2026-06-01 17:49:52,807 - INFO - ensure_height - Ensuring height 3.0m (tol: 0.5m)...
+2026-06-01 17:49:52,812 - DEBUG - send_text - Current height is 3.084 meters
+2026-06-01 17:49:52,813 - DEBUG - send_text - Height target reached: 3.08m
+2026-06-01 18:02:47,373 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:02:47,374 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:02:47,374 - DEBUG - move_servo - sending command move servo to FC with value: 11900
+2026-06-01 18:02:49,375 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:02:49,376 - DEBUG - move_servo - sending command move servo to FC with value: 25344
+2026-06-01 18:13:40,594 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:13:40,595 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:13:40,595 - DEBUG - move_servo - sending command move servo to FC with value: 15566
+2026-06-01 18:13:42,596 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:13:42,597 - DEBUG - move_servo - sending command move servo to FC with value: 22900
+2026-06-01 18:14:07,387 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:14:07,387 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:14:07,387 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:14:09,388 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:14:09,389 - DEBUG - move_servo - sending command move servo to FC with value: 2122
+2026-06-01 18:14:36,936 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:14:36,936 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:14:36,936 - DEBUG - move_servo - sending command move servo to FC with value: 900
+2026-06-01 18:14:52,033 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:14:52,033 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:14:52,033 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:15:02,887 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:15:02,888 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:15:02,888 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:15:25,063 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:15:25,064 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:15:25,064 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:16:07,655 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:16:07,656 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:07,656 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:16:08,157 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:08,158 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:16:08,659 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:08,660 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:16:09,161 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:09,161 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:16:09,662 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:09,662 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:16:10,164 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:10,164 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:16:10,665 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:10,667 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:16:41,734 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:16:41,736 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:41,737 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:16:42,737 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:42,738 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:16:43,738 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:43,739 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:16:44,739 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:44,740 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:16:45,741 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:45,741 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:16:46,742 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:46,742 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:16:47,743 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:47,743 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:16:48,744 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:48,744 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:16:49,745 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:49,745 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:16:50,746 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:50,746 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:16:51,747 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:51,748 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:16:52,748 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:52,749 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:16:53,750 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:53,750 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:16:54,751 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:54,752 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:16:55,752 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:55,752 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:16:56,753 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:56,753 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:16:57,754 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:57,755 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:16:58,756 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:58,757 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:16:59,758 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:16:59,758 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:17:00,759 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:00,759 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:17:01,760 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:01,761 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:17:02,761 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:02,762 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:17:03,764 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:03,764 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:17:04,765 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:04,765 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:17:05,766 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:05,766 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:17:06,767 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:06,767 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:17:07,768 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:07,769 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:17:08,770 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:08,771 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:17:09,771 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:09,772 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:17:10,773 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:10,773 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:17:11,775 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:11,775 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:17:12,776 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:12,777 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:17:13,777 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:13,778 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:17:14,779 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:14,779 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:17:15,780 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:15,780 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:17:16,781 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:16,781 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:17:17,782 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:17,782 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:17:18,783 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:18,783 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:17:19,784 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:19,784 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:17:20,785 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:20,785 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:17:21,786 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:21,786 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:17:22,787 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:22,787 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:17:23,788 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:23,788 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:17:24,789 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:24,789 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:17:25,790 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:25,791 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:17:26,791 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:26,791 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:17:27,792 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:27,793 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:17:28,794 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:28,794 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:17:29,794 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:29,795 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:17:30,796 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:30,796 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:17:31,797 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:31,798 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:17:32,799 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:32,800 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:17:33,801 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:33,801 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:17:34,802 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:34,802 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:17:35,803 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:35,804 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:17:36,805 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:36,805 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:17:37,806 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:37,806 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:17:38,806 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:38,807 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:17:39,809 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:39,809 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:17:40,810 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:40,810 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:17:41,811 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:41,811 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:17:42,812 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:42,812 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:17:43,813 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:43,813 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:17:44,814 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:44,814 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:17:45,815 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:45,815 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:17:46,816 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:46,816 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:17:47,817 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:47,818 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:17:48,818 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:48,819 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:17:49,819 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:49,820 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:17:50,820 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:50,820 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:17:51,821 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:51,821 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:17:52,822 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:52,822 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:17:53,823 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:53,824 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:17:54,825 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:54,826 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:17:55,826 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:55,827 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:17:56,827 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:56,828 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:17:57,829 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:57,829 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:17:58,830 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:58,830 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:17:59,831 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:17:59,831 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:18:00,832 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:00,833 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:18:13,004 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:18:13,005 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:13,006 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:18:13,507 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:13,508 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:18:14,009 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:14,009 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:18:14,510 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:14,511 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:18:15,011 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:15,012 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:18:15,513 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:15,513 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:18:16,015 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:16,015 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:18:16,516 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:16,516 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:18:17,018 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:17,018 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:18:17,519 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:17,520 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:18:18,022 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:18,022 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:18:18,524 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:18,524 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:18:19,026 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:19,026 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:18:19,527 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:19,528 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:18:20,029 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:20,030 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:18:20,532 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:20,532 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:18:21,032 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:21,033 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:18:21,535 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:21,535 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:18:22,036 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:22,037 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:18:22,539 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:22,540 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:18:23,042 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:23,042 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:18:23,543 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:23,544 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:18:24,045 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:24,046 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:18:24,547 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:24,548 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:18:25,049 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:25,049 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:18:25,550 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:25,551 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:18:26,052 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:26,052 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:18:26,553 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:26,554 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:18:27,056 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:27,056 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:18:27,558 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:27,559 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:18:28,062 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:28,063 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:18:28,564 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:28,565 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:18:29,067 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:29,068 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:18:29,569 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:29,569 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:18:30,071 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:30,071 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:18:30,572 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:30,573 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:18:31,074 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:31,075 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:18:31,576 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:31,576 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:18:32,078 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:32,078 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:18:32,580 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:32,580 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:18:33,081 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:33,082 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:18:33,583 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:33,584 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:18:34,084 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:34,085 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:18:34,587 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:34,587 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:18:35,088 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:35,089 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:18:35,590 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:35,590 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:18:36,091 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:36,092 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:18:36,594 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:36,594 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:18:37,095 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:37,095 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:18:37,596 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:37,596 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:18:38,097 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:38,098 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:18:38,598 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:38,598 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:18:39,099 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:39,100 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:18:39,601 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:39,601 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:18:40,102 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:40,103 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:18:40,604 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:40,605 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:18:41,106 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:41,106 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:18:41,608 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:41,609 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:18:42,110 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:42,110 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:18:42,612 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:42,613 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:18:43,114 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:43,114 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:18:43,616 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:43,616 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:18:44,118 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:44,118 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:18:44,620 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:44,620 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:18:45,123 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:45,123 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:18:45,624 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:45,625 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:18:46,127 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:46,128 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:18:46,629 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:46,630 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:18:47,132 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:47,132 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:18:47,633 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:47,634 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:18:48,135 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:48,137 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:18:48,638 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:48,639 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:18:49,141 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:49,141 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:18:49,643 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:49,644 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:18:50,145 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:50,146 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:18:50,648 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:50,649 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:18:51,151 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:51,152 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:18:51,653 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:51,654 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:18:52,156 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:52,158 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:18:52,660 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:18:52,661 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:19:19,556 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:19:19,556 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:19,556 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:19:20,057 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:20,058 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:19:20,559 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:20,561 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:19:21,063 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:21,063 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:19:21,564 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:21,564 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:19:22,066 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:22,066 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:19:22,568 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:22,568 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:19:23,069 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:23,069 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:19:23,571 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:23,571 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:19:24,072 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:24,072 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:19:24,573 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:24,574 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:19:25,074 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:25,075 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:19:25,575 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:25,576 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:19:26,076 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:26,077 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:19:26,578 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:26,578 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:19:27,079 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:27,080 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:19:27,581 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:27,581 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:19:28,082 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:28,082 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:19:28,583 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:28,583 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:19:29,084 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:29,085 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:19:29,587 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:29,587 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:19:30,088 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:30,088 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:19:30,589 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:30,590 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:19:31,091 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:31,091 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:19:31,592 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:31,593 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:19:32,094 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:32,095 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:19:32,597 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:32,597 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:19:33,098 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:33,099 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:19:33,600 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:33,600 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:19:34,101 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:34,102 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:19:34,603 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:34,604 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:19:35,105 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:35,105 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:19:35,607 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:35,607 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:19:36,109 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:36,110 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:19:36,612 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:36,612 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:19:37,113 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:37,113 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:19:37,613 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:37,614 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:19:38,115 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:38,116 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:19:38,617 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:38,617 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:19:39,118 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:39,119 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:19:39,620 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:39,620 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:19:40,122 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:40,123 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:19:40,624 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:40,625 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:19:41,125 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:41,126 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:19:41,626 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:41,627 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:19:42,127 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:42,128 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:19:42,630 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:42,630 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:19:43,132 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:43,133 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:19:43,634 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:43,635 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:19:44,136 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:44,136 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:19:44,638 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:44,639 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:19:45,140 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:45,141 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:19:45,642 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:45,643 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:19:46,143 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:46,144 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:19:46,645 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:46,646 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:19:47,148 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:47,148 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:19:47,649 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:47,650 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:19:48,152 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:48,152 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:19:48,653 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:48,654 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:19:49,156 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:49,158 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:19:49,660 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:49,661 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:19:50,163 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:50,163 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:19:50,664 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:50,665 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:19:51,167 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:51,168 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:19:51,669 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:51,669 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:19:52,171 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:52,172 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:19:52,673 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:52,674 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:19:53,175 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:53,176 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:19:53,677 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:53,678 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:19:54,180 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:54,181 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:19:54,682 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:54,683 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:19:55,184 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:55,185 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:19:55,686 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:55,687 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:19:56,188 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:56,188 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:19:56,689 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:56,690 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:19:57,192 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:57,192 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:19:57,693 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:57,694 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:19:58,196 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:58,197 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:19:58,698 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:58,699 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:19:59,201 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:19:59,202 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:21:16,844 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:21:16,845 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:16,845 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:21:17,346 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:17,347 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:21:17,849 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:17,850 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:21:18,352 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:18,352 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:21:18,853 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:18,854 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:21:19,356 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:19,357 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:21:19,858 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:19,859 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:21:20,360 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:20,361 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:21:20,862 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:20,863 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:21:21,364 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:21,364 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:21:21,866 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:21,866 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:21:22,367 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:22,367 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:21:22,868 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:22,868 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:21:23,369 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:23,369 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:21:23,870 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:23,871 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:21:24,371 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:24,372 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:21:24,874 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:24,875 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:21:25,376 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:25,376 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:21:25,877 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:25,878 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:21:26,379 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:26,380 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:21:26,881 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:26,882 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:21:27,384 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:27,385 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:21:27,887 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:27,888 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:21:28,389 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:28,389 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:21:28,890 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:28,891 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:21:29,393 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:29,393 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:21:29,893 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:29,894 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:21:30,395 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:30,395 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:21:30,896 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:30,897 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:21:31,398 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:31,398 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:21:31,899 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:31,899 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:21:32,401 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:32,402 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:21:32,904 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:32,905 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:21:33,406 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:33,406 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:21:33,907 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:33,908 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:21:34,410 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:34,411 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:21:34,913 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:34,914 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:21:35,415 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:35,416 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:21:35,918 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:35,919 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:21:36,421 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:36,422 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:21:36,923 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:36,924 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:21:37,425 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:37,426 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:21:37,927 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:37,928 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:21:38,429 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:38,430 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:21:38,932 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:38,932 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:21:39,434 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:39,435 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:21:39,936 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:39,937 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:21:40,439 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:40,440 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:21:40,941 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:40,942 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:21:41,442 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:41,443 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:21:41,944 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:41,944 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:21:42,445 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:42,446 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:21:42,947 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:42,948 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:21:43,450 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:43,450 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:21:43,951 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:43,951 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:21:44,452 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:44,453 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:21:44,954 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:44,954 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:21:45,455 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:45,456 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:21:45,957 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:45,958 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:21:46,459 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:46,459 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:21:46,960 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:46,960 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:21:47,460 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:47,461 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:21:47,962 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:47,962 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:21:48,463 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:48,463 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:21:48,964 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:48,964 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:21:49,465 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:49,466 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:21:49,967 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:49,967 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:21:50,468 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:50,469 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:21:50,971 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:50,971 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:21:51,473 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:51,473 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:21:51,974 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:51,975 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:21:52,476 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:52,477 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:21:52,978 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:52,978 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:21:53,480 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:53,480 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:21:53,981 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:53,981 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:21:54,482 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:54,484 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:21:54,985 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:54,986 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:21:55,487 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:55,488 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:21:55,990 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:55,990 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:21:56,491 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:21:56,492 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:22:15,248 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:22:15,249 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:15,249 - DEBUG - move_servo - sending command move servo to FC with value: 1022
+2026-06-01 18:22:15,750 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:15,750 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:22:16,252 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:16,252 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:22:16,753 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:16,754 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:22:17,255 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:17,256 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:22:17,757 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:17,757 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:22:18,258 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:18,259 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:22:18,760 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:18,760 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:22:19,261 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:19,262 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:22:19,762 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:19,763 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:22:20,264 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:20,264 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:22:20,766 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:20,767 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:22:21,268 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:21,269 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:22:21,769 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:21,770 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:22:22,271 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:22,272 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:22:22,773 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:22,773 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:22:23,274 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:23,274 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:22:23,775 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:23,775 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:22:24,277 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:24,277 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:22:24,778 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:24,778 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:22:25,279 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:25,279 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:22:25,780 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:25,781 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:22:26,281 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:26,281 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:22:26,782 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:26,782 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:22:27,283 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:27,283 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:22:27,784 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:27,785 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:22:28,285 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:28,286 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:22:28,787 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:28,787 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:22:29,288 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:29,288 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:22:29,790 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:29,790 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:22:30,290 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:30,291 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:22:30,791 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:30,792 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:22:31,292 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:31,292 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:22:31,793 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:31,793 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:22:32,294 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:32,295 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:22:32,795 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:32,796 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:22:33,296 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:33,296 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:22:33,797 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:33,797 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:22:34,298 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:34,299 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:22:34,800 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:34,800 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:22:35,301 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:35,301 - DEBUG - move_servo - sending command move servo to FC with value: 2000
+2026-06-01 18:22:35,803 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:35,803 - DEBUG - move_servo - sending command move servo to FC with value: 1975
+2026-06-01 18:22:36,304 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:36,304 - DEBUG - move_servo - sending command move servo to FC with value: 1951
+2026-06-01 18:22:36,805 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:36,805 - DEBUG - move_servo - sending command move servo to FC with value: 1926
+2026-06-01 18:22:37,306 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:37,306 - DEBUG - move_servo - sending command move servo to FC with value: 1902
+2026-06-01 18:22:37,807 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:37,807 - DEBUG - move_servo - sending command move servo to FC with value: 1877
+2026-06-01 18:22:38,308 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:38,309 - DEBUG - move_servo - sending command move servo to FC with value: 1853
+2026-06-01 18:22:38,810 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:38,811 - DEBUG - move_servo - sending command move servo to FC with value: 1828
+2026-06-01 18:22:39,312 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:39,312 - DEBUG - move_servo - sending command move servo to FC with value: 1804
+2026-06-01 18:22:39,813 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:39,814 - DEBUG - move_servo - sending command move servo to FC with value: 1780
+2026-06-01 18:22:40,315 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:40,316 - DEBUG - move_servo - sending command move servo to FC with value: 1755
+2026-06-01 18:22:40,816 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:40,817 - DEBUG - move_servo - sending command move servo to FC with value: 1731
+2026-06-01 18:22:41,317 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:41,318 - DEBUG - move_servo - sending command move servo to FC with value: 1706
+2026-06-01 18:22:41,818 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:41,819 - DEBUG - move_servo - sending command move servo to FC with value: 1682
+2026-06-01 18:22:42,320 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:42,321 - DEBUG - move_servo - sending command move servo to FC with value: 1657
+2026-06-01 18:22:42,821 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:42,821 - DEBUG - move_servo - sending command move servo to FC with value: 1633
+2026-06-01 18:22:43,322 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:43,323 - DEBUG - move_servo - sending command move servo to FC with value: 1608
+2026-06-01 18:22:43,824 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:43,824 - DEBUG - move_servo - sending command move servo to FC with value: 1584
+2026-06-01 18:22:44,325 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:44,325 - DEBUG - move_servo - sending command move servo to FC with value: 1560
+2026-06-01 18:22:44,826 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:44,826 - DEBUG - move_servo - sending command move servo to FC with value: 1535
+2026-06-01 18:22:45,327 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:45,327 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:22:45,829 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:45,829 - DEBUG - move_servo - sending command move servo to FC with value: 1486
+2026-06-01 18:22:46,330 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:46,330 - DEBUG - move_servo - sending command move servo to FC with value: 1462
+2026-06-01 18:22:46,831 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:46,831 - DEBUG - move_servo - sending command move servo to FC with value: 1437
+2026-06-01 18:22:47,332 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:47,332 - DEBUG - move_servo - sending command move servo to FC with value: 1413
+2026-06-01 18:22:47,833 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:47,834 - DEBUG - move_servo - sending command move servo to FC with value: 1388
+2026-06-01 18:22:48,335 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:48,336 - DEBUG - move_servo - sending command move servo to FC with value: 1364
+2026-06-01 18:22:48,837 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:48,838 - DEBUG - move_servo - sending command move servo to FC with value: 1340
+2026-06-01 18:22:49,339 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:49,340 - DEBUG - move_servo - sending command move servo to FC with value: 1315
+2026-06-01 18:22:49,843 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:49,843 - DEBUG - move_servo - sending command move servo to FC with value: 1291
+2026-06-01 18:22:50,344 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:50,345 - DEBUG - move_servo - sending command move servo to FC with value: 1266
+2026-06-01 18:22:50,845 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:50,846 - DEBUG - move_servo - sending command move servo to FC with value: 1242
+2026-06-01 18:22:51,346 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:51,346 - DEBUG - move_servo - sending command move servo to FC with value: 1217
+2026-06-01 18:22:51,851 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:51,851 - DEBUG - move_servo - sending command move servo to FC with value: 1193
+2026-06-01 18:22:52,353 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:52,353 - DEBUG - move_servo - sending command move servo to FC with value: 1168
+2026-06-01 18:22:52,854 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:52,855 - DEBUG - move_servo - sending command move servo to FC with value: 1144
+2026-06-01 18:22:53,356 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:53,356 - DEBUG - move_servo - sending command move servo to FC with value: 1120
+2026-06-01 18:22:53,858 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:53,859 - DEBUG - move_servo - sending command move servo to FC with value: 1095
+2026-06-01 18:22:54,360 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:54,361 - DEBUG - move_servo - sending command move servo to FC with value: 1071
+2026-06-01 18:22:54,862 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:54,862 - DEBUG - move_servo - sending command move servo to FC with value: 1046
+2026-06-01 18:22:55,363 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:22:55,364 - DEBUG - move_servo - sending command move servo to FC with value: 1511
+2026-06-01 18:23:11,526 - INFO - _connect - Heartbeat from system (system 1 component 0)
+2026-06-01 18:23:11,526 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:11,527 - DEBUG - move_servo - sending command move servo to FC with value: 1022, channel: 9, angle: 10
+2026-06-01 18:23:12,027 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:12,027 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:23:12,528 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:12,528 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:23:13,029 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:13,029 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:23:13,530 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:13,531 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:23:14,032 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:14,033 - DEBUG - move_servo - sending command move servo to FC with value: 1144, channel: 9, angle: 20
+2026-06-01 18:23:14,534 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:14,535 - DEBUG - move_servo - sending command move servo to FC with value: 1168, channel: 9, angle: 22
+2026-06-01 18:23:15,036 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:15,036 - DEBUG - move_servo - sending command move servo to FC with value: 1193, channel: 9, angle: 24
+2026-06-01 18:23:15,537 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:15,538 - DEBUG - move_servo - sending command move servo to FC with value: 1217, channel: 9, angle: 26
+2026-06-01 18:23:16,039 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:16,040 - DEBUG - move_servo - sending command move servo to FC with value: 1242, channel: 9, angle: 28
+2026-06-01 18:23:16,542 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:16,542 - DEBUG - move_servo - sending command move servo to FC with value: 1266, channel: 9, angle: 30
+2026-06-01 18:23:17,043 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:17,044 - DEBUG - move_servo - sending command move servo to FC with value: 1291, channel: 9, angle: 32
+2026-06-01 18:23:17,546 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:17,546 - DEBUG - move_servo - sending command move servo to FC with value: 1315, channel: 9, angle: 34
+2026-06-01 18:23:18,047 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:18,048 - DEBUG - move_servo - sending command move servo to FC with value: 1340, channel: 9, angle: 36
+2026-06-01 18:23:18,549 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:18,549 - DEBUG - move_servo - sending command move servo to FC with value: 1364, channel: 9, angle: 38
+2026-06-01 18:23:19,051 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:19,052 - DEBUG - move_servo - sending command move servo to FC with value: 1388, channel: 9, angle: 40
+2026-06-01 18:23:19,553 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:19,553 - DEBUG - move_servo - sending command move servo to FC with value: 1413, channel: 9, angle: 42
+2026-06-01 18:23:20,055 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:20,056 - DEBUG - move_servo - sending command move servo to FC with value: 1437, channel: 9, angle: 44
+2026-06-01 18:23:20,558 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:20,559 - DEBUG - move_servo - sending command move servo to FC with value: 1462, channel: 9, angle: 46
+2026-06-01 18:23:21,060 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:21,061 - DEBUG - move_servo - sending command move servo to FC with value: 1486, channel: 9, angle: 48
+2026-06-01 18:23:21,563 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:21,564 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50
+2026-06-01 18:23:22,065 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:22,066 - DEBUG - move_servo - sending command move servo to FC with value: 1535, channel: 9, angle: 52
+2026-06-01 18:23:22,567 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:22,568 - DEBUG - move_servo - sending command move servo to FC with value: 1560, channel: 9, angle: 54
+2026-06-01 18:23:23,069 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:23,070 - DEBUG - move_servo - sending command move servo to FC with value: 1584, channel: 9, angle: 56
+2026-06-01 18:23:23,573 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:23,573 - DEBUG - move_servo - sending command move servo to FC with value: 1608, channel: 9, angle: 58
+2026-06-01 18:23:24,074 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:24,075 - DEBUG - move_servo - sending command move servo to FC with value: 1633, channel: 9, angle: 60
+2026-06-01 18:23:24,576 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:24,577 - DEBUG - move_servo - sending command move servo to FC with value: 1657, channel: 9, angle: 62
+2026-06-01 18:23:25,078 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:25,079 - DEBUG - move_servo - sending command move servo to FC with value: 1682, channel: 9, angle: 64
+2026-06-01 18:23:25,581 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:25,581 - DEBUG - move_servo - sending command move servo to FC with value: 1706, channel: 9, angle: 66
+2026-06-01 18:23:26,082 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:26,083 - DEBUG - move_servo - sending command move servo to FC with value: 1731, channel: 9, angle: 68
+2026-06-01 18:23:26,585 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:26,586 - DEBUG - move_servo - sending command move servo to FC with value: 1755, channel: 9, angle: 70
+2026-06-01 18:23:27,088 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:27,088 - DEBUG - move_servo - sending command move servo to FC with value: 1780, channel: 9, angle: 72
+2026-06-01 18:23:27,590 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:27,591 - DEBUG - move_servo - sending command move servo to FC with value: 1804, channel: 9, angle: 74
+2026-06-01 18:23:28,093 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:28,094 - DEBUG - move_servo - sending command move servo to FC with value: 1828, channel: 9, angle: 76
+2026-06-01 18:23:28,595 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:28,596 - DEBUG - move_servo - sending command move servo to FC with value: 1853, channel: 9, angle: 78
+2026-06-01 18:23:29,097 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:29,098 - DEBUG - move_servo - sending command move servo to FC with value: 1877, channel: 9, angle: 80
+2026-06-01 18:23:29,600 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:29,601 - DEBUG - move_servo - sending command move servo to FC with value: 1902, channel: 9, angle: 82
+2026-06-01 18:23:30,102 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:30,103 - DEBUG - move_servo - sending command move servo to FC with value: 1926, channel: 9, angle: 84
+2026-06-01 18:23:30,604 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:30,604 - DEBUG - move_servo - sending command move servo to FC with value: 1951, channel: 9, angle: 86
+2026-06-01 18:23:31,106 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:31,106 - DEBUG - move_servo - sending command move servo to FC with value: 1975, channel: 9, angle: 88
+2026-06-01 18:23:31,608 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:31,608 - DEBUG - move_servo - sending command move servo to FC with value: 2000, channel: 9, angle: 90
+2026-06-01 18:23:32,109 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:32,110 - DEBUG - move_servo - sending command move servo to FC with value: 1975, channel: 9, angle: 88
+2026-06-01 18:23:32,614 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:32,614 - DEBUG - move_servo - sending command move servo to FC with value: 1951, channel: 9, angle: 86
+2026-06-01 18:23:33,115 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:33,116 - DEBUG - move_servo - sending command move servo to FC with value: 1926, channel: 9, angle: 84
+2026-06-01 18:23:33,618 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:33,618 - DEBUG - move_servo - sending command move servo to FC with value: 1902, channel: 9, angle: 82
+2026-06-01 18:23:34,120 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:34,120 - DEBUG - move_servo - sending command move servo to FC with value: 1877, channel: 9, angle: 80
+2026-06-01 18:23:34,622 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:34,622 - DEBUG - move_servo - sending command move servo to FC with value: 1853, channel: 9, angle: 78
+2026-06-01 18:23:35,123 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:35,124 - DEBUG - move_servo - sending command move servo to FC with value: 1828, channel: 9, angle: 76
+2026-06-01 18:23:35,625 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:35,625 - DEBUG - move_servo - sending command move servo to FC with value: 1804, channel: 9, angle: 74
+2026-06-01 18:23:36,126 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:36,126 - DEBUG - move_servo - sending command move servo to FC with value: 1780, channel: 9, angle: 72
+2026-06-01 18:23:36,627 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:36,628 - DEBUG - move_servo - sending command move servo to FC with value: 1755, channel: 9, angle: 70
+2026-06-01 18:23:37,130 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:37,131 - DEBUG - move_servo - sending command move servo to FC with value: 1731, channel: 9, angle: 68
+2026-06-01 18:23:37,632 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:37,632 - DEBUG - move_servo - sending command move servo to FC with value: 1706, channel: 9, angle: 66
+2026-06-01 18:23:38,133 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:38,133 - DEBUG - move_servo - sending command move servo to FC with value: 1682, channel: 9, angle: 64
+2026-06-01 18:23:38,635 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:38,635 - DEBUG - move_servo - sending command move servo to FC with value: 1657, channel: 9, angle: 62
+2026-06-01 18:23:39,136 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:39,137 - DEBUG - move_servo - sending command move servo to FC with value: 1633, channel: 9, angle: 60
+2026-06-01 18:23:39,637 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:39,638 - DEBUG - move_servo - sending command move servo to FC with value: 1608, channel: 9, angle: 58
+2026-06-01 18:23:40,139 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:40,140 - DEBUG - move_servo - sending command move servo to FC with value: 1584, channel: 9, angle: 56
+2026-06-01 18:23:40,640 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:40,641 - DEBUG - move_servo - sending command move servo to FC with value: 1560, channel: 9, angle: 54
+2026-06-01 18:23:41,142 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:41,142 - DEBUG - move_servo - sending command move servo to FC with value: 1535, channel: 9, angle: 52
+2026-06-01 18:23:41,642 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:41,643 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50
+2026-06-01 18:23:42,143 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:42,144 - DEBUG - move_servo - sending command move servo to FC with value: 1486, channel: 9, angle: 48
+2026-06-01 18:23:42,644 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:42,645 - DEBUG - move_servo - sending command move servo to FC with value: 1462, channel: 9, angle: 46
+2026-06-01 18:23:43,145 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:43,146 - DEBUG - move_servo - sending command move servo to FC with value: 1437, channel: 9, angle: 44
+2026-06-01 18:23:43,649 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:43,649 - DEBUG - move_servo - sending command move servo to FC with value: 1413, channel: 9, angle: 42
+2026-06-01 18:23:44,150 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:44,151 - DEBUG - move_servo - sending command move servo to FC with value: 1388, channel: 9, angle: 40
+2026-06-01 18:23:44,651 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:44,652 - DEBUG - move_servo - sending command move servo to FC with value: 1364, channel: 9, angle: 38
+2026-06-01 18:23:45,153 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:45,153 - DEBUG - move_servo - sending command move servo to FC with value: 1340, channel: 9, angle: 36
+2026-06-01 18:23:45,654 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:45,654 - DEBUG - move_servo - sending command move servo to FC with value: 1315, channel: 9, angle: 34
+2026-06-01 18:23:46,155 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:46,155 - DEBUG - move_servo - sending command move servo to FC with value: 1291, channel: 9, angle: 32
+2026-06-01 18:23:46,656 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:46,656 - DEBUG - move_servo - sending command move servo to FC with value: 1266, channel: 9, angle: 30
+2026-06-01 18:23:47,157 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:47,157 - DEBUG - move_servo - sending command move servo to FC with value: 1242, channel: 9, angle: 28
+2026-06-01 18:23:47,659 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:47,659 - DEBUG - move_servo - sending command move servo to FC with value: 1217, channel: 9, angle: 26
+2026-06-01 18:23:48,160 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:48,160 - DEBUG - move_servo - sending command move servo to FC with value: 1193, channel: 9, angle: 24
+2026-06-01 18:23:48,661 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:48,662 - DEBUG - move_servo - sending command move servo to FC with value: 1168, channel: 9, angle: 22
+2026-06-01 18:23:49,163 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:49,163 - DEBUG - move_servo - sending command move servo to FC with value: 1144, channel: 9, angle: 20
+2026-06-01 18:23:49,664 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:49,665 - DEBUG - move_servo - sending command move servo to FC with value: 1120, channel: 9, angle: 18
+2026-06-01 18:23:50,165 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:50,166 - DEBUG - move_servo - sending command move servo to FC with value: 1095, channel: 9, angle: 16
+2026-06-01 18:23:50,666 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:50,667 - DEBUG - move_servo - sending command move servo to FC with value: 1071, channel: 9, angle: 14
+2026-06-01 18:23:51,168 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:51,168 - DEBUG - move_servo - sending command move servo to FC with value: 1046, channel: 9, angle: 12
+2026-06-01 18:23:51,669 - DEBUG - move_servo - requsting to move servo in FC
+2026-06-01 18:23:51,669 - DEBUG - move_servo - sending command move servo to FC with value: 1511, channel: 9, angle: 50

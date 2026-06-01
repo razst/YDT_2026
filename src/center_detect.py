@@ -164,6 +164,14 @@ class Detect:
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
         # self.mavLink.start_pump()        
         # move servo back and forth for FIRE_DURATION seconds
+       # servo 20sec each side
+        for i in range(10,90,2):
+            self.mavLink.move_servo(SERVO_CHANNEL, i)
+            time.sleep(SERVO_SPEED)
+        for i in range(90,10,-2):
+            self.mavLink.move_servo(SERVO_CHANNEL, i)
+            time.sleep(SERVO_SPEED)
+        self.mavLink.move_servo(SERVO_CHANNEL, 50) # move back to center
         return
 
 

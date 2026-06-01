@@ -3,8 +3,8 @@ import os
 
 # MAVLINK params
 #MAV_COM="/dev/ttyACM0" 
-#MAV_COM="COM5" 
-MAV_COM="tcp:localhost:5763" # SITL com
+MAV_COM="COM12" 
+# MAV_COM="tcp:localhost:5763" # SITL com
 MAV_MSG_FREQ = 10 # how ofthen do we want to get messages from mavlink (in Hz)
 MAX_ALLOWED_ALT = 15.0  # Maximum allowed altitude in meters to prevent flyaways
 
@@ -27,3 +27,5 @@ FRAMES_CENTERED = 100 # Number of consecutive frames the target must be centered
 FIRE_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
 VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive for down, negative for up)
 DRONE_MOVE_ANGLE = 2
+SERVO_SPEED = 0.5
+SERVO_CHANNEL = 9
