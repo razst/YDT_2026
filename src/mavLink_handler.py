@@ -34,8 +34,7 @@ class MavLinkHandler:
             mode = self.get_curr_mode()
             logger.debug(f"mode={mode}")
     def _connect(self,connection_string,msg_frq):
-        the_connection = mavutil.mavlink_connection(connection_string,source_system=1)
-        the_connection.set_timeout(5.0) # Set timeout to 5 seconds for blocking calls
+        the_connection = mavutil.mavlink_connection(connection_string,source_system=1,baud=BAUD_RATE)
         the_connection.wait_heartbeat()
         logger.info("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
 

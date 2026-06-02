@@ -3,6 +3,7 @@ from venv import logger
 import cv2
 import numpy as np
 import time
+from datetime import datetime
 from enum import IntEnum,Enum
 from collections import deque
 import threading
@@ -200,6 +201,9 @@ class Detect:
                 
                 original_frame, edited_frame, horz, vert = self.center_detect(frame)
                 
+                timestamp_text = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+                cv2.putText(edited_frame, timestamp_text, (10, 140), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+
                 if not IS_HEADLESS:
                     cv2.putText(edited_frame, f"FPS: {fps:.2f}", (10, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
                     cv2.imshow('Drone Alignment Check', edited_frame)
