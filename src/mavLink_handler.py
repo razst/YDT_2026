@@ -10,6 +10,11 @@ class NotGuidedException(Exception):
         super().__init__(self.message)
 
 
+class MavLinkCommandError(Exception):
+    def __init__(self, message="MavLink command failed"):
+        self.message = message
+        super().__init__(self.message)
+
 class MavLinkHandler:
     def __init__(self, connection_string,msg_frq=1): # msg freq in Hz
         self._last_pos = 0
@@ -29,8 +34,8 @@ class MavLinkHandler:
             mode = self.get_curr_mode()
             logger.debug(f"mode={mode}")
     def _connect(self,connection_string,msg_frq):
-
-        the_connection = mavutil.mavlink_connection(connection_string,source_system=1) 
+        the_connection = mavutil.mavlink_connection(connection_string,source_system=1)
+        the_connection.set_timeout(5.0) # Set timeout to 5 seconds for blocking calls
         the_connection.wait_heartbeat()
         logger.info("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
 
@@ -47,11 +52,17 @@ class MavLinkHandler:
     def _get_message(self, msg_type:str):
         if msg_type == "" or msg_type is None:
             msg = self._connection.recv_match(blocking=True)
+            if msg is None:
+                logger.warning("Timeout waiting for any message")
+                return None
             logger.debug(msg.get_type())
             return msg
 
         # Get the first message of the type (blocking)
         msg = self._connection.recv_match(type=msg_type, blocking=True)
+        if msg is None:
+            logger.warning(f"Timeout waiting for message of type {msg_type}")
+            return None
 
         # Drain the buffer for the same type to get the most recent one
         while True:
@@ -113,13 +124,18 @@ class MavLinkHandler:
         # ******* Change flight mode ********
         # Change flight mode. 0-Stabilize, 4-Guided, 5-Loiter, 6-RTL, 9-Land
         # mode values: https://ardupilot.org/copter/docs/parameters.html#fltmode1
-        # see also https://ardupilot.org/dev/docs/mavlink-get-set-flightmode.html & 
+        # see also https://ardupilot.org/dev/docs/mavlink-get-set-flightmode.html &
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_DO_SET_MODE, 0, 1, mode, 0, 0, 0, 0, 0)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        if msg.result != 0:
-            self.send_text(f"Unable to change to mode {mode}")
-            quit()
+        if msg is None:
+            error_msg = f"Timeout waiting for ACK to change mode to {mode}"
+            self.send_text(error_msg)
+            raise MavLinkCommandError(error_msg)
+        elif msg.result != 0:
+            error_msg = f"Unable to change to mode {mode}"
+            self.send_text(error_msg)
+            raise MavLinkCommandError(error_msg)
         else:
             self.send_text(f"Mode changed to {mode}")
 
@@ -128,9 +144,14 @@ class MavLinkHandler:
         self._connection.mav.command_long_send(self._connection.target_system, self._connection.target_component,
                                                 mavutil.mavlink.MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 0, 0, 0, 0, 0, 0)
         msg = self._connection.recv_match(type='COMMAND_ACK',blocking=True)
-        if msg.result != 0:
-            self.send_text("Unable to ARM. Exiting !!!")
-            quit()
+        if msg is None:
+            error_msg = "Timeout waiting for ARM ACK"
+            self.send_text(error_msg)
+            raise MavLinkCommandError(error_msg)
+        elif msg.result != 0:
+            error_msg = "Unable to ARM"
+            self.send_text(f"{error_msg}. Exiting !!!")
+            raise MavLinkCommandError(error_msg)
         else:
             self.send_text("ARMED !!!!")
 

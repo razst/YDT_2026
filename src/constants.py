@@ -21,12 +21,12 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "recordings")
 SEGMENT_DURATION = -1  # Duration of each video segment in seconds. set -1 to disable video output
 
 # Detect params
-FRAMES_CENTERED = 100 # Number of consecutive frames the target must be centered to consider the task complete
+FRAMES_CENTERED = 5 # Number of consecutive frames the target must be centered to fire. This helps ensure we have a stable lock before firing, reducing false positives.
 
 # fire params
 FIRE_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
 VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive for down, negative for up)
 DRONE_MOVE_ANGLE = 2
-SERVO_SPEED = 0.5
+SERVO_SPEED = 0.25
 SERVO_CHANNEL = 9
 PUMP_RELAY=0 #(0 for Relay1, 1 for Relay2, etc.)

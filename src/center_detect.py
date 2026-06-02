@@ -165,7 +165,7 @@ class Detect:
         self.mavLink.set_motor_relay(PUMP_RELAY, 1) # turn on pump
         time.sleep(1) # wait for pump to spin up, adjust as necessary     
         # move servo back and forth for FIRE_DURATION seconds
-       # servo 20sec each side
+       # servo 10sec each side
         for i in range(10,90,2):
             self.mavLink.move_servo(SERVO_CHANNEL, i)
             time.sleep(SERVO_SPEED)
@@ -209,22 +209,22 @@ class Detect:
 
                 # ADDED: Task Completion Logic
                 if horz == TargetPosition.CENTER and vert == TargetPosition.CENTER:
-                    #TODO add hight check??
-                    self.fire()
                     centered_frames_count += 1
                     # Require being centered for FRAMES_CENTERED consecutive frames to prevent false positives
-                    if centered_frames_count > FRAMES_CENTERED:
-                        #TODO stop pump
-                        logger.info("Target properly aligned and locked! Finishing task.")
+                    if centered_frames_count >= FRAMES_CENTERED:
+                        logger.info("Target properly aligned and locked! Initiating firing sequence...")
+                        self.fire()
+                        logger.info("Firing sequence complete. Finishing task.")
                         self.running = False
                         self.is_finished.set() # Unblocks the TaskManager!
                         break
-                
-                elif horz == TargetPosition.NOT_DETECTED or vert == TargetPosition.NOT_DETECTED:
-                    # target not found, go up to search for it
-                    self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 10)
                 else:
-                    self.mavLink.send_ned_velocity(vert * DRONE_MOVE_ANGLE, horz * DRONE_MOVE_ANGLE, 0, 10)
+                    centered_frames_count = 0
+                    if horz == TargetPosition.NOT_DETECTED or vert == TargetPosition.NOT_DETECTED:
+                        # target not found, go up to search for it
+                        self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 10)
+                    else:
+                        self.mavLink.send_ned_velocity(vert * DRONE_MOVE_ANGLE, horz * DRONE_MOVE_ANGLE, 0, 10)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.running = False
