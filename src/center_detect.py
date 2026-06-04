@@ -21,6 +21,7 @@ class TargetColor(Enum):
     RED = 0
     GREEN = 1
     BLUE = 2
+    YELLOW = 3
 
 class Detect:
     def __init__(self, mavLink,frame_buffer, record_buffer=None, auto_start=False, target_color=TargetColor.RED):
@@ -54,6 +55,11 @@ class Detect:
             self.upper_1 = np.array([140, 255, 255])
             self.lower_2 = np.array([100, 80, 50])
             self.upper_2 = np.array([140, 255, 255])
+        elif target_color == TargetColor.YELLOW:
+            self.lower_1 = np.array([15, 60, 90])
+            self.upper_1 = np.array([35, 255, 255])
+            self.lower_2 = np.array([15, 60, 90])
+            self.upper_2 = np.array([35, 255, 255])
             
         if auto_start:
             self.start()
@@ -91,7 +97,7 @@ class Detect:
             if area > 500:
                 x, y, w, h = cv2.boundingRect(cnt)
                 aspect_ratio = float(w) / h
-                if 0 < aspect_ratio < 1 and area > max_area: #the values are not to br changed!!!0.45 0.57
+                if 0.45  < aspect_ratio < 0.57 and area > max_area: #the values are not to br changed!!!0.45 0.57
                     max_cnt = cnt
                     max_area = area
 

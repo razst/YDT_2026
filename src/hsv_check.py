@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # Video sources
-video_src = 'C:/Users/pc/Pictures/Camera Roll/WIN_20250421_19_07_06_Pro.mp4'
-cap = cv2.VideoCapture(0)
+video_src = "C:/dev/GitHub/PiCam_20260604_190530.avi"
+cap = cv2.VideoCapture(1)
 
 hsv_values = {
     "hMin": 0, "hMax": 179,
@@ -53,6 +53,10 @@ def handle_calibration_clicks(event, x, y, flags, param):
                 print("Blue Preset Selected")
                 current_mode = "blue"
                 set_hsv_ranges(100, 140, 100, 255, 100, 255)
+            elif 450 <= x <= 550:
+                print("Yellow Preset Selected")
+                current_mode = "yellow"
+                set_hsv_ranges(15, 35, 60, 255, 90, 255)
 
 def pick_color(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -81,8 +85,8 @@ cv2.createTrackbar("V Max", "HSV Calibration", 255, 255, lambda value: on_trackb
 
 kernel = np.ones((5,5), np.uint8)
 
-# Expanded the width from 350 to 460 to fit the fourth button
-calibration_panel = np.zeros((70, 460, 3), dtype=np.uint8)
+# Expanded the width from 350 to 460 to fit the fourth button, and to 560 for yellow
+calibration_panel = np.zeros((70, 560, 3), dtype=np.uint8)
 
 # Button 1: RED 1 (Lower HSV)
 cv2.rectangle(calibration_panel, (10, 10), (110, 50), (0, 0, 150), -1) # Slightly darker red
@@ -99,6 +103,10 @@ cv2.putText(calibration_panel, "GREEN", (245, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6
 # Button 4: BLUE
 cv2.rectangle(calibration_panel, (340, 10), (440, 50), (255, 0, 0), -1)
 cv2.putText(calibration_panel, "BLUE", (365, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+
+# Button 5: YELLOW
+cv2.rectangle(calibration_panel, (450, 10), (550, 50), (0, 255, 255), -1)
+cv2.putText(calibration_panel, "YELLOW", (465, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
 
 while True:
@@ -130,7 +138,15 @@ while True:
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     cv2.imshow("HSV Mask", mask)
 
-    if cv2.waitKey(1) & 0xFF == 27:  # Press ESC to exit
+    # Wait for spacebar to advance or ESC to exit
+    while True:
+        key = cv2.waitKey(0) & 0xFF
+        if key == 27:  # ESC to exit
+            break
+        elif key == 32:  # SPACE to advance
+            break
+    
+    if key == 27:  # If ESC was pressed, exit outer loop
         break
 
 cv2.destroyAllWindows()

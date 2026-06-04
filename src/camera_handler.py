@@ -1,13 +1,21 @@
 import cv2
 import threading
 import time
+import os
 from logger_handler import logger
 # queue import removed!
 
 class Camera:
     # Changed frame_queue to frame_buffer to match your updated main script
-    def __init__(self, cam_idx, frame_buffer, auto_start=False):
+    def __init__(self, cam_idx, frame_buffer, auto_start=False, loop=False):
+        self.source = cam_idx
         self.cap = cv2.VideoCapture(cam_idx)
+        self.is_file_source = isinstance(cam_idx, str) and os.path.exists(cam_idx)
+        self.loop = loop
+
+        if not self.cap.isOpened():
+            raise RuntimeError(f"Unable to open camera/video stream: {cam_idx}")
+
         self.frame_buffer = frame_buffer
         self.stopped = False
 
@@ -26,7 +34,20 @@ class Camera:
             prev_time = current_time
                 
             if not ret:
-                logger.error("Stream ended or failed.")
+                if self.is_file_source and self.loop:
+                    logger.info("Video file ended; reopening for loop.")
+                    self.cap.release()
+                    self.cap = cv2.VideoCapture(self.source)
+                    if not self.cap.isOpened():
+                        logger.error("Unable to reopen video file for looping.")
+                        self.stop()
+                        break
+                    continue
+
+                if self.is_file_source:
+                    logger.info("Video file ended.")
+                else:
+                    logger.error("Stream ended or failed.")
                 self.stop()
                 break
 

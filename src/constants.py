@@ -4,10 +4,10 @@ import os
 # MAVLINK params
 # H7 over GPIO = '/dev/serial0', baud=921600
 # MAV_COM="/dev/ttyACM0"
-MAV_COM="/dev/serial0"
+#MAV_COM="/dev/serial0"
 BAUD_RATE=921600
 # MAV_COM="COM12"
-# MAV_COM="tcp:localhost:5763" # SITL com
+MAV_COM="tcp:localhost:5763" # SITL com
 MAV_MSG_FREQ = 10 # how ofthen do we want to get messages from mavlink (in Hz)
 MAX_ALLOWED_ALT = 10.0  # Maximum allowed altitude in meters to prevent flyaways
 

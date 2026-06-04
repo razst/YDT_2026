@@ -30,7 +30,7 @@ if __name__ == "__main__":
       target_buffer = deque(maxlen=1)
       # Connect the Camera
       # Pass the new buffer to the Camera
-      camera = Camera(CAMERA_IDX, cam_buffer, True) 
+      camera = Camera("C:/dev/GitHub/PiCam_20260604_195555.avi", cam_buffer, True, loop=True) 
    except Exception as e:
       logger.error(f"Unable to connect to Camera: {e}")
       quit()
@@ -39,7 +39,7 @@ if __name__ == "__main__":
    recorder = RecordVideo(target_buffer,True)
 
    # start the mission
-   manager = TaskManager(mavLink, cam_buffer, target_buffer, tasks=[TargetColor.RED, TargetColor.GREEN, TargetColor.BLUE], auto_start=True)   
+   manager = TaskManager(mavLink, cam_buffer, target_buffer, tasks=[TargetColor.YELLOW], auto_start=True)   
    
    while True:
       time.sleep(1)
