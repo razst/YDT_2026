@@ -326,6 +326,20 @@ class MavLinkHandler:
         for _ in range(duration):
             self._connection.mav.send(msg)
             time.sleep(0.01)
+        msg = self._connection.mav.set_position_target_local_ned_encode(
+            0,  # time_boot_ms
+            self._connection.target_system,
+            self._connection.target_component,
+            mavutil.mavlink.MAV_FRAME_LOCAL_OFFSET_NED,
+            0b0000101111000111,  # velocity + yaw enabled; bit 10 cleared = use yaw field
+            0, 0, 0,             # x, y, z positions (not used)
+            0, 0, 0,  # velocities in m/s
+            0, 0, 0,             # acceleration (not used)
+            current_yaw, 0       # hold current heading, yaw_rate=0
+        )
+        self._connection.mav.send(msg)
+        time.sleep(0.01)
+
             
 def to_quaternion(roll = 0.0, pitch = 0.0, yaw = 0.0):
     """

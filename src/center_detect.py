@@ -56,9 +56,9 @@ class Detect:
             self.lower_2 = np.array([100, 80, 50])
             self.upper_2 = np.array([140, 255, 255])
         elif target_color == TargetColor.YELLOW:
-            self.lower_1 = np.array([15, 60, 90])
+            self.lower_1 = np.array([15, 25, 90])
             self.upper_1 = np.array([35, 255, 255])
-            self.lower_2 = np.array([15, 60, 90])
+            self.lower_2 = np.array([15, 25, 90])
             self.upper_2 = np.array([35, 255, 255])
             
         if auto_start:
@@ -169,7 +169,7 @@ class Detect:
     def fire(self):
         logger.info("Target locked! Initiating firing sequence...")
         self.mavLink.ensure_height(FIRE_ALTITUDE)       
-        self.mavLink.set_motor_relay(PUMP_RELAY, 1) # turn on pump
+        #self.mavLink.set_motor_relay(PUMP_RELAY, 1) # turn on pump
         time.sleep(1) # wait for pump to spin up, adjust as necessary     
         # move servo back and forth for FIRE_DURATION seconds
        # servo 10sec each side
@@ -180,7 +180,7 @@ class Detect:
             self.mavLink.move_servo(SERVO_CHANNEL, i)
             time.sleep(SERVO_SPEED)
         self.mavLink.move_servo(SERVO_CHANNEL, 50) # move back to center
-        self.mavLink.set_motor_relay(PUMP_RELAY, 0) # turn off pump
+        #self.mavLink.set_motor_relay(PUMP_RELAY, 0) # turn off pump
         return
 
 

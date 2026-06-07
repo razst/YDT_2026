@@ -4,10 +4,10 @@ import os
 # MAVLINK params
 # H7 over GPIO = '/dev/serial0', baud=921600
 # MAV_COM="/dev/ttyACM0"
-#MAV_COM="/dev/serial0"
+MAV_COM="/dev/serial0"
 BAUD_RATE=921600
 # MAV_COM="COM12"
-MAV_COM="tcp:localhost:5763" # SITL com
+# MAV_COM="tcp:localhost:5763" # SITL com
 MAV_MSG_FREQ = 10 # how ofthen do we want to get messages from mavlink (in Hz)
 MAX_ALLOWED_ALT = 10.0  # Maximum allowed altitude in meters to prevent flyaways
 
@@ -20,7 +20,7 @@ CAMERA_IDX=0
 #video out params
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "recordings")
-SEGMENT_DURATION =  30 # Duration of each video segment in seconds. set -1 to disable video output
+SEGMENT_DURATION =  15 # Duration of each video segment in seconds. set -1 to disable video output
 
 # Detect params
 FRAMES_CENTERED = 5 # Number of consecutive frames the target must be centered to fire. This helps ensure we have a stable lock before firing, reducing false positives.
@@ -28,7 +28,7 @@ FRAMES_CENTERED = 5 # Number of consecutive frames the target must be centered t
 # fire params
 FIRE_ALTITUDE = 3.0  # meters, target altitude for hold_altitude
 VELOCITY_Z = -0.5  # m/s, vertical velocity to maintain during firing (positive for down, negative for up)
-DRONE_MOVE_ANGLE = 2
+DRONE_MOVE_ANGLE = 1
 SERVO_SPEED = 0.25
 SERVO_CHANNEL = 9
 PUMP_RELAY=0 #(0 for Relay1, 1 for Relay2, etc.)

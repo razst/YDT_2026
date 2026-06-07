@@ -21,8 +21,6 @@ if __name__ == "__main__":
       logger.error(f"Error: {e}")
       quit()
       
-   # wait 4 GUIDED mode
-   mavLink.check_until_guided()
 
    try:
       # FIX 2: Create the deque with maxlen=1. 
@@ -30,19 +28,24 @@ if __name__ == "__main__":
       target_buffer = deque(maxlen=1)
       # Connect the Camera
       # Pass the new buffer to the Camera
-      camera = Camera(CAMERA_IDX, cam_buffer, True, loop=True) 
+      camera = Camera(CAMERA_IDX, cam_buffer, True) 
    except Exception as e:
       logger.error(f"Unable to connect to Camera: {e}")
       quit()
    
    #Start movie recording to file
-   recorder = RecordVideo(target_buffer,True)
+   # recorder = RecordVideo(target_buffer,True)
+   recorder = RecordVideo(cam_buffer,True)
 
+
+   # wait 4 GUIDED mode
+   mavLink.check_until_guided()
+
+   time.sleep(30)
+
+   mavLink.land()
    # start the mission
-   manager = TaskManager(mavLink, cam_buffer, target_buffer, tasks=[TargetColor.YELLOW], auto_start=True)   
+   # manager = TaskManager(mavLink, cam_buffer, target_buffer, tasks=[TargetColor.RED, TargetColor.GREEN, TargetColor.BLUE], auto_start=True)   
    
-   while True:
-      time.sleep(1)
-   # wait for mission to end
    
    quit()
