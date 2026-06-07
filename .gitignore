@@ -1,5 +1,3 @@
 droneV2.log
 recordings/
-src/__pycache__/center_detect.cpython-314.pyc
-src/__pycache__/constants.cpython-314.pyc
-src/__pycache__/mavLink_handler.cpython-314.pyc
+src/__pycache__/

@@ -97,6 +97,11 @@ class RecordVideo:
                     segment_start_time = time.time()
                 
                 out.write(frame)
+                # Enforce minimum delay per frame (Option A): This attempts to smooth playback speed
+                # by pausing execution briefly after each write, compensating for variable overheads
+                # and ensuring a consistent rhythm matching self.fps.
+                target_frame_duration = 1.0 / self.fps
+                time.sleep(target_frame_duration)
 
         except Exception as e:
             print(f"An error occurred: {e}")

@@ -11,7 +11,6 @@ from record_video import *
 from task_man import TaskManager
 
 if __name__ == "__main__":
-   
    logger.info("Starting autonumi script 2026...")
    # Connect the FC
    try:
@@ -27,7 +26,7 @@ if __name__ == "__main__":
    try:
       # FIX 2: Create the deque with maxlen=1. 
       cam_buffer = deque(maxlen=1)
-      target_buffer = deque(maxlen=1)
+      target_buffer = deque(maxlen=100)
       # Connect the Camera
       # Pass the new buffer to the Camera
       camera = Camera(CAMERA_IDX, cam_buffer, True, loop=True) 
@@ -38,6 +37,7 @@ if __name__ == "__main__":
    #Start movie recording to file
    recorder = RecordVideo(target_buffer,True)
 
+   logger.info("Initialization complete, starting main task manager...")
    # start the mission
    manager = TaskManager(mavLink, cam_buffer, target_buffer, tasks=[TargetColor.YELLOW], auto_start=True)   
    

@@ -3,7 +3,7 @@ from logging.handlers import RotatingFileHandler
 from constants import *
 
 # Set up logger
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 logger.setLevel(LOGGING_LEVEL)
 
 # Formatter with time, function name, and message

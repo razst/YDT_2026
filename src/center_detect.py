@@ -232,8 +232,10 @@ class Detect:
                     centered_frames_count = 0
                     if horz == TargetPosition.NOT_DETECTED or vert == TargetPosition.NOT_DETECTED:
                         # target not found, go up to search for it
+                        logger.info("Target not found. Ascending to search...")
                         self.mavLink.send_ned_velocity(0, 0, VELOCITY_Z, 10)
                     else:
+                        logger.info("Target found but not centered. Adjusting position...vert: %s, horz: %s", vert.name, horz.name)
                         self.mavLink.send_ned_velocity(vert * DRONE_MOVE_ANGLE, horz * DRONE_MOVE_ANGLE, 0, 10)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
