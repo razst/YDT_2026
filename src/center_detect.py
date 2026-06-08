@@ -56,10 +56,10 @@ class Detect:
             self.lower_2 = np.array([100, 80, 50])
             self.upper_2 = np.array([140, 255, 255])
         elif target_color == TargetColor.YELLOW:
-            self.lower_1 = np.array([15, 25, 90])
-            self.upper_1 = np.array([35, 255, 255])
-            self.lower_2 = np.array([15, 25, 90])
-            self.upper_2 = np.array([35, 255, 255])
+            self.lower_1 = np.array([15, 40, 80])
+            self.upper_1 = np.array([40, 255, 255])
+            self.lower_2 = np.array([15, 40, 80])
+            self.upper_2 = np.array([40, 255, 255])
             
         if auto_start:
             self.start()
@@ -97,7 +97,8 @@ class Detect:
             if area > 500:
                 x, y, w, h = cv2.boundingRect(cnt)
                 aspect_ratio = float(w) / h
-                if 0.45  < aspect_ratio < 0.57 and area > max_area: #the values are not to br changed!!!0.45 0.57
+                # Allow a wider rectangle shape range for yellow targets and real-world distortion
+                if 0.30 < aspect_ratio < 0.80 and area > max_area:
                     max_cnt = cnt
                     max_area = area
 

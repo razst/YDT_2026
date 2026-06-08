@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Video sources
-video_src = "C:/dev/GitHub/PiCam_20260604_190530.avi"
+video_src = "C:/dev/GitHub/PiCam_20260607_140752.avi"
 cap = cv2.VideoCapture(1)
 
 hsv_values = {
@@ -48,7 +48,8 @@ def handle_calibration_clicks(event, x, y, flags, param):
             elif 230 <= x <= 330:
                 print("Green Preset Selected")
                 current_mode = "green"
-                set_hsv_ranges(40, 80, 100, 255, 100, 255)
+                # Prefer darker green shades: lower V max and allow lower V min
+                set_hsv_ranges(40, 80, 100, 255, 40, 200)
             elif 340 <= x <= 440:
                 print("Blue Preset Selected")
                 current_mode = "blue"
@@ -96,8 +97,8 @@ cv2.putText(calibration_panel, "RED 1", (30, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
 cv2.rectangle(calibration_panel, (120, 10), (220, 50), (0, 0, 255), -1) # Brighter red
 cv2.putText(calibration_panel, "RED 2", (140, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-# Button 3: GREEN
-cv2.rectangle(calibration_panel, (230, 10), (330, 50), (0, 255, 0), -1)
+# Button 3: GREEN (darker visual)
+cv2.rectangle(calibration_panel, (230, 10), (330, 50), (0, 150, 0), -1)
 cv2.putText(calibration_panel, "GREEN", (245, 35), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
 # Button 4: BLUE

@@ -7,8 +7,9 @@ from logger_handler import logger
 
 class Camera:
     # Changed frame_queue to frame_buffer to match your updated main script
-    def __init__(self, cam_idx, frame_buffer, auto_start=False, loop=False):
+    def __init__(self, cam_idx, frame_buffers, auto_start=False, loop=False):
         self.source = cam_idx
+        # Use the actual camera source passed in (index for webcam/simulator, or file path)
         self.cap = cv2.VideoCapture(cam_idx)
         self.is_file_source = isinstance(cam_idx, str) and os.path.exists(cam_idx)
         self.loop = loop
@@ -16,7 +17,8 @@ class Camera:
         if not self.cap.isOpened():
             raise RuntimeError(f"Unable to open camera/video stream: {cam_idx}")
 
-        self.frame_buffer = frame_buffer
+        # Support a single buffer or a list of buffers
+        self.frame_buffers = frame_buffers if isinstance(frame_buffers, list) else [frame_buffers]
         self.stopped = False
 
         if auto_start:
@@ -53,9 +55,10 @@ class Camera:
 
             # --- THE MAGIC OF DEQUE ---
             # All the "if full, try/except get_nowait()" logic is DELETED.
-            # Because we initialized deque with maxlen=1 in main.py, 
+            # Because we initialized deque with maxlen=1 in main.py,
             # append() automatically and instantly drops the old frame for you!
-            self.frame_buffer.append(frame)
+            for buf in self.frame_buffers:
+                buf.append(frame)
 
     def start(self):
         thread = threading.Thread(target=self.update, daemon=True) 

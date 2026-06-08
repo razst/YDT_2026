@@ -10,10 +10,12 @@ import os
 # MAV_COM="/dev/serial0"
 
 # MAV_COM="COM12"
-BAUD_RATE=115200
+# BAUD_RATE=115200
+# MAV_COM="tcp:localhost:5763" # SITL com
+BAUD_RATE=921600
 MAV_COM="tcp:localhost:5763" # SITL com
-MAV_MSG_FREQ = 10 # how ofthen do we want to get messages from mavlink (in Hz)
-MAX_ALLOWED_ALT = 10.0  # Maximum allowed altitude in meters to prevent flyaways
+MAV_MSG_FREQ = 10 # how often do we want to get messages from mavlink (in Hz)
+MAX_ALLOWED_ALT = 8  # Maximum allowed altitude in meters to prevent flyaways
 
 # General params
 LOGGING_LEVEL = logging.DEBUG  # You can set to INFO, WARNING, ERROR etc.
@@ -25,7 +27,7 @@ CAMERA_IDX=0
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "recordings")
 SEGMENT_DURATION =  15 # Duration of each video segment in seconds. set -1 to disable video output
-CAMERA_FPS = 5
+VIDEO_FPS = 5
 
 # Detect params
 FRAMES_CENTERED = 5 # Number of consecutive frames the target must be centered to fire. This helps ensure we have a stable lock before firing, reducing false positives.

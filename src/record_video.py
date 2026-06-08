@@ -11,7 +11,7 @@ class RecordVideo:
     def __init__(self, frame_queue, auto_start=False): 
         self.frame_queue = frame_queue
         # Removed hardcoded width and height!
-        self.fps = constants.CAMERA_FPS 
+        self.fps = constants.VIDEO_FPS 
         self.segment_duration = constants.SEGMENT_DURATION
         self.recording = True
 
