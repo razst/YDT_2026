@@ -17,7 +17,7 @@ MAX_ALLOWED_ALT = 10.0  # Maximum allowed altitude in meters to prevent flyaways
 
 # General params
 LOGGING_LEVEL = logging.DEBUG  # You can set to INFO, WARNING, ERROR etc.
-IS_HEADLESS = True
+IS_HEADLESS = False
 # Camera params
 CAMERA_IDX=0
 
@@ -25,6 +25,7 @@ CAMERA_IDX=0
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "recordings")
 SEGMENT_DURATION =  15 # Duration of each video segment in seconds. set -1 to disable video output
+CAMERA_FPS = 5
 
 # Detect params
 FRAMES_CENTERED = 5 # Number of consecutive frames the target must be centered to fire. This helps ensure we have a stable lock before firing, reducing false positives.

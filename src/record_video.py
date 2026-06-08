@@ -11,7 +11,7 @@ class RecordVideo:
     def __init__(self, frame_queue, auto_start=False): 
         self.frame_queue = frame_queue
         # Removed hardcoded width and height!
-        self.fps = 30 
+        self.fps = constants.CAMERA_FPS 
         self.segment_duration = constants.SEGMENT_DURATION
         self.recording = True
 
@@ -54,7 +54,7 @@ class RecordVideo:
                 try:
                     # (Use pop() here if you are using the dual-buffer architecture, 
                     # or [-1] if you went with the single shared queue)
-                    first_frame = self.frame_queue.pop() 
+                    first_frame = self.frame_queue.popleft()
                 except IndexError:
                     time.sleep(0.001)
                     
@@ -72,7 +72,7 @@ class RecordVideo:
             
             while self.recording:
                 try:
-                    frame = self.frame_queue.pop()
+                    frame = self.frame_queue.popleft()
                 except IndexError:
                     time.sleep(0.001)
                     continue
@@ -97,11 +97,6 @@ class RecordVideo:
                     segment_start_time = time.time()
                 
                 out.write(frame)
-                # Enforce minimum delay per frame (Option A): This attempts to smooth playback speed
-                # by pausing execution briefly after each write, compensating for variable overheads
-                # and ensuring a consistent rhythm matching self.fps.
-                target_frame_duration = 1.0 / self.fps
-                time.sleep(target_frame_duration)
 
         except Exception as e:
             print(f"An error occurred: {e}")
